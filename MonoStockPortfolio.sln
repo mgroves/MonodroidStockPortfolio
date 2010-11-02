@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoStockPortfolio", "MonoStockPortfolio\MonoStockPortfolio.csproj", "{E23D8575-CE4E-4716-B9C7-70115D23ADBB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{643BA3D4-E3D6-49B7-B347-2B935FD5B9FC}"
+	ProjectSection(SolutionItems) = preProject
+		libs\FileHelpers.dll = libs\FileHelpers.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{4EE7F6AD-B8A9-4402-800E-E4C8AE0FF8FB}"
+	ProjectSection(SolutionItems) = preProject
+		assets\monodroid8431.msi = assets\monodroid8431.msi
+		assets\UInotes.txt = assets\UInotes.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoStockPortfolio.Core", "MonoStockPortfolio.Core\MonoStockPortfolio.Core.csproj", "{251E7BB4-CFE2-4DE4-9E2A-AAE1AF41C8CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoStockPortfolio.Entities", "MonoStockPortfolio.Entities\MonoStockPortfolio.Entities.csproj", "{05A57650-3B41-46FF-9EAD-9112B5EFBEED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E23D8575-CE4E-4716-B9C7-70115D23ADBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E23D8575-CE4E-4716-B9C7-70115D23ADBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E23D8575-CE4E-4716-B9C7-70115D23ADBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E23D8575-CE4E-4716-B9C7-70115D23ADBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{251E7BB4-CFE2-4DE4-9E2A-AAE1AF41C8CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{251E7BB4-CFE2-4DE4-9E2A-AAE1AF41C8CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{251E7BB4-CFE2-4DE4-9E2A-AAE1AF41C8CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{251E7BB4-CFE2-4DE4-9E2A-AAE1AF41C8CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05A57650-3B41-46FF-9EAD-9112B5EFBEED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05A57650-3B41-46FF-9EAD-9112B5EFBEED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05A57650-3B41-46FF-9EAD-9112B5EFBEED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05A57650-3B41-46FF-9EAD-9112B5EFBEED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

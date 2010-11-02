@@ -1,0 +1,21 @@
+- add a portfolio
+- delete a portfolio
+- select a portfolio
+	- refresh it to get updates on positions
+	- add new positions
+	- edit positions
+	- delete positions
+
+main view
+---------
+add portfolio button
+clickable list of portfolios
+long hold portfolio to get menu: delete option
+
+click a portfolio
+-----------------
+add ticker button
+refresh button
+list of:
+	ticker, price, gain/loss, time
+long hold ticker to get menu: edit & delete options
