@@ -1,3 +1,9 @@
+Monodroid Stock Portfolio
+=========================
+
+What...? Why...?
+----------------
+
 This is a rewriting of a Windows Mobile project I wrote for my own personal use, since I have
 recently switched from Windows Mobile to Android.
 
@@ -6,3 +12,11 @@ Also, I can (partly) reuse the libraries I created for the Windows Mobile app.
 
 By hosting this project on github, I will be providing this app as an open-source app for other
 Monodroid devs to learn from, as well as help myself learn how to use git.
+
+Notes
+-----
+
+I originally used db4o for the persistence of this app, but since the Mono version of db4o seems to
+be a bit behind, and it also seems a little silly to run a conversion of a conversion on top of
+another conversion, so I just switched it over to using Sqlite, since it's not that complex of a
+domain anyway.
