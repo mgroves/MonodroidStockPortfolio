@@ -1,0 +1,5 @@
+This is a rewriting of a Windows Mobile project I wrote for my own personal use, since I have
+recently switched from Windows Mobile to Android.
+
+I am using Monodroid since I'm not good at Java, and I couldn't get PhoneGap to work right.
+Also, I can (partly) reuse the libraries I created for the Windows Mobile app.
