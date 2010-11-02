@@ -20,3 +20,6 @@ I originally used db4o for the persistence of this app, but since the Mono versi
 be a bit behind, and it also seems a little silly to run a conversion of a conversion on top of
 another conversion, so I just switched it over to using Sqlite, since it's not that complex of a
 domain anyway.
+
+To get stock quotes, I'm using a Yahoo API coupled with the FileHelpers library
+(since the Yahoo API outputs a CSV)
