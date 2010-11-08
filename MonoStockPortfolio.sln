@@ -10,7 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{643BA3D4-E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{4EE7F6AD-B8A9-4402-800E-E4C8AE0FF8FB}"
 	ProjectSection(SolutionItems) = preProject
-		assets\monodroid8431.msi = assets\monodroid8431.msi
 		assets\UInotes.txt = assets\UInotes.txt
 	EndProjectSection
 EndProject
