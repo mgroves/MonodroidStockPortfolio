@@ -32,58 +32,25 @@ namespace MonoStockPortfolio.Core.Services
 
         public IEnumerable<IDictionary<StockDataItem, string>> GetDetailedItems(long portfolioID, IEnumerable<StockDataItem> items)
         {
-            IDictionary<StockDataItem, string> dict = new Dictionary<StockDataItem, string>();
-            dict.Add(StockDataItem.Ticker, "DENN");
-            dict.Add(StockDataItem.LastTradePrice, "4.99");
-            dict.Add(StockDataItem.Time, "3:59pm");
+            var positions = _portRepo.GetAllPositions(portfolioID);
+            var tickers = positions.Select(p => p.Ticker);
+            var stockData = _stockRepo.GetStockQuotes(tickers);
 
-            IDictionary<StockDataItem, string> dict2 = new Dictionary<StockDataItem, string>();
-            dict2.Add(StockDataItem.Ticker, "XIN");
-            dict2.Add(StockDataItem.LastTradePrice, "3.02");
-            dict2.Add(StockDataItem.Time, "4:00pm");
-
-            var list = new List<IDictionary<StockDataItem, string>>();
-            list.Add(dict);
-            list.Add(dict2);
-            return list;
-
-//            var positions = _portRepo.GetAllPositions(portfolioID);
-//            var tickers = positions.Select(p => p.Ticker);
-//            var stockData = _stockRepo.GetStockQuotes(tickers);
-//
-//            foreach (var position in positions)
-//            {
-//                var ticker = position.Ticker;
-//                var tickerStockData = stockData.Single(stock => stock.Ticker == ticker);
-//                var stockItems = GetStockItems(items, tickerStockData);
-//                var remainingItemsToGet = items.Except(stockItems.Keys);
-//                stockItems.AddRange(CalculateItems(remainingItemsToGet, position, tickerStockData));
-//                
-//                yield return stockItems;
-//            }
+            foreach (var position in positions)
+            {
+                var ticker = position.Ticker;
+                var tickerStockData = stockData.Single(stock => stock.Ticker == ticker);
+                var stockItems = GetStockItems(items, tickerStockData);
+                var remainingItemsToGet = items.Except(stockItems.Keys);
+                stockItems.AddRange(CalculateItems(remainingItemsToGet, position, tickerStockData));
+                
+                yield return stockItems;
+            }
         }
 
         public Portfolio GetPortolioById(long portfolioId)
         {
             return _portRepo.GetPortfolioById(portfolioId);
-        }
-
-        public IEnumerable<IDictionary<StockDataItem, string>> GetDetailedItems(Portfolio portfolio, IEnumerable<StockDataItem> items)
-        {
-//            var tickers = portfolio.Positions.Select(p => p.Ticker);
-//            var stockData = _stockRepo.GetStockQuotes(tickers);
-//
-//            foreach (var position in portfolio.Positions)
-//            {
-//                var ticker = position.Ticker;
-//                var tickerStockData = stockData.Single(stock => stock.Ticker == ticker);
-//                var stockItems = GetStockItems(items, tickerStockData);
-//                var remainingItemsToGet = items.Except(stockItems.Keys);
-//                stockItems.AddRange(CalculateItems(remainingItemsToGet, position, tickerStockData));
-//
-//                yield return stockItems;
-//            }
-            throw new NotImplementedException();
         }
 
         private IDictionary<StockDataItem, string> GetStockItems(IEnumerable<StockDataItem> items, StockQuote quote)

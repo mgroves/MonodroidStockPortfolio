@@ -14,7 +14,10 @@ namespace MonoStockPortfolio
     [Activity(Label = "Portfolio")]
     public class PortfolioActivity : Activity
     {
-        public PortfolioActivity(IntPtr handle) : base(handle) { }
+        public PortfolioActivity(IntPtr handle) : base(handle)
+        {
+            _svc = new PortfolioService(this);
+        }
 
         public static string ClassName { get { return "monoStockPortfolio.PortfolioActivity"; } }
         public static string Extra_PortfolioID { get { return "monoStockPortfolio.PortfolioActivity.PortfolioID"; } }
@@ -32,18 +35,20 @@ namespace MonoStockPortfolio
             var addPositionButton = FindViewById<Button>(Resource.id.btnAddPosition);
             addPositionButton.Click += addPositionButton_Click;
 
-            _svc = new PortfolioService(this);
-
             var portfolio = _svc.GetPortolioById(ThisPortofolioId);
             this.Title = "Portfolio: " + portfolio.Name;
+        }
 
-            var items = new List<StockDataItem>();
-            items.Add(StockDataItem.Ticker);
-            items.Add(StockDataItem.LastTradePrice);
-            var tickers = _svc.GetDetailedItems(ThisPortofolioId, items);
+        private void Refresh()
+        {
+            // TODO: put this in another thread or something, perhaps?
+            var tickers = _svc.GetDetailedItems(ThisPortofolioId, GetStockItemsFromConfig());
 
             if (tickers.Any())
             {
+                var tableLayout = FindViewById<TableLayout>(Resource.id.quoteTable);
+                tableLayout.RemoveAllViews();
+
                 WriteTickerHeader(tickers.First());
                 foreach (var ticker in tickers)
                 {
@@ -52,12 +57,30 @@ namespace MonoStockPortfolio
             }
         }
 
+        private List<StockDataItem> GetStockItemsFromConfig()
+        {
+            // TODO: load this from a config
+            var items = new List<StockDataItem>();
+            items.Add(StockDataItem.Ticker);
+            items.Add(StockDataItem.LastTradePrice);
+            items.Add(StockDataItem.GainLossRealTime);
+            items.Add(StockDataItem.Time);
+            return items;
+        }
+
         void addPositionButton_Click(object sender, EventArgs e)
         {
             var intent = new Intent();
             intent.SetClassName(this, AddPositionActivity.ClassName);
             intent.PutExtra(AddPositionActivity.Extra_PortfolioID, ThisPortofolioId);
             StartActivityForResult(intent, 0);
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+
+            Refresh();
         }
 
         private void WriteTickerHeader(IDictionary<StockDataItem, string> ticker)

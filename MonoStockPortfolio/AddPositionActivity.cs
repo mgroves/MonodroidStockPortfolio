@@ -1,7 +1,10 @@
 using System;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Widget;
+using MonoStockPortfolio.Core.PortfolioRepositories;
+using MonoStockPortfolio.Core.Services;
 using MonoStockPortfolio.Entities;
 
 namespace MonoStockPortfolio
@@ -12,6 +15,7 @@ namespace MonoStockPortfolio
         public AddPositionActivity(IntPtr handle) : base(handle) { }
         public static string ClassName { get { return "monoStockPortfolio.AddPositionActivity"; } }
         public static string Extra_PortfolioID { get { return "monoStockPortfolio.AddPositionActivity.PortfolioID"; } }
+        private IPortfolioRepository _repo;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -28,9 +32,12 @@ namespace MonoStockPortfolio
             var position = new Position();
             if(Validate(position))
             {
-                // save it
-                // go back
-                Toast.MakeText(this, "Saved!", ToastLength.Long).Show();
+                _repo = new AndroidSqlitePortfolioRepository(this);
+                _repo.SavePosition(position);
+
+                var intent = new Intent();
+                SetResult(Result.Ok, intent);
+                Finish();
             }
         }
 

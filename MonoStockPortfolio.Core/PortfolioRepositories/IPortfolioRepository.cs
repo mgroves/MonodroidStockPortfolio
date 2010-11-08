@@ -10,5 +10,6 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
         void DeletePortfolio(Entities.Portfolio portfolio);
         IList<Position> GetAllPositions(long portfolioId);
         Portfolio GetPortfolioById(long portfolioId);
+        void SavePosition(Position position);
     }
 }
