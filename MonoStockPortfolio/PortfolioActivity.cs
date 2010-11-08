@@ -37,6 +37,8 @@ namespace MonoStockPortfolio
 
             var portfolio = _svc.GetPortolioById(ThisPortofolioId);
             this.Title = "Portfolio: " + portfolio.Name;
+
+            Refresh();
         }
 
         private void Refresh()
