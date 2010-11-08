@@ -56,6 +56,11 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
             return null;
         }
 
+        public void SavePosition(Position position)
+        {
+            _db.Insert(POSITION_TABLE_NAME, null, GetPositionContentValues(position));
+        }
+
 
         public void DeletePortfolio(Portfolio portfolio)
         {
@@ -110,6 +115,16 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
             var contentValues = new ContentValues();
             contentValues.Put("Name", portfolio.Name);
             return contentValues;
+        }
+
+        private ContentValues GetPositionContentValues(Position position)
+        {
+            var positionValues = new ContentValues();
+            positionValues.Put("PricePerShare", (double)position.PricePerShare);
+            positionValues.Put("Ticker", position.Ticker);
+            positionValues.Put("Shares", (double)position.Shares);
+            positionValues.Put("ContainingPortfolioID", position.ContainingPortfolioID);
+            return positionValues;
         }
 
         private class OpenHelper : SQLiteOpenHelper
