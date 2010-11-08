@@ -9,6 +9,6 @@ namespace MonoStockPortfolio.Entities
         public string Ticker { get; set; }
         public decimal Shares { get; set; }
         public decimal PricePerShare { get; set; }
-        public int ContainingPortfolioID { get; set; }
+        public long ContainingPortfolioID { get; set; }
     }
 }

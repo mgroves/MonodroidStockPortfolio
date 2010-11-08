@@ -21,23 +21,26 @@ namespace MonoStockPortfolio
         private IPortfolioService _svc;
         private IEnumerable<char>[] longClickOptions;
 
+        private long ThisPortofolioId { get { return Intent.GetLongExtra(Extra_PortfolioID, -1); } }
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             SetContentView(Resource.layout.portfolio);
 
-            var portfolioId = Intent.GetLongExtra(Extra_PortfolioID, -1);
+            var addPositionButton = FindViewById<Button>(Resource.id.btnAddPosition);
+            addPositionButton.Click += addPositionButton_Click;
 
             _svc = new PortfolioService(this);
 
-            var portfolio = _svc.GetPortolioById(portfolioId);
+            var portfolio = _svc.GetPortolioById(ThisPortofolioId);
             this.Title = "Portfolio: " + portfolio.Name;
 
             var items = new List<StockDataItem>();
             items.Add(StockDataItem.Ticker);
             items.Add(StockDataItem.LastTradePrice);
-            var tickers = _svc.GetDetailedItems(portfolioId, items);
+            var tickers = _svc.GetDetailedItems(ThisPortofolioId, items);
 
             if (tickers.Any())
             {
@@ -47,6 +50,14 @@ namespace MonoStockPortfolio
                     WriteTickerRow(ticker);
                 }
             }
+        }
+
+        void addPositionButton_Click(object sender, EventArgs e)
+        {
+            var intent = new Intent();
+            intent.SetClassName(this, AddPositionActivity.ClassName);
+            intent.PutExtra(AddPositionActivity.Extra_PortfolioID, ThisPortofolioId);
+            StartActivityForResult(intent, 0);
         }
 
         private void WriteTickerHeader(IDictionary<StockDataItem, string> ticker)
