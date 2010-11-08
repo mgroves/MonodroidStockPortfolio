@@ -10,7 +10,7 @@ using MonoStockPortfolio.Entities;
 
 namespace MonoStockPortfolio
 {
-    [Activity(Label = "Stock Portfolio", MainLauncher = true)]
+    [Activity(Label = "Stock Portfolio", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         public static string ClassName { get { return "monoStockPortfolio.MainActivity"; } }
