@@ -32,13 +32,11 @@ namespace MonoStockPortfolio
 
             SetContentView(Resource.layout.portfolio);
 
-            var addPositionButton = FindViewById<Button>(Resource.id.btnAddPosition);
-            addPositionButton.Click += addPositionButton_Click;
-
-            var portfolio = _svc.GetPortolioById(ThisPortofolioId);
-            this.Title = "Portfolio: " + portfolio.Name;
-
             Refresh();
+
+            WireUpEvents();
+
+            SetTitle();
         }
 
         private void Refresh()
@@ -57,6 +55,18 @@ namespace MonoStockPortfolio
                     WriteTickerRow(ticker);
                 }
             }
+        }
+
+        private void WireUpEvents()
+        {
+            var addPositionButton = FindViewById<Button>(Resource.id.btnAddPosition);
+            addPositionButton.Click += addPositionButton_Click;
+        }
+
+        private void SetTitle()
+        {
+            var portfolio = _svc.GetPortolioById(ThisPortofolioId);
+            this.Title = "Portfolio: " + portfolio.Name;
         }
 
         private List<StockDataItem> GetStockItemsFromConfig()
@@ -130,16 +140,7 @@ namespace MonoStockPortfolio
 
         void tr_LongClick(object sender, Android.Views.View.LongClickEventArgs e)
         {
-            longClickOptions = new IList<char>[] {"Edit".ToCharArray(), "Delete".ToCharArray()};
-            var dialogBuilder = new AlertDialog.Builder(this);
-            dialogBuilder.SetTitle("Options");
-            dialogBuilder.SetItems(longClickOptions, tr_LongClick_Options);
-            dialogBuilder.Create().Show();
-        }
-
-        private void tr_LongClick_Options(object sender, DialogClickEventArgs e)
-        {
-            Toast.MakeText(this, "Option: " + longClickOptions[e.Which], ToastLength.Long).Show();
+            Toast.MakeText(this, "TODO!", ToastLength.Long);
         }
     }
 }

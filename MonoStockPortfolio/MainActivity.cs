@@ -14,7 +14,10 @@ namespace MonoStockPortfolio
     public class MainActivity : Activity
     {
         public static string ClassName { get { return "monoStockPortfolio.MainActivity"; } }
-        public MainActivity(IntPtr handle) : base(handle) { }
+        public MainActivity(IntPtr handle) : base(handle)
+        {
+            _svc = new PortfolioService(this);
+        }
 
         private IPortfolioService _svc;
         private IList<Portfolio> _portfolios;
@@ -35,7 +38,6 @@ namespace MonoStockPortfolio
 
         private void RefreshList()
         {
-            _svc = new PortfolioService(this);
             _portfolios = _svc.GetAllPortfolios();
 
             var listAdapter = new ArrayAdapter<string>(this, Android.R.Layout.SimpleListItem1, _portfolios.Select(p => p.Name).ToList());
