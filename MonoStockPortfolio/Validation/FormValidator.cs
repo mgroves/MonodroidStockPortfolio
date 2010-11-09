@@ -30,7 +30,7 @@ namespace MonoStockPortfolio.Validation
             AddValidation(control, () => ValidPositiveDecimal(control, errorMessage));
         }
 
-        public string Validate()
+        public string Apply()
         {
             var errorMessage = string.Empty;
             foreach (var keyValuePair in _dict)
