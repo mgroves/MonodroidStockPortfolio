@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Android.Content;
 using Android.Database.Sqlite;
 using Android.Util;
-using Android.Widget;
 using MonoStockPortfolio.Entities;
 
 namespace MonoStockPortfolio.Core.PortfolioRepositories
@@ -12,7 +11,6 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
     {
         private OpenHelper _dbHelper;
         private SQLiteDatabase _db;
-        private Context _context;
         private const string PORTFOLIO_TABLE_NAME = "Portfolios";
         private const string DATABASE_NAME = "stockportfolio.db";
         private const int DATABASE_VERSION = 1;
@@ -20,7 +18,6 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
 
         public AndroidSqlitePortfolioRepository(Context context)
         {
-            _context = context;
             _dbHelper = new OpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
             _db = _dbHelper.WritableDatabase;
         }

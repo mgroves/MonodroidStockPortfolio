@@ -5,6 +5,7 @@ using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.OS;
+using Android.Util;
 using Android.Widget;
 using MonoStockPortfolio.Core;
 using MonoStockPortfolio.Core.Services;
@@ -14,12 +15,7 @@ namespace MonoStockPortfolio
     [Activity(Label = "Portfolio")]
     public class PortfolioActivity : Activity
     {
-        public PortfolioActivity(IntPtr handle) : base(handle)
-        {
-            _svc = new PortfolioService(this);
-        }
-
-        public static string ClassName { get { return "monoStockPortfolio.PortfolioActivity"; } }
+        public static string ClassName { get { return "monostockportfolio.PortfolioActivity"; } }
         public static string Extra_PortfolioID { get { return "monoStockPortfolio.PortfolioActivity.PortfolioID"; } }
         private IPortfolioService _svc;
         private IEnumerable<char>[] longClickOptions;
@@ -30,20 +26,28 @@ namespace MonoStockPortfolio
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.layout.portfolio);
+            try
+            {
+                SetContentView(Resource.layout.portfolio);
 
-            Refresh();
+                _svc = new PortfolioService(this);
 
-            WireUpEvents();
+                Refresh();
 
-            SetTitle();
+                WireUpEvents();
+
+                SetTitle();
+            }
+            catch (Exception ex)
+            {
+                Log.E("EXCEPTION", ex.ToString());
+                Toast.MakeText(this, ex.ToString(), ToastLength.Long);
+            }
         }
 
         private void Refresh()
         {
-            // TODO: put this in another thread or something, perhaps?
             var tickers = _svc.GetDetailedItems(ThisPortofolioId, GetStockItemsFromConfig());
-
             if (tickers.Any())
             {
                 var tableLayout = FindViewById<TableLayout>(Resource.id.quoteTable);

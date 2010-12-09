@@ -11,17 +11,14 @@ namespace MonoStockPortfolio
     [Activity(Label = "Add Portfolio", MainLauncher = false)]
     public class AddPortfolioActivity : Activity
     {
-        public AddPortfolioActivity(IntPtr handle) : base(handle)
-        {
-            _repo = new AndroidSqlitePortfolioRepository(this);
-        }
-
-        public static string ClassName { get { return "monoStockPortfolio.AddPortfolioActivity"; } }
+        public static string ClassName { get { return "monostockportfolio.AddPortfolioActivity"; } }
         private IPortfolioRepository _repo; 
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
+            _repo = new AndroidSqlitePortfolioRepository(this);
 
             SetContentView(Resource.layout.addportfolio);
 
