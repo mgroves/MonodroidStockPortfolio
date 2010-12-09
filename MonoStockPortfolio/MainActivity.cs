@@ -17,6 +17,7 @@ namespace MonoStockPortfolio
 
         private IPortfolioService _svc;
         private IList<Portfolio> _portfolios;
+        private string[] _longClickOptions;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -45,7 +46,22 @@ namespace MonoStockPortfolio
         private void WireUpEvents()
         {
             AddPortfolioButton.Click += addPortfolioButton_Click;
+            PortfolioListView.ItemLongClick += PortfolioListView_ItemLongClick;
             PortfolioListView.ItemClick += listView_ItemClick;
+        }
+
+        void PortfolioListView_ItemLongClick(object sender, ItemEventArgs e)
+        {
+            _longClickOptions = new[] { "Edit", "Delete" };
+            var dialogBuilder = new AlertDialog.Builder(this);
+            dialogBuilder.SetTitle("Options");
+            dialogBuilder.SetItems(_longClickOptions, tr_LongClick_Options);
+            dialogBuilder.Create().Show();
+        }
+
+        private void tr_LongClick_Options(object sender, DialogClickEventArgs e)
+        {
+            Toast.MakeText(this, "Option: " + _longClickOptions[e.Which], ToastLength.Long).Show();
         }
 
         private void listView_ItemClick(object sender, ItemEventArgs e)

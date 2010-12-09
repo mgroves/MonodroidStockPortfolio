@@ -10,7 +10,9 @@
         <Button android:text="Add New Portfolio" android:layout_height="wrap_content"
             android:layout_width="fill_parent" android:id="@+id/btnAddPortfolio" />
 
-        <ListView android:id="@+id/portfolioList" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <ListView android:id="@+id/portfolioList"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content" />
 
     </LinearLayout>
 
