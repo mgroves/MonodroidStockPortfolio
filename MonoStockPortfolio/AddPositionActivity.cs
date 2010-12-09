@@ -12,12 +12,7 @@ namespace MonoStockPortfolio
     [Activity(Label = "Add Position", MainLauncher = false)]
     public class AddPositionActivity : Activity
     {
-        public AddPositionActivity(IntPtr handle) : base(handle)
-        {
-            _repo = new AndroidSqlitePortfolioRepository(this);
-        }
-
-        public static string ClassName { get { return "monoStockPortfolio.AddPositionActivity"; } }
+        public static string ClassName { get { return "monostockportfolio.AddPositionActivity"; } }
         public static string Extra_PortfolioID { get { return "monoStockPortfolio.AddPositionActivity.PortfolioID"; } }
 
         private IPortfolioRepository _repo;
@@ -32,6 +27,8 @@ namespace MonoStockPortfolio
             base.OnCreate(bundle);
 
             SetContentView(Resource.layout.addposition);
+
+            _repo = new AndroidSqlitePortfolioRepository(this);
 
             SaveButton.Click += saveButton_Click;
         }

@@ -13,11 +13,7 @@ namespace MonoStockPortfolio
     [Activity(Label = "Stock Portfolio", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        public static string ClassName { get { return "monoStockPortfolio.MainActivity"; } }
-        public MainActivity(IntPtr handle) : base(handle)
-        {
-            _svc = new PortfolioService(this);
-        }
+        public static string ClassName { get { return "monostockportfolio.MainActivity"; } }
 
         private IPortfolioService _svc;
         private IList<Portfolio> _portfolios;
@@ -25,6 +21,8 @@ namespace MonoStockPortfolio
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
+            _svc = new PortfolioService(this);
 
             SetContentView(Resource.layout.main);
 
