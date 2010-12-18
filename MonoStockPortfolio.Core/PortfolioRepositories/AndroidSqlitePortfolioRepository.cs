@@ -16,6 +16,11 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
         private const int DATABASE_VERSION = 1;
         private const string POSITION_TABLE_NAME = "Positions";
 
+        public AndroidSqlitePortfolioRepository(SQLiteDatabase db)
+        {
+            _db = db;
+        }
+
         public AndroidSqlitePortfolioRepository(Context context)
         {
             _dbHelper = new OpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -41,7 +46,7 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
 
         public Portfolio GetPortfolioById(long portfolioId)
         {
-            var cursor = _db.Query(PORTFOLIO_TABLE_NAME, new[] { "id", "Name" }, null, null, null, null, null);
+            var cursor = _db.Query(PORTFOLIO_TABLE_NAME, new[] { "id", "Name" }, " ID = " + portfolioId, null, null, null, null);
             if (cursor.Count > 0)
             {
                 cursor.MoveToNext();
@@ -59,9 +64,42 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
         }
 
 
-        public void DeletePortfolio(Portfolio portfolio)
+        public void DeletePortfolio(string portfolioName)
         {
-            throw new NotImplementedException();
+            _db.BeginTransaction();
+            try
+            {
+                var portfolio = GetPortfolioByName(portfolioName);
+                Log.E("DeletePortfolio", "Name: " + portfolio.Name);
+                Log.E("DeletePortfolio", "Name: " + portfolio.ID);
+                _db.RawQuery("DELETE FROM " + PORTFOLIO_TABLE_NAME + " WHERE id = " + portfolio.ID, null);
+                _db.RawQuery("DELETE FROM " + POSITION_TABLE_NAME + " WHERE ContainingPortfolioID = " + portfolio.ID, null);
+                //_db.Delete(PORTFOLIO_TABLE_NAME, " WHERE id = " + portfolio.ID, null);
+                //_db.Delete(POSITION_TABLE_NAME, " WHERE ContainingPortfolioID = " + portfolio.ID, null);
+                _db.SetTransactionSuccessful();
+            }
+            catch (SQLiteException ex)
+            {
+                Log.E("DeletePortfolio", "Name = " + portfolioName);
+            }
+            finally
+            {
+                _db.EndTransaction();
+            }
+        }
+
+        public Portfolio GetPortfolioByName(string portfolioName)
+        {
+            var cursor = _db.Query(PORTFOLIO_TABLE_NAME, new[] { "id", "Name" }, " Name = '" + portfolioName + "'", null, null, null, null);
+            if (cursor.Count > 0)
+            {
+                cursor.MoveToNext();
+                var portfolio = new Portfolio(cursor.GetLong(0));
+                portfolio.Name = cursor.GetString(1);
+                if (!cursor.IsClosed) cursor.Close();
+                return portfolio;
+            }
+            return null;
         }
 
         public IList<Position> GetAllPositions(long portfolioId)
@@ -123,6 +161,13 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
             positionValues.Put("ContainingPortfolioID", position.ContainingPortfolioID);
             return positionValues;
         }
+
+
+
+
+
+
+
 
         private class OpenHelper : SQLiteOpenHelper
         {

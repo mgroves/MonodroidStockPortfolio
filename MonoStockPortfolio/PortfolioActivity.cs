@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.OS;
-using Android.Util;
 using Android.Widget;
 using MonoStockPortfolio.Core;
 using MonoStockPortfolio.Core.Services;
@@ -26,38 +26,40 @@ namespace MonoStockPortfolio
         {
             base.OnCreate(bundle);
 
-            try
-            {
-                SetContentView(Resource.layout.portfolio);
+            SetContentView(Resource.layout.portfolio);
 
-                _svc = new PortfolioService(this);
+            _svc = new PortfolioService(this);
 
-                Refresh();
+            Refresh();
 
-                WireUpEvents();
+            WireUpEvents();
 
-                SetTitle();
-            }
-            catch (Exception ex)
-            {
-                Log.E("EXCEPTION", ex.ToString());
-                Toast.MakeText(this, ex.ToString(), ToastLength.Long);
-            }
+            SetTitle();
         }
 
         private void Refresh()
         {
-            var tickers = _svc.GetDetailedItems(ThisPortofolioId, GetStockItemsFromConfig());
-            if (tickers.Any())
-            {
-                var tableLayout = FindViewById<TableLayout>(Resource.id.quoteTable);
-                tableLayout.RemoveAllViews();
+            Action refresh = () =>
+                                 {
+                                     var tickers = _svc.GetDetailedItems(ThisPortofolioId, GetStockItemsFromConfig());
+                                     if (tickers.Any())
+                                     {
+                                         RunOnUiThread(() => RefreshUI(tickers));
+                                     }
+                                 };
+            var background = new Thread(() => refresh());
+            background.Start();
+        }
 
-                WriteTickerHeader(tickers.First());
-                foreach (var ticker in tickers)
-                {
-                    WriteTickerRow(ticker);
-                }
+        private void RefreshUI(IEnumerable<IDictionary<StockDataItem, string>> tickers)
+        {
+            var tableLayout = FindViewById<TableLayout>(Resource.id.quoteTable);
+            tableLayout.RemoveAllViews();
+
+            WriteTickerHeader(tickers.First());
+            foreach (var ticker in tickers)
+            {
+                WriteTickerRow(ticker);
             }
         }
 

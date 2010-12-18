@@ -5,6 +5,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
+using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.Services;
 using MonoStockPortfolio.Entities;
 
@@ -18,12 +19,14 @@ namespace MonoStockPortfolio
         private IPortfolioService _svc;
         private IList<Portfolio> _portfolios;
         private string[] _longClickOptions;
+        private IPortfolioRepository _repo;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             _svc = new PortfolioService(this);
+            _repo = new AndroidSqlitePortfolioRepository(this);
 
             SetContentView(Resource.layout.main);
 
@@ -52,16 +55,28 @@ namespace MonoStockPortfolio
 
         void PortfolioListView_ItemLongClick(object sender, ItemEventArgs e)
         {
-            _longClickOptions = new[] { "Edit", "Delete" };
+            _longClickOptions = new[] {"Edit", "Delete"};
+            var selectedPortfolio = ((TextView) e.View).Text.ToS();
             var dialogBuilder = new AlertDialog.Builder(this);
             dialogBuilder.SetTitle("Options");
-            dialogBuilder.SetItems(_longClickOptions, tr_LongClick_Options);
+            dialogBuilder.SetItems(_longClickOptions,
+                                   (senderi, ei) => tr_LongClick_Options(senderi, ei, selectedPortfolio));
             dialogBuilder.Create().Show();
         }
 
-        private void tr_LongClick_Options(object sender, DialogClickEventArgs e)
+        private void tr_LongClick_Options(object sender, DialogClickEventArgs e, string selectedPortfolio)
         {
-            Toast.MakeText(this, "Option: " + _longClickOptions[e.Which], ToastLength.Long).Show();
+            //Toast.MakeText(this, "Option: " + _longClickOptions[e.Which], ToastLength.Long).Show();
+            if(_longClickOptions[e.Which] == "Edit")
+            {
+                // Edit
+            }
+            else if (_longClickOptions[e.Which] == "Delete")
+            {
+                // Delete
+                _repo.DeletePortfolio(selectedPortfolio);
+                RefreshList();
+            }
         }
 
         private void listView_ItemClick(object sender, ItemEventArgs e)
