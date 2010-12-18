@@ -68,6 +68,7 @@ namespace MonoStockPortfolio
         private bool Validate(Portfolio portfolioToSave)
         {
             var validator = new FormValidator();
+            validator.AddRequired(PortfolioName, "Please enter a portfolio name");
             validator.AddValidation(PortfolioName, () => IsDuplicateName(portfolioToSave));
 
             var result = validator.Apply();
