@@ -63,19 +63,14 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
             _db.Insert(POSITION_TABLE_NAME, null, GetPositionContentValues(position));
         }
 
-
         public void DeletePortfolio(string portfolioName)
         {
             _db.BeginTransaction();
             try
             {
                 var portfolio = GetPortfolioByName(portfolioName);
-                Log.E("DeletePortfolio", "Name: " + portfolio.Name);
-                Log.E("DeletePortfolio", "Name: " + portfolio.ID);
-                _db.RawQuery("DELETE FROM " + PORTFOLIO_TABLE_NAME + " WHERE id = " + portfolio.ID, null);
-                _db.RawQuery("DELETE FROM " + POSITION_TABLE_NAME + " WHERE ContainingPortfolioID = " + portfolio.ID, null);
-                //_db.Delete(PORTFOLIO_TABLE_NAME, " WHERE id = " + portfolio.ID, null);
-                //_db.Delete(POSITION_TABLE_NAME, " WHERE ContainingPortfolioID = " + portfolio.ID, null);
+                _db.Delete(PORTFOLIO_TABLE_NAME, "id = " + portfolio.ID, null);
+                _db.Delete(POSITION_TABLE_NAME, "ContainingPortfolioID = " + portfolio.ID, null);
                 _db.SetTransactionSuccessful();
             }
             catch (SQLiteException ex)
@@ -137,12 +132,12 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
         private void UpdateExistingPortfolio(Portfolio portfolio)
         {
             var portfolioID = portfolio.ID ?? -1;
-            _db.Update(PORTFOLIO_TABLE_NAME, GetPortfolioContentValues(portfolio), " WHERE id = " + portfolioID, null);
+            Log.E("UpdateExistingPortfolio", "Portfolios updated: " + _db.Update(PORTFOLIO_TABLE_NAME, GetPortfolioContentValues(portfolio), "id = " + portfolioID, null));
         }
 
         private void InsertNewPortfolio(Portfolio portfolio)
         {
-            _db.Insert(PORTFOLIO_TABLE_NAME, null, GetPortfolioContentValues(portfolio));
+            Log.E("InsertNewPortfolio", "Portfolios inserted: " + _db.Insert(PORTFOLIO_TABLE_NAME, null, GetPortfolioContentValues(portfolio)));
         }
 
         private static ContentValues GetPortfolioContentValues(Portfolio portfolio)

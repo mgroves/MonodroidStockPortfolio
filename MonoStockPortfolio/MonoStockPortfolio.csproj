@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddPortfolioActivity.cs" />
+    <Compile Include="EditPortfolioActivity.cs" />
     <Compile Include="PortfolioActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="AddPositionActivity.cs" />

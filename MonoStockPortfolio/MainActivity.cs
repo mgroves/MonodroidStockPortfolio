@@ -56,7 +56,8 @@ namespace MonoStockPortfolio
         void PortfolioListView_ItemLongClick(object sender, ItemEventArgs e)
         {
             _longClickOptions = new[] {"Edit", "Delete"};
-            var selectedPortfolio = ((TextView) e.View).Text.ToS();
+            var selectedPortfolioName = ((TextView) e.View).Text.ToS();
+            var selectedPortfolio = _repo.GetPortfolioByName(selectedPortfolioName);
             var dialogBuilder = new AlertDialog.Builder(this);
             dialogBuilder.SetTitle("Options");
             dialogBuilder.SetItems(_longClickOptions,
@@ -64,17 +65,21 @@ namespace MonoStockPortfolio
             dialogBuilder.Create().Show();
         }
 
-        private void tr_LongClick_Options(object sender, DialogClickEventArgs e, string selectedPortfolio)
+        private void tr_LongClick_Options(object sender, DialogClickEventArgs e, Portfolio selectedPortfolio)
         {
             //Toast.MakeText(this, "Option: " + _longClickOptions[e.Which], ToastLength.Long).Show();
             if(_longClickOptions[e.Which] == "Edit")
             {
                 // Edit
+                var intent = new Intent();
+                intent.SetClassName(this, EditPortfolioActivity.ClassName);
+                intent.PutExtra(EditPortfolioActivity.Extra_PortfolioID, selectedPortfolio.ID ?? -1);
+                StartActivityForResult(intent, 0);
             }
             else if (_longClickOptions[e.Which] == "Delete")
             {
                 // Delete
-                _repo.DeletePortfolio(selectedPortfolio);
+                _repo.DeletePortfolio(selectedPortfolio.Name);
                 RefreshList();
             }
         }
@@ -90,7 +95,7 @@ namespace MonoStockPortfolio
         private void addPortfolioButton_Click(object sender, EventArgs e)
         {
             var intent = new Intent();
-            intent.SetClassName(this, AddPortfolioActivity.ClassName);
+            intent.SetClassName(this, EditPortfolioActivity.ClassName);
             StartActivityForResult(intent, 0);
         }
 
