@@ -16,17 +16,15 @@ namespace MonoStockPortfolio
     {
         public static string ClassName { get { return "monostockportfolio.MainActivity"; } }
 
-        private IPortfolioService _svc;
+        [IoC] private IPortfolioService _svc;
+        [IoC] private IPortfolioRepository _repo;
+
         private IList<Portfolio> _portfolios;
         private string[] _longClickOptions;
-        private IPortfolioRepository _repo;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
-            _svc = new PortfolioService(this);
-            _repo = new AndroidSqlitePortfolioRepository(this);
 
             SetContentView(Resource.layout.main);
 
@@ -67,7 +65,6 @@ namespace MonoStockPortfolio
 
         private void tr_LongClick_Options(object sender, DialogClickEventArgs e, Portfolio selectedPortfolio)
         {
-            //Toast.MakeText(this, "Option: " + _longClickOptions[e.Which], ToastLength.Long).Show();
             if(_longClickOptions[e.Which] == "Edit")
             {
                 // Edit

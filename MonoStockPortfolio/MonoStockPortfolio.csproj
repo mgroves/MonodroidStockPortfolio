@@ -38,6 +38,10 @@
   <ItemGroup>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
+    <Reference Include="PostSharp.SL, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\PostSharp.SL.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EditPortfolioActivity.cs" />
+    <Compile Include="IoCAttribute.cs" />
     <Compile Include="PortfolioActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="AddPositionActivity.cs" />
@@ -54,6 +59,9 @@
     <Compile Include="Validation\FormValidator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="PostSharp.Custom.targets">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\AboutResources.txt" />
   </ItemGroup>
   <ItemGroup>

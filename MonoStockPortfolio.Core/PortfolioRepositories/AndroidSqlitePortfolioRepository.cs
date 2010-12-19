@@ -16,11 +16,6 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
         private const int DATABASE_VERSION = 1;
         private const string POSITION_TABLE_NAME = "Positions";
 
-        public AndroidSqlitePortfolioRepository(SQLiteDatabase db)
-        {
-            _db = db;
-        }
-
         public AndroidSqlitePortfolioRepository(Context context)
         {
             _dbHelper = new OpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
