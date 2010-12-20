@@ -13,7 +13,7 @@ namespace MonoStockPortfolio
 
         public override void OnGetValue(LocationInterceptionArgs args)
         {
-            if(_context != null) _context = (Context)args.Instance;
+            if(_context == null) _context = (Context)args.Instance;
 
             var locationType = args.Location.LocationType;
             var instantiation = GetInstance(locationType);
