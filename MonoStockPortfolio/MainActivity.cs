@@ -59,11 +59,11 @@ namespace MonoStockPortfolio
             var dialogBuilder = new AlertDialog.Builder(this);
             dialogBuilder.SetTitle("Options");
             dialogBuilder.SetItems(_longClickOptions,
-                                   (senderi, ei) => tr_LongClick_Options(senderi, ei, selectedPortfolio));
+                                   (senderi, ei) => tr_LongClick_Options(ei, selectedPortfolio));
             dialogBuilder.Create().Show();
         }
 
-        private void tr_LongClick_Options(object sender, DialogClickEventArgs e, Portfolio selectedPortfolio)
+        private void tr_LongClick_Options(DialogClickEventArgs e, Portfolio selectedPortfolio)
         {
             if(_longClickOptions[e.Which] == "Edit")
             {
