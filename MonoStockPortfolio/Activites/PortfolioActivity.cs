@@ -33,6 +33,24 @@ namespace MonoStockPortfolio.Activites
             SetTitle();
         }
 
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            var item = menu.Add(0,1,1,"Refresh");
+            item.SetIcon(Resource.drawable.ic_menu_refresh);
+            return true;
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.Title.ToS())
+            {
+                case "Refresh": Refresh();
+                    return true;
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
+        }
+
         private void Refresh()
         {
             QuoteTable.RemoveAllViews();
