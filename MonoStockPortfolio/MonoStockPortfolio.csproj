@@ -48,11 +48,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddPositionActivity.designer.cs">
+      <DependentUpon>AddPositionActivity.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditPortfolioActivity.cs" />
+    <Compile Include="EditPortfolioActivity.designer.cs">
+      <DependentUpon>EditPortfolioActivity.cs</DependentUpon>
+    </Compile>
     <Compile Include="IoCAttribute.cs" />
+    <Compile Include="MainActivity.designer.cs">
+      <DependentUpon>MainActivity.cs</DependentUpon>
+    </Compile>
     <Compile Include="PortfolioActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="AddPositionActivity.cs" />
+    <Compile Include="PortfolioActivity.designer.cs">
+      <DependentUpon>PortfolioActivity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringExtensions.cs" />

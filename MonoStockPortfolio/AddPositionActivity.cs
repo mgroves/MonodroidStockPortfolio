@@ -10,25 +10,15 @@ using MonoStockPortfolio.Validation;
 namespace MonoStockPortfolio
 {
     [Activity(Label = "Add Position", MainLauncher = false)]
-    public class AddPositionActivity : Activity
+    public partial class AddPositionActivity : Activity
     {
-        public static string ClassName { get { return "monostockportfolio.AddPositionActivity"; } }
-        public static string Extra_PortfolioID { get { return "monoStockPortfolio.AddPositionActivity.PortfolioID"; } }
-
-        private IPortfolioRepository _repo;
-
-        private EditText TickerTextBox { get { return FindViewById<EditText>(Resource.id.addPositionTicker); } }
-        private EditText PriceTextBox { get { return FindViewById<EditText>(Resource.id.addPositionPrice); } }
-        private EditText SharesTextBox { get { return FindViewById<EditText>(Resource.id.addPositionShares); } }
-        private Button SaveButton { get { return FindViewById<Button>(Resource.id.addPositionSaveButton); } }
+        [IoC] private IPortfolioRepository _repo;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             SetContentView(Resource.layout.addposition);
-
-            _repo = new AndroidSqlitePortfolioRepository(this);
 
             SaveButton.Click += saveButton_Click;
         }

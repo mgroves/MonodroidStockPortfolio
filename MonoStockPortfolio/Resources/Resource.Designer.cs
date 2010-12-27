@@ -15,7 +15,7 @@ namespace MonoStockPortfolio
 	public partial class Resource
 	{
 		
-		public class attr
+		public partial class attr
 		{
 			
 			private attr()
@@ -23,7 +23,7 @@ namespace MonoStockPortfolio
 			}
 		}
 		
-		public class drawable
+		public partial class drawable
 		{
 			
 			// aapt resource value: 0x7f020000
@@ -34,7 +34,45 @@ namespace MonoStockPortfolio
 			}
 		}
 		
-		public class layout
+		public partial class id
+		{
+			
+			// aapt resource value: 0x7f050004
+			public const int addPositionPrice = 2131034116;
+			
+			// aapt resource value: 0x7f050005
+			public const int addPositionSaveButton = 2131034117;
+			
+			// aapt resource value: 0x7f050003
+			public const int addPositionShares = 2131034115;
+			
+			// aapt resource value: 0x7f050002
+			public const int addPositionTicker = 2131034114;
+			
+			// aapt resource value: 0x7f050006
+			public const int btnAddPortfolio = 2131034118;
+			
+			// aapt resource value: 0x7f050008
+			public const int btnAddPosition = 2131034120;
+			
+			// aapt resource value: 0x7f050001
+			public const int btnSave = 2131034113;
+			
+			// aapt resource value: 0x7f050007
+			public const int portfolioList = 2131034119;
+			
+			// aapt resource value: 0x7f050000
+			public const int portfolioName = 2131034112;
+			
+			// aapt resource value: 0x7f050009
+			public const int quoteTable = 2131034121;
+			
+			private id()
+			{
+			}
+		}
+		
+		public partial class layout
 		{
 			
 			// aapt resource value: 0x7f030000
@@ -54,54 +92,16 @@ namespace MonoStockPortfolio
 			}
 		}
 		
-		public class @string
+		public partial class @string
 		{
-			
-			// aapt resource value: 0x7f040000
-			public const int hello = 2130968576;
 			
 			// aapt resource value: 0x7f040001
 			public const int app_name = 2130968577;
 			
+			// aapt resource value: 0x7f040000
+			public const int hello = 2130968576;
+			
 			private @string()
-			{
-			}
-		}
-		
-		public class id
-		{
-			
-			// aapt resource value: 0x7f050000
-			public const int portfolioName = 2131034112;
-			
-			// aapt resource value: 0x7f050001
-			public const int btnSave = 2131034113;
-			
-			// aapt resource value: 0x7f050002
-			public const int addPositionTicker = 2131034114;
-			
-			// aapt resource value: 0x7f050003
-			public const int addPositionShares = 2131034115;
-			
-			// aapt resource value: 0x7f050004
-			public const int addPositionPrice = 2131034116;
-			
-			// aapt resource value: 0x7f050005
-			public const int addPositionSaveButton = 2131034117;
-			
-			// aapt resource value: 0x7f050006
-			public const int btnAddPortfolio = 2131034118;
-			
-			// aapt resource value: 0x7f050007
-			public const int portfolioList = 2131034119;
-			
-			// aapt resource value: 0x7f050008
-			public const int btnAddPosition = 2131034120;
-			
-			// aapt resource value: 0x7f050009
-			public const int quoteTable = 2131034121;
-			
-			private id()
 			{
 			}
 		}

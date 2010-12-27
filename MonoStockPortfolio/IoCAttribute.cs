@@ -13,7 +13,11 @@ namespace MonoStockPortfolio
 
         public override void OnGetValue(LocationInterceptionArgs args)
         {
-            if(_context == null) _context = (Context)args.Instance;
+            if(_context == null)
+            {
+                var activityContext= (Context)args.Instance;
+                _context = activityContext.ApplicationContext.ApplicationContext;
+            }
 
             var locationType = args.Location.LocationType;
             var instantiation = GetInstance(locationType);
@@ -24,7 +28,7 @@ namespace MonoStockPortfolio
             args.ProceedGetValue();
         }
 
-        private static object GetInstance(Type locationType)
+        private object GetInstance(Type locationType)
         {
             if (DependencyMap.ContainsKey(locationType))
             {
@@ -33,13 +37,13 @@ namespace MonoStockPortfolio
             return null;
         }
 
-        private static IDictionary<Type, Func<object>> DependencyMap
+        private IDictionary<Type, Func<object>> DependencyMap
         {
             get { return _dependencyMap ?? (_dependencyMap = DefaultDependencies()); }
         }
 
         private static IDictionary<Type, Func<object>> _dependencyMap;
-        private static IDictionary<Type, Func<object>> DefaultDependencies()
+        private IDictionary<Type, Func<object>> DefaultDependencies()
         {
             var map = new Dictionary<Type, Func<object>>();
             map.Add(typeof(IPortfolioService), () => new PortfolioService(_context));

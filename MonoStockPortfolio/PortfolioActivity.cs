@@ -13,22 +13,16 @@ using MonoStockPortfolio.Core.Services;
 namespace MonoStockPortfolio
 {
     [Activity(Label = "Portfolio")]
-    public class PortfolioActivity : Activity
+    public partial class PortfolioActivity : Activity
     {
-        public static string ClassName { get { return "monostockportfolio.PortfolioActivity"; } }
-        public static string Extra_PortfolioID { get { return "monoStockPortfolio.PortfolioActivity.PortfolioID"; } }
-        private IPortfolioService _svc;
+        [IoC] private IPortfolioService _svc;
         private IEnumerable<char>[] longClickOptions;
-
-        private long ThisPortofolioId { get { return Intent.GetLongExtra(Extra_PortfolioID, -1); } }
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
             SetContentView(Resource.layout.portfolio);
-
-            _svc = new PortfolioService(this);
 
             Refresh();
 
@@ -53,8 +47,7 @@ namespace MonoStockPortfolio
 
         private void RefreshUI(IEnumerable<IDictionary<StockDataItem, string>> tickers)
         {
-            var tableLayout = FindViewById<TableLayout>(Resource.id.quoteTable);
-            tableLayout.RemoveAllViews();
+            QuoteTable.RemoveAllViews();
 
             WriteTickerHeader(tickers.First());
             foreach (var ticker in tickers)
@@ -65,8 +58,7 @@ namespace MonoStockPortfolio
 
         private void WireUpEvents()
         {
-            var addPositionButton = FindViewById<Button>(Resource.id.btnAddPosition);
-            addPositionButton.Click += addPositionButton_Click;
+            AddPositionButton.Click += addPositionButton_Click;
         }
 
         private void SetTitle()
@@ -119,8 +111,7 @@ namespace MonoStockPortfolio
                 tr.AddView(column);
             }
 
-            var tableLayout = FindViewById<TableLayout>(Resource.id.quoteTable);
-            tableLayout.AddView(tr, new TableRow.LayoutParams(TableRow.LayoutParams.FillParent, TableRow.LayoutParams.WrapContent));
+            QuoteTable.AddView(tr, new TableRow.LayoutParams(TableRow.LayoutParams.FillParent, TableRow.LayoutParams.WrapContent));
         }
 
         private void WriteTickerRow(IDictionary<StockDataItem, string> ticker)
@@ -140,8 +131,7 @@ namespace MonoStockPortfolio
                 tr.AddView(column);
             }
 
-            var tableLayout = FindViewById<TableLayout>(Resource.id.quoteTable);
-            tableLayout.AddView(tr, new TableRow.LayoutParams(TableRow.LayoutParams.FillParent, TableRow.LayoutParams.WrapContent));
+            QuoteTable.AddView(tr, new TableRow.LayoutParams(TableRow.LayoutParams.FillParent, TableRow.LayoutParams.WrapContent));
         }
 
         void tr_LongClick(object sender, Android.Views.View.LongClickEventArgs e)

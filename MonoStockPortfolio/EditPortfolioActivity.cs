@@ -10,21 +10,13 @@ using MonoStockPortfolio.Validation;
 namespace MonoStockPortfolio
 {
     [Activity(Label = "Add Portfolio", MainLauncher = false)]
-    public class EditPortfolioActivity : Activity
+    public partial class EditPortfolioActivity : Activity
     {
-        public static string ClassName { get { return "monostockportfolio.EditPortfolioActivity"; } }
-        public static string Extra_PortfolioID { get { return "monoStockPortfolio.EditPortfolioActivity.PortfolioID"; } }
-
-        private Button SaveButton { get { return FindViewById<Button>(Resource.id.btnSave); } }
-        private EditText PortfolioName { get { return FindViewById<EditText>(Resource.id.portfolioName); } }
-
-        private IPortfolioRepository _repo; 
+        [IoC] private IPortfolioRepository _repo;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
-            _repo = new AndroidSqlitePortfolioRepository(this);
 
             SetContentView(Resource.layout.addportfolio);
 

@@ -12,10 +12,8 @@ using MonoStockPortfolio.Entities;
 namespace MonoStockPortfolio
 {
     [Activity(Label = "Stock Portfolio", MainLauncher = true, Icon = "@drawable/icon")]
-    public class MainActivity : Activity
+    public partial class MainActivity : Activity
     {
-        public static string ClassName { get { return "monostockportfolio.MainActivity"; } }
-
         [IoC] private IPortfolioService _svc;
         [IoC] private IPortfolioRepository _repo;
 
@@ -32,9 +30,6 @@ namespace MonoStockPortfolio
 
             WireUpEvents();
         }
-
-        private Button AddPortfolioButton { get { return FindViewById<Button>(Resource.id.btnAddPortfolio); } }
-        private ListView PortfolioListView { get { return FindViewById<ListView>(Resource.id.portfolioList); } }
 
         private void RefreshList()
         {
