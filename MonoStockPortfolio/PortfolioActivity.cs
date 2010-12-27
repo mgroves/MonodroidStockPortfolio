@@ -33,6 +33,8 @@ namespace MonoStockPortfolio
 
         private void Refresh()
         {
+            ShowMessage("Please wait!");
+
             Action refresh = () =>
                                  {
                                      var tickers = _svc.GetDetailedItems(ThisPortofolioId, GetStockItemsFromConfig());
@@ -40,9 +42,21 @@ namespace MonoStockPortfolio
                                      {
                                          RunOnUiThread(() => RefreshUI(tickers));
                                      }
+                                     else
+                                     {
+                                         RunOnUiThread(() => ShowMessage("Please add a position!"));
+                                     }
                                  };
             var background = new Thread(() => refresh());
             background.Start();
+        }
+
+        private void ShowMessage(string message)
+        {
+            QuoteTable.RemoveAllViews();
+            var pleaseWaitMessage = new TextView(this);
+            pleaseWaitMessage.Text = message;
+            QuoteTable.AddView(pleaseWaitMessage);
         }
 
         private void RefreshUI(IEnumerable<IDictionary<StockDataItem, string>> tickers)
