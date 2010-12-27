@@ -5,9 +5,9 @@ using Android.OS;
 using Android.Widget;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Entities;
-using MonoStockPortfolio.Validation;
+using MonoStockPortfolio.Framework;
 
-namespace MonoStockPortfolio
+namespace MonoStockPortfolio.Activites
 {
     [Activity(Label = "Add Portfolio", MainLauncher = false)]
     public partial class EditPortfolioActivity : Activity

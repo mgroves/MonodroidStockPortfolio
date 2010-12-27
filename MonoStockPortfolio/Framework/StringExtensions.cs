@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MonoStockPortfolio
+namespace MonoStockPortfolio.Framework
 {
     public static class StringExtensions
     {

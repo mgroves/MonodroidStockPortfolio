@@ -5,7 +5,7 @@ using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.Services;
 using PostSharp.Aspects;
 
-namespace MonoStockPortfolio
+namespace MonoStockPortfolio.Framework
 {
     public class IoCAttribute : LocationInterceptionAspect
     {

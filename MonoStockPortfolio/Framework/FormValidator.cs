@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Android.Widget;
 
-namespace MonoStockPortfolio.Validation
+namespace MonoStockPortfolio.Framework
 {
     public class FormValidator
     {

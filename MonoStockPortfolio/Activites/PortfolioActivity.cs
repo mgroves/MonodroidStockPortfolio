@@ -10,8 +10,9 @@ using Android.Views;
 using Android.Widget;
 using MonoStockPortfolio.Core;
 using MonoStockPortfolio.Core.Services;
+using MonoStockPortfolio.Framework;
 
-namespace MonoStockPortfolio
+namespace MonoStockPortfolio.Activites
 {
     [Activity(Label = "Portfolio")]
     public partial class PortfolioActivity : Activity

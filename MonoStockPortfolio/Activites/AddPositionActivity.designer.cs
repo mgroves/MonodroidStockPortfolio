@@ -1,10 +1,10 @@
 using Android.Widget;
 
-namespace MonoStockPortfolio
+namespace MonoStockPortfolio.Activites
 {
     public partial class AddPositionActivity
     {
-        public static string ClassName { get { return "monostockportfolio.AddPositionActivity"; } }
+        public static string ClassName { get { return "monostockportfolio.activites.AddPositionActivity"; } }
         public static string Extra_PortfolioID { get { return "monoStockPortfolio.AddPositionActivity.PortfolioID"; } }
 
         protected EditText TickerTextBox { get { return FindViewById<EditText>(Resource.id.addPositionTicker); } }

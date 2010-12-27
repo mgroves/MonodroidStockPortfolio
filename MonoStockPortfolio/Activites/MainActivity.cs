@@ -8,8 +8,9 @@ using Android.Widget;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.Services;
 using MonoStockPortfolio.Entities;
+using MonoStockPortfolio.Framework;
 
-namespace MonoStockPortfolio
+namespace MonoStockPortfolio.Activites
 {
     [Activity(Label = "Stock Portfolio", MainLauncher = true, Icon = "@drawable/icon")]
     public partial class MainActivity : Activity
