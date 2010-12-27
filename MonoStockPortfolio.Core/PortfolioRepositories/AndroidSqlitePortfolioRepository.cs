@@ -58,19 +58,18 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
             _db.Insert(POSITION_TABLE_NAME, null, GetPositionContentValues(position));
         }
 
-        public void DeletePortfolio(string portfolioName)
+        public void DeletePortfolioById(int portfolioId)
         {
             _db.BeginTransaction();
             try
             {
-                var portfolio = GetPortfolioByName(portfolioName);
-                _db.Delete(PORTFOLIO_TABLE_NAME, "id = " + portfolio.ID, null);
-                _db.Delete(POSITION_TABLE_NAME, "ContainingPortfolioID = " + portfolio.ID, null);
+                _db.Delete(PORTFOLIO_TABLE_NAME, "id = " + portfolioId, null);
+                _db.Delete(POSITION_TABLE_NAME, "ContainingPortfolioID = " + portfolioId, null);
                 _db.SetTransactionSuccessful();
             }
-            catch (SQLiteException ex)
+            catch (SQLiteException)
             {
-                Log.E("DeletePortfolio", "Name = " + portfolioName);
+                Log.E("DeletePortfolio", "SQLiteException => Id = " + portfolioId);
             }
             finally
             {

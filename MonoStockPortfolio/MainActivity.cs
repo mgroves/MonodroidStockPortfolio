@@ -18,7 +18,6 @@ namespace MonoStockPortfolio
         [IoC] private IPortfolioRepository _repo;
 
         private IList<Portfolio> _portfolios;
-        private readonly string[] _longClickOptions = new[] {"Rename", "Delete"};
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -42,37 +41,43 @@ namespace MonoStockPortfolio
         private void WireUpEvents()
         {
             AddPortfolioButton.Click += addPortfolioButton_Click;
-            PortfolioListView.ItemLongClick += PortfolioListView_ItemLongClick;
             PortfolioListView.ItemClick += listView_ItemClick;
+            RegisterForContextMenu(PortfolioListView);
         }
 
-        void PortfolioListView_ItemLongClick(object sender, ItemEventArgs e)
+        public override void OnCreateContextMenu(Android.Views.IContextMenu menu, Android.Views.View v, Android.Views.IContextMenuContextMenuInfo menuInfo)
         {
-            var selectedPortfolioName = ((TextView) e.View).Text.ToS();
+            base.OnCreateContextMenu(menu, v, menuInfo);
+
+            var info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+            var selectedPortfolioName = ((TextView)info.TargetView).Text.ToS();
             var selectedPortfolio = _repo.GetPortfolioByName(selectedPortfolioName);
-            var dialogBuilder = new AlertDialog.Builder(this);
-            dialogBuilder.SetTitle("Options");
-            dialogBuilder.SetItems(_longClickOptions,
-                                   (senderi, ei) => tr_LongClick_Options(ei, selectedPortfolio));
-            dialogBuilder.Create().Show();
+            var id = (int)(selectedPortfolio.ID ?? -1);
+
+            menu.SetHeaderTitle("Options");
+            menu.Add(0, id, 1, "Rename");
+            menu.Add(0, id, 2, "Delete");
         }
 
-        private void tr_LongClick_Options(DialogClickEventArgs e, Portfolio selectedPortfolio)
+        public override bool OnContextItemSelected(Android.Views.IMenuItem item)
         {
-            if(_longClickOptions[e.Which] == "Rename")
+            if (item.Title.ToS() == "Rename")
             {
                 // Edit
                 var intent = new Intent();
                 intent.SetClassName(this, EditPortfolioActivity.ClassName);
-                intent.PutExtra(EditPortfolioActivity.Extra_PortfolioID, selectedPortfolio.ID ?? -1);
+                intent.PutExtra(EditPortfolioActivity.Extra_PortfolioID, (long)item.ItemId);
                 StartActivityForResult(intent, 0);
+                return true;
             }
-            else if (_longClickOptions[e.Which] == "Delete")
+            if (item.Title.ToS() == "Delete")
             {
                 // Delete
-                _repo.DeletePortfolio(selectedPortfolio.Name);
+                _repo.DeletePortfolioById(item.ItemId);
                 RefreshList();
+                return true;
             }
+            return base.OnContextItemSelected(item);
         }
 
         private void listView_ItemClick(object sender, ItemEventArgs e)

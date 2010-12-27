@@ -5,9 +5,9 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
 {
     public interface IPortfolioRepository
     {
-        IList<Entities.Portfolio> GetAllPortfolios();
-        void SavePortfolio(Entities.Portfolio portfolio);
-        void DeletePortfolio(string portfolioName);
+        IList<Portfolio> GetAllPortfolios();
+        void SavePortfolio(Portfolio portfolio);
+        void DeletePortfolioById(int portfolioId);
         IList<Position> GetAllPositions(long portfolioId);
         Portfolio GetPortfolioById(long portfolioId);
         void SavePosition(Position position);
