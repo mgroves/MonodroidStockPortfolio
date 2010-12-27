@@ -6,6 +6,7 @@ using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using MonoStockPortfolio.Core;
 using MonoStockPortfolio.Core.Services;
@@ -33,7 +34,12 @@ namespace MonoStockPortfolio
 
         private void Refresh()
         {
-            ShowMessage("Please wait!");
+            QuoteTable.RemoveAllViews();
+
+            var pd = new ProgressDialog(this);
+            pd.SetMessage("Loading...Please wait...");
+            pd.SetProgressStyle(ProgressDialogStyle.Spinner);
+            pd.Show();
 
             Action refresh = () =>
                                  {
@@ -44,8 +50,9 @@ namespace MonoStockPortfolio
                                      }
                                      else
                                      {
-                                         RunOnUiThread(() => ShowMessage("Please add a position!"));
+                                         RunOnUiThread(() => ShowMessage("Please add positions!"));
                                      }
+                                     pd.Dismiss();
                                  };
             var background = new Thread(() => refresh());
             background.Start();
@@ -68,6 +75,8 @@ namespace MonoStockPortfolio
             {
                 WriteTickerRow(ticker);
             }
+
+            this.Window.SetFeatureInt(WindowFeatures.IndeterminateProgress, 10000);
         }
 
         private void WireUpEvents()
@@ -120,7 +129,7 @@ namespace MonoStockPortfolio
                 column.Text = item.Key.GetStringValue();
                 column.SetPadding(0, 0, 5, 0);
                 column.LayoutParameters = new TableRow.LayoutParams(TableRow.LayoutParams.FillParent, TableRow.LayoutParams.WrapContent);
-                column.SetTextSize(2, 22);
+                column.SetTextSize(2, 18);
                 column.SetTextColor(Color.Black);
                 tr.AddView(column);
             }
@@ -141,7 +150,7 @@ namespace MonoStockPortfolio
                 column.Text = item.Value;
                 column.SetPadding(0,0,5,0);
                 column.LayoutParameters = new TableRow.LayoutParams(TableRow.LayoutParams.FillParent, TableRow.LayoutParams.WrapContent);
-                column.SetTextSize(2, 22);
+                column.SetTextSize(2, 18);
                 tr.AddView(column);
             }
 
