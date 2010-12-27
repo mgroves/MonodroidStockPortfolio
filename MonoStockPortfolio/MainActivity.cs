@@ -20,7 +20,7 @@ namespace MonoStockPortfolio
         [IoC] private IPortfolioRepository _repo;
 
         private IList<Portfolio> _portfolios;
-        private string[] _longClickOptions;
+        private readonly string[] _longClickOptions = new[] {"Rename", "Delete"};
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -53,7 +53,6 @@ namespace MonoStockPortfolio
 
         void PortfolioListView_ItemLongClick(object sender, ItemEventArgs e)
         {
-            _longClickOptions = new[] {"Edit", "Delete"};
             var selectedPortfolioName = ((TextView) e.View).Text.ToS();
             var selectedPortfolio = _repo.GetPortfolioByName(selectedPortfolioName);
             var dialogBuilder = new AlertDialog.Builder(this);
@@ -65,7 +64,7 @@ namespace MonoStockPortfolio
 
         private void tr_LongClick_Options(DialogClickEventArgs e, Portfolio selectedPortfolio)
         {
-            if(_longClickOptions[e.Which] == "Edit")
+            if(_longClickOptions[e.Which] == "Rename")
             {
                 // Edit
                 var intent = new Intent();
