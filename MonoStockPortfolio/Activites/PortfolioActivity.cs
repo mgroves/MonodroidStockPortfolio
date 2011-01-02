@@ -4,9 +4,7 @@ using System.Linq;
 using System.Threading;
 using Android.App;
 using Android.Content;
-using Android.Content.Res;
 using Android.OS;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
 using MonoStockPortfolio.Core;
@@ -129,7 +127,7 @@ namespace MonoStockPortfolio.Activites
                     var cell = new TextView(Context);
                     cell.Text = item.Items[stockDataItem];
                     cell.SetWidth(columnWidth);
-                    row.AddView(cell);
+                    row.AddView(cell, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent));
                 }
                 return row;
             }

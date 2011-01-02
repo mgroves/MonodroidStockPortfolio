@@ -47,8 +47,7 @@ namespace MonoStockPortfolio.Framework
         {
             var map = new Dictionary<Type, Func<object>>();
             map.Add(typeof(IPortfolioService), () => new PortfolioService(_context));
-            //map.Add(typeof(IPortfolioRepository), () => new AndroidSqlitePortfolioRepository(_context));
-            map.Add(typeof(IPortfolioRepository), () => new FakePortfolioRepository());
+            map.Add(typeof(IPortfolioRepository), () => new AndroidSqlitePortfolioRepository(_context));
             return map;
         }
 
