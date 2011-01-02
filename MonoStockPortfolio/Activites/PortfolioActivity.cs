@@ -8,6 +8,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using MonoStockPortfolio.Core;
+using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.Services;
 using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Framework;
@@ -19,6 +20,7 @@ namespace MonoStockPortfolio.Activites
     public partial class PortfolioActivity : Activity
     {
         [IoC] private IPortfolioService _svc;
+        [IoC] private IPortfolioRepository _repo;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -49,6 +51,40 @@ namespace MonoStockPortfolio.Activites
                 default:
                     return base.OnOptionsItemSelected(item);
             }
+        }
+
+        public override void OnCreateContextMenu(IContextMenu menu, View v, IContextMenuContextMenuInfo menuInfo)
+        {
+            base.OnCreateContextMenu(menu, v, menuInfo);
+
+            var info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+            var selectedPositionId = int.Parse(info.TargetView.Tag.ToString());
+
+            menu.SetHeaderTitle("Options");
+            menu.Add(0, selectedPositionId, 1, "Edit");
+            menu.Add(0, selectedPositionId, 2, "Delete");
+        }
+
+        public override bool OnContextItemSelected(IMenuItem item)
+        {
+            if (item.Title.ToS() == "Edit")
+            {
+                // Edit
+                var intent = new Intent();
+                intent.SetClassName(this, EditPositionActivity.ClassName);
+                intent.PutExtra(EditPositionActivity.Extra_PositionID, (long)item.ItemId);
+                intent.PutExtra(EditPositionActivity.Extra_PortfolioID, ThisPortofolioId);
+                StartActivityForResult(intent, 0);
+                return true;
+            }
+            if (item.Title.ToS() == "Delete")
+            {
+                // Delete
+                _repo.DeletePositionById(item.ItemId);
+                Refresh();
+                return true;
+            }
+            return base.OnContextItemSelected(item);
         }
 
         private void Refresh()
@@ -127,7 +163,8 @@ namespace MonoStockPortfolio.Activites
                     var cell = new TextView(Context);
                     cell.Text = item.Items[stockDataItem];
                     cell.SetWidth(columnWidth);
-                    row.AddView(cell, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent));
+                    row.Tag = item.PositionId;
+                    row.AddView(cell);
                 }
                 return row;
             }
@@ -136,6 +173,7 @@ namespace MonoStockPortfolio.Activites
         private void WireUpEvents()
         {
             AddPositionButton.Click += addPositionButton_Click;
+            RegisterForContextMenu(QuoteListview);
         }
 
         private void SetTitle()
@@ -158,8 +196,8 @@ namespace MonoStockPortfolio.Activites
         void addPositionButton_Click(object sender, EventArgs e)
         {
             var intent = new Intent();
-            intent.SetClassName(this, AddPositionActivity.ClassName);
-            intent.PutExtra(AddPositionActivity.Extra_PortfolioID, ThisPortofolioId);
+            intent.SetClassName(this, EditPositionActivity.ClassName);
+            intent.PutExtra(EditPositionActivity.Extra_PortfolioID, ThisPortofolioId);
             StartActivityForResult(intent, 0);
         }
 

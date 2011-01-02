@@ -48,8 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activites\AddPositionActivity.designer.cs">
-      <DependentUpon>AddPositionActivity.cs</DependentUpon>
+    <Compile Include="Activites\EditPositionActivity.designer.cs">
+      <DependentUpon>EditPositionActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="Activites\EditPortfolioActivity.cs" />
     <Compile Include="Activites\EditPortfolioActivity.designer.cs">
@@ -63,7 +63,7 @@
     </Compile>
     <Compile Include="Activites\PortfolioActivity.cs" />
     <Compile Include="Activites\MainActivity.cs" />
-    <Compile Include="Activites\AddPositionActivity.cs" />
+    <Compile Include="Activites\EditPositionActivity.cs" />
     <Compile Include="Activites\PortfolioActivity.designer.cs">
       <DependentUpon>PortfolioActivity.cs</DependentUpon>
     </Compile>

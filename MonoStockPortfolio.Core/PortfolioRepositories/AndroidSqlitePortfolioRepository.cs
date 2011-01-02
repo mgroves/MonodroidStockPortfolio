@@ -55,7 +55,14 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
 
         public void SavePosition(Position position)
         {
-            _db.Insert(POSITION_TABLE_NAME, null, GetPositionContentValues(position));
+            if (position.ID == null)
+            {
+                InsertNewPosition(position);
+            }
+            else
+            {
+                UpdateExistingPosition(position);
+            }
         }
 
         public void DeletePortfolioById(int portfolioId)
@@ -89,6 +96,30 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
                 return portfolio;
             }
             return null;
+        }
+
+        public void DeletePositionById(long positionId)
+        {
+            _db.Delete(POSITION_TABLE_NAME, "id = " + positionId, null);
+        }
+
+        public Position GetPositionById(long positionId)
+        {
+            Position position = null;
+
+            var cursor = _db.Query(POSITION_TABLE_NAME, new[] { "id", "Ticker", "Shares", "PricePerShare" }, " id = " + positionId, null, null, null, null);
+            if (cursor.Count > 0)
+            {
+                while (cursor.MoveToNext())
+                {
+                    position= new Position(cursor.GetInt(0));
+                    position.Ticker = cursor.GetString(1);
+                    position.Shares = Convert.ToDecimal(cursor.GetFloat(2));
+                    position.PricePerShare = Convert.ToDecimal(cursor.GetFloat(3));
+                }
+            }
+            if (!cursor.IsClosed) cursor.Close();
+            return position;
         }
 
         public IList<Position> GetAllPositions(long portfolioId)
@@ -134,6 +165,17 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
             Log.E("InsertNewPortfolio", "Portfolios inserted: " + _db.Insert(PORTFOLIO_TABLE_NAME, null, GetPortfolioContentValues(portfolio)));
         }
 
+        private void UpdateExistingPosition(Position position)
+        {
+            var positionID = position.ID ?? -1;
+            Log.E("UpdateExistingPosition", "Positions updated: " + _db.Update(POSITION_TABLE_NAME, GetPositionContentValues(position), "id = " + positionID, null));
+        }
+
+        private void InsertNewPosition(Position position)
+        {
+            Log.E("InsertNewPosition", "Positions inserted: " + _db.Insert(POSITION_TABLE_NAME, null, GetPositionContentValues(position)));
+        }
+
         private static ContentValues GetPortfolioContentValues(Portfolio portfolio)
         {
             var contentValues = new ContentValues();
@@ -169,6 +211,11 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
             {
                 db.ExecSQL("CREATE TABLE " + PORTFOLIO_TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT)");
                 db.ExecSQL("CREATE TABLE " + POSITION_TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT, Ticker TEXT, Shares REAL, PricePerShare REAL, ContainingPortfolioID INT)");
+
+                db.ExecSQL("INSERT INTO " + PORTFOLIO_TABLE_NAME + " (Name) VALUES ('Test portfolio')");
+                db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('XIN', '300', '2.98', 1)");
+                db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('MSFT', '300', '25.18', 1)");
+                db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('AAPL', '300', '300', 1)");
             }
 
             public override void OnUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
