@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Android.Content;
 using Android.Util;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.StockData;
@@ -14,13 +13,12 @@ namespace MonoStockPortfolio.Core.Services
         private readonly IPortfolioRepository _portRepo;
         private readonly IStockDataProvider _stockRepo;
 
-        public PortfolioService(Context context) : this(new AndroidSqlitePortfolioRepository(context),
-            new YahooStockDataProvider())
-        {
-        }
+//        public PortfolioService(Context context) : this(new AndroidSqlitePortfolioRepository(context),
+//            new YahooStockDataProvider())
+//        {
+//        }
 
-        public PortfolioService(IPortfolioRepository portfolioRepository,
-                                IStockDataProvider stockDataProvider)
+        public PortfolioService(IPortfolioRepository portfolioRepository, IStockDataProvider stockDataProvider)
         {
             _portRepo = portfolioRepository;
             _stockRepo = stockDataProvider;

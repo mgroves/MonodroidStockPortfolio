@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using Android.Util;
-using Android.Widget;
 using FileHelpers;
 using MonoStockPortfolio.Entities;
 
