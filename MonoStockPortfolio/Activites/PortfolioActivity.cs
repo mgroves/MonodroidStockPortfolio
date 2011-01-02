@@ -13,6 +13,7 @@ using MonoStockPortfolio.Core;
 using MonoStockPortfolio.Core.Services;
 using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Framework;
+using Orientation = Android.Widget.Orientation;
 
 namespace MonoStockPortfolio.Activites
 {
@@ -122,6 +123,7 @@ namespace MonoStockPortfolio.Activites
                 var columnWidth = width / item.Items.Count;
 
                 var row = new LinearLayout(Context);
+                row.Orientation = Orientation.Horizontal;
                 foreach (var stockDataItem in GetStockItemsFromConfig())
                 {
                     var cell = new TextView(Context);

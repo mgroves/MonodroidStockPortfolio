@@ -14,7 +14,7 @@ namespace MonoStockPortfolio.Core.Services
         private readonly IPortfolioRepository _portRepo;
         private readonly IStockDataProvider _stockRepo;
 
-        public PortfolioService(Context context) : this(new AndroidSqlitePortfolioRepository(context),
+        public PortfolioService(Context context) : this(new FakePortfolioRepository(),
             new YahooStockDataProvider())
         {
         }
