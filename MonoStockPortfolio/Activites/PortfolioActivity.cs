@@ -51,6 +51,31 @@ namespace MonoStockPortfolio.Activites
             }
         }
 
+        public override void OnCreateContextMenu(IContextMenu menu, View v, IContextMenuContextMenuInfo menuInfo)
+        {
+            base.OnCreateContextMenu(menu, v, menuInfo);
+
+            var info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+            var selectedPositionId = int.Parse(info.TargetView.Tag.ToString());
+
+            menu.SetHeaderTitle("Options");
+            menu.Add(0, selectedPositionId, 1, "Edit");
+            menu.Add(0, selectedPositionId, 2, "Delete");
+        }
+
+        public override bool OnContextItemSelected(IMenuItem item)
+        {
+            if (item.Title.ToS() == "Edit")
+            {
+                Toast.MakeText(this, "edit: " + item.ItemId, ToastLength.Long).Show();
+            }
+            else if (item.Title.ToS() == "Delete")
+            {
+                Toast.MakeText(this, "delete: " + item.ItemId, ToastLength.Long).Show();
+            }
+            return base.OnContextItemSelected(item);
+        }
+
         private void Refresh()
         {
             var pd = new ProgressDialog(this);
@@ -127,7 +152,8 @@ namespace MonoStockPortfolio.Activites
                     var cell = new TextView(Context);
                     cell.Text = item.Items[stockDataItem];
                     cell.SetWidth(columnWidth);
-                    row.AddView(cell, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent));
+                    row.Tag = item.PositionId;
+                    row.AddView(cell);
                 }
                 return row;
             }
@@ -136,6 +162,7 @@ namespace MonoStockPortfolio.Activites
         private void WireUpEvents()
         {
             AddPositionButton.Click += addPositionButton_Click;
+            RegisterForContextMenu(QuoteListview);
         }
 
         private void SetTitle()
