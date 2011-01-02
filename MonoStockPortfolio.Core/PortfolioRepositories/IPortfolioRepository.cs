@@ -13,5 +13,6 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
         void SavePosition(Position position);
         Portfolio GetPortfolioByName(string portfolioName);
         void DeletePositionById(long positionId);
+        Position GetPositionById(long positionId);
     }
 }

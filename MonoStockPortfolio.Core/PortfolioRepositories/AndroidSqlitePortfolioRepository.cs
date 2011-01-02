@@ -55,7 +55,14 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
 
         public void SavePosition(Position position)
         {
-            _db.Insert(POSITION_TABLE_NAME, null, GetPositionContentValues(position));
+            if (position.ID == null)
+            {
+                InsertNewPosition(position);
+            }
+            else
+            {
+                UpdateExistingPosition(position);
+            }
         }
 
         public void DeletePortfolioById(int portfolioId)
@@ -94,6 +101,25 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
         public void DeletePositionById(long positionId)
         {
             _db.Delete(POSITION_TABLE_NAME, "id = " + positionId, null);
+        }
+
+        public Position GetPositionById(long positionId)
+        {
+            Position position = null;
+
+            var cursor = _db.Query(POSITION_TABLE_NAME, new[] { "id", "Ticker", "Shares", "PricePerShare" }, " id = " + positionId, null, null, null, null);
+            if (cursor.Count > 0)
+            {
+                while (cursor.MoveToNext())
+                {
+                    position= new Position(cursor.GetInt(0));
+                    position.Ticker = cursor.GetString(1);
+                    position.Shares = Convert.ToDecimal(cursor.GetFloat(2));
+                    position.PricePerShare = Convert.ToDecimal(cursor.GetFloat(3));
+                }
+            }
+            if (!cursor.IsClosed) cursor.Close();
+            return position;
         }
 
         public IList<Position> GetAllPositions(long portfolioId)
@@ -137,6 +163,17 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
         private void InsertNewPortfolio(Portfolio portfolio)
         {
             Log.E("InsertNewPortfolio", "Portfolios inserted: " + _db.Insert(PORTFOLIO_TABLE_NAME, null, GetPortfolioContentValues(portfolio)));
+        }
+
+        private void UpdateExistingPosition(Position position)
+        {
+            var positionID = position.ID ?? -1;
+            Log.E("UpdateExistingPosition", "Positions updated: " + _db.Update(POSITION_TABLE_NAME, GetPositionContentValues(position), "id = " + positionID, null));
+        }
+
+        private void InsertNewPosition(Position position)
+        {
+            Log.E("InsertNewPosition", "Positions inserted: " + _db.Insert(POSITION_TABLE_NAME, null, GetPositionContentValues(position)));
         }
 
         private static ContentValues GetPortfolioContentValues(Portfolio portfolio)

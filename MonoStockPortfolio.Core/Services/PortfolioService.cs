@@ -48,7 +48,7 @@ namespace MonoStockPortfolio.Core.Services
                     var remainingItemsToGet = items.Except(stockItems.Keys);
                     stockItems.AddRange(CalculateItems(remainingItemsToGet, position, tickerStockData));
 
-                    var positionResults = new PositionResultsViewModel(position.ID);
+                    var positionResults = new PositionResultsViewModel(position.ID ?? -1);
                     positionResults.Items = stockItems;
 
                     results.Add(positionResults);

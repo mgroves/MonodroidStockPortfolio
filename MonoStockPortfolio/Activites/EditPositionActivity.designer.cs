@@ -2,10 +2,11 @@ using Android.Widget;
 
 namespace MonoStockPortfolio.Activites
 {
-    public partial class AddPositionActivity
+    public partial class EditPositionActivity
     {
-        public static string ClassName { get { return "monostockportfolio.activites.AddPositionActivity"; } }
-        public static string Extra_PortfolioID { get { return "monoStockPortfolio.AddPositionActivity.PortfolioID"; } }
+        public static string ClassName { get { return "monostockportfolio.activites.EditPositionActivity"; } }
+        public static string Extra_PortfolioID { get { return "monoStockPortfolio.EditPositionActivity.PortfolioID"; } }
+        public static string Extra_PositionID { get { return "monoStockPortfolio.EditPositionActivity.PositionID"; } }
 
         protected EditText TickerTextBox { get { return FindViewById<EditText>(Resource.id.addPositionTicker); } }
         protected EditText PriceTextBox { get { return FindViewById<EditText>(Resource.id.addPositionPrice); } }

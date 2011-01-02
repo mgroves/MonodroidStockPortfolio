@@ -70,13 +70,14 @@ namespace MonoStockPortfolio.Activites
             if (item.Title.ToS() == "Edit")
             {
                 // Edit
-//                var intent = new Intent();
-//                intent.SetClassName(this, EditPortfolioActivity.ClassName);
-//                intent.PutExtra(EditPortfolioActivity.Extra_PortfolioID, (long)item.ItemId);
-//                StartActivityForResult(intent, 0);
-//                return true;
+                var intent = new Intent();
+                intent.SetClassName(this, EditPositionActivity.ClassName);
+                intent.PutExtra(EditPositionActivity.Extra_PositionID, (long)item.ItemId);
+                intent.PutExtra(EditPositionActivity.Extra_PortfolioID, ThisPortofolioId);
+                StartActivityForResult(intent, 0);
+                return true;
             }
-            else if (item.Title.ToS() == "Delete")
+            if (item.Title.ToS() == "Delete")
             {
                 // Delete
                 _repo.DeletePositionById(item.ItemId);
@@ -195,8 +196,8 @@ namespace MonoStockPortfolio.Activites
         void addPositionButton_Click(object sender, EventArgs e)
         {
             var intent = new Intent();
-            intent.SetClassName(this, AddPositionActivity.ClassName);
-            intent.PutExtra(AddPositionActivity.Extra_PortfolioID, ThisPortofolioId);
+            intent.SetClassName(this, EditPositionActivity.ClassName);
+            intent.PutExtra(EditPositionActivity.Extra_PortfolioID, ThisPortofolioId);
             StartActivityForResult(intent, 0);
         }
 
