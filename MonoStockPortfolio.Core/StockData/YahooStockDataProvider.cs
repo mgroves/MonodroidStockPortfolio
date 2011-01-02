@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using Android.Util;
+using Android.Widget;
 using FileHelpers;
 using MonoStockPortfolio.Entities;
 
@@ -82,15 +84,23 @@ namespace MonoStockPortfolio.Core.StockData
 
         private static string ScrapeUrl(string url)
         {
-            string resultCsv;
-            var req = WebRequest.Create(url);
-            var resp = req.GetResponse();
-            using(var sr = new StreamReader(resp.GetResponseStream()))
+            try
             {
-                resultCsv = sr.ReadToEnd();
-                sr.Close();
+                string resultCsv;
+                var req = WebRequest.Create(url);
+                var resp = req.GetResponse();
+                using (var sr = new StreamReader(resp.GetResponseStream()))
+                {
+                    resultCsv = sr.ReadToEnd();
+                    sr.Close();
+                }
+                return resultCsv;
             }
-            return resultCsv;
+            catch (Exception ex)
+            {
+                Log.E("ScrapeUrlException", ex.ToString());
+                throw;
+            }
         }
     }
 }

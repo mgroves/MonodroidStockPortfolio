@@ -6,7 +6,7 @@ namespace MonoStockPortfolio.Core.Services
     public interface IPortfolioService
     {
         IList<Portfolio> GetAllPortfolios();
-        IEnumerable<IDictionary<StockDataItem, string>> GetDetailedItems(long portfolioID, IEnumerable<StockDataItem> items);
+        IEnumerable<PositionResultsViewModel> GetDetailedItems(long portfolioID, IEnumerable<StockDataItem> items);
         Portfolio GetPortolioById(long portfolioId);
     }
 }

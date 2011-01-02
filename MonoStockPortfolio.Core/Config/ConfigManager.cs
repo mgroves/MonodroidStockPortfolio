@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using MonoStockPortfolio.Core.Services;
 using MonoStockPortfolio.Core.Config;
+using MonoStockPortfolio.Entities;
 
 namespace MonoStockPortfolio.Core.Config
 {

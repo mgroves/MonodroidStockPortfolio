@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.Content;
+using Android.Util;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.StockData;
 using MonoStockPortfolio.Entities;
@@ -30,21 +31,34 @@ namespace MonoStockPortfolio.Core.Services
             return _portRepo.GetAllPortfolios();
         }
 
-        public IEnumerable<IDictionary<StockDataItem, string>> GetDetailedItems(long portfolioID, IEnumerable<StockDataItem> items)
+        public IEnumerable<PositionResultsViewModel> GetDetailedItems(long portfolioID, IEnumerable<StockDataItem> items)
         {
-            var positions = _portRepo.GetAllPositions(portfolioID);
-            var tickers = positions.Select(p => p.Ticker);
-            var stockData = _stockRepo.GetStockQuotes(tickers);
-
-            foreach (var position in positions)
+            try
             {
-                var ticker = position.Ticker;
-                var tickerStockData = stockData.Single(stock => stock.Ticker == ticker);
-                var stockItems = GetStockItems(items, tickerStockData);
-                var remainingItemsToGet = items.Except(stockItems.Keys);
-                stockItems.AddRange(CalculateItems(remainingItemsToGet, position, tickerStockData));
-                
-                yield return stockItems;
+                var results = new List<PositionResultsViewModel>();
+                var positions = _portRepo.GetAllPositions(portfolioID);
+                var tickers = positions.Select(p => p.Ticker);
+                var stockData = _stockRepo.GetStockQuotes(tickers);
+
+                foreach (var position in positions)
+                {
+                    var ticker = position.Ticker;
+                    var tickerStockData = stockData.Single(stock => stock.Ticker == ticker);
+                    var stockItems = GetStockItems(items, tickerStockData);
+                    var remainingItemsToGet = items.Except(stockItems.Keys);
+                    stockItems.AddRange(CalculateItems(remainingItemsToGet, position, tickerStockData));
+
+                    var positionResults = new PositionResultsViewModel(position.ID);
+                    positionResults.Items = stockItems;
+
+                    results.Add(positionResults);
+                }
+                return results;
+            }
+            catch (Exception ex)
+            {
+                Log.E("GetDetailedItems", ex.ToString());
+                throw;
             }
         }
 

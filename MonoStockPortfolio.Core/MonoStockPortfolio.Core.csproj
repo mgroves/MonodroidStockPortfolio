@@ -52,11 +52,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IPortfolioService.cs" />
     <Compile Include="Services\PortfolioService.cs" />
-    <Compile Include="Services\StockDataItem.cs" />
     <Compile Include="StockData\IStockDataProvider.cs" />
     <Compile Include="StockData\YahooFinanceStockData.cs" />
     <Compile Include="StockData\YahooStockDataProvider.cs" />
-    <Compile Include="StringValueAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MonoStockPortfolio.Entities\MonoStockPortfolio.Entities.csproj">

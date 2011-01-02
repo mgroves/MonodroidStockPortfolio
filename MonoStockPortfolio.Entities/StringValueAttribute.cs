@@ -1,6 +1,6 @@
 using System;
 
-namespace MonoStockPortfolio.Core
+namespace MonoStockPortfolio.Entities
 {
     public class StringValueAttribute : Attribute
     {

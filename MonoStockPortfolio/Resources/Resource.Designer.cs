@@ -68,7 +68,10 @@ namespace MonoStockPortfolio
 			public const int portfolioName = 2131034112;
 			
 			// aapt resource value: 0x7f050009
-			public const int quoteTable = 2131034121;
+			public const int quoteHeaderLayout = 2131034121;
+			
+			// aapt resource value: 0x7f05000a
+			public const int quoteListview = 2131034122;
 			
 			private id()
 			{
