@@ -16,11 +16,15 @@
                     android:layout_height="wrap_content"
                     android:layout_width="fill_parent" />
 
-            <TableLayout
-                android:id="@+id/quoteTable"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-                  
+            <LinearLayout android:id="@+id/quoteHeaderLayout"
+                          android:layout_height="wrap_content"
+                          android:layout_width="fill_parent"
+                          android:orientation="horizontal" />
+
+            <ListView android:id="@+id/quoteListview"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content" />
+            
         </LinearLayout>
 
     </ScrollView>

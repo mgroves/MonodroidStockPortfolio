@@ -1,4 +1,4 @@
-namespace MonoStockPortfolio.Core.Services
+namespace MonoStockPortfolio.Entities
 {
     public enum StockDataItem
     {

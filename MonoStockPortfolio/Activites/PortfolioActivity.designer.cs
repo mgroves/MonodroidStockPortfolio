@@ -9,7 +9,8 @@ namespace MonoStockPortfolio.Activites
         public static string Extra_PortfolioID { get { return "monoStockPortfolio.PortfolioActivity.PortfolioID"; } }
         public long ThisPortofolioId { get { return Intent.GetLongExtra(Extra_PortfolioID, -1); } }
 
-        protected TableLayout QuoteTable { get { return FindViewById<TableLayout>(Resource.id.quoteTable); } }
+        protected ListView QuoteListview { get { return FindViewById<ListView>(Resource.id.quoteListview); } }
         protected Button AddPositionButton { get { return FindViewById<Button>(Resource.id.btnAddPosition); } }
+        protected LinearLayout QuoteListviewHeader { get { return FindViewById<LinearLayout>(Resource.id.quoteHeaderLayout); } }
     }
 }

@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading;
 using Android.App;
 using Android.Content;
-using Android.Graphics;
+using Android.Content.Res;
 using Android.OS;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using MonoStockPortfolio.Core;
 using MonoStockPortfolio.Core.Services;
+using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Framework;
 
 namespace MonoStockPortfolio.Activites
@@ -18,7 +20,6 @@ namespace MonoStockPortfolio.Activites
     public partial class PortfolioActivity : Activity
     {
         [IoC] private IPortfolioService _svc;
-        private IEnumerable<char>[] longClickOptions;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -53,8 +54,6 @@ namespace MonoStockPortfolio.Activites
 
         private void Refresh()
         {
-            QuoteTable.RemoveAllViews();
-
             var pd = new ProgressDialog(this);
             pd.SetMessage("Loading...Please wait...");
             pd.SetProgressStyle(ProgressDialogStyle.Spinner);
@@ -71,31 +70,67 @@ namespace MonoStockPortfolio.Activites
                                      {
                                          RunOnUiThread(() => ShowMessage("Please add positions!"));
                                      }
-                                     pd.Dismiss();
+                                     RunOnUiThread(pd.Dismiss);
                                  };
             var background = new Thread(() => refresh());
             background.Start();
+            UpdateHeader(GetStockItemsFromConfig());
         }
 
         private void ShowMessage(string message)
         {
-            QuoteTable.RemoveAllViews();
-            var pleaseWaitMessage = new TextView(this);
-            pleaseWaitMessage.Text = message;
-            QuoteTable.AddView(pleaseWaitMessage);
+            var listAdapter = new ArrayAdapter<string>(this, Android.R.Layout.SimpleListItem1, new[] {message});
+            QuoteListview.Adapter = listAdapter;
         }
 
-        private void RefreshUI(IEnumerable<IDictionary<StockDataItem, string>> tickers)
+        private void RefreshUI(IEnumerable<PositionResultsViewModel> tickers)
         {
-            QuoteTable.RemoveAllViews();
+            var listAdapter = new PositionArrayAdapter(this, tickers.ToArray());
+            QuoteListview.Adapter = listAdapter;
+        }
 
-            WriteTickerHeader(tickers.First());
-            foreach (var ticker in tickers)
+        private void UpdateHeader(ICollection<StockDataItem> items)
+        {
+            QuoteListviewHeader.RemoveAllViews();
+            var cellwidth = this.GetScreenWidth()/items.Count;
+            foreach (var stockDataItem in items)
             {
-                WriteTickerRow(ticker);
+                var textItem = new TextView(this);
+                textItem.Text = stockDataItem.GetStringValue();
+                textItem.SetWidth(cellwidth);
+                textItem.SetTextColor(Resources.GetColor(Android.R.Color.Black));
+                QuoteListviewHeader.AddView(textItem);
+            }
+            QuoteListviewHeader.SetBackgroundResource(Android.R.Color.BackgroundLight);
+        }
+
+        public class PositionArrayAdapter : GenericArrayAdapter<PositionResultsViewModel>
+        {
+            public PositionArrayAdapter(Context context, IEnumerable<PositionResultsViewModel> results)
+                : base(context, results) { }
+
+            public override long GetItemId(int position)
+            {
+                return this[position].PositionId;
             }
 
-            this.Window.SetFeatureInt(WindowFeatures.IndeterminateProgress, 10000);
+            public override View GetView(int position, View convertView, ViewGroup parent)
+            {
+                var item = this[position];
+
+                var width = Context.GetScreenWidth();
+                var columnWidth = width / item.Items.Count;
+
+                var row = new LinearLayout(Context);
+                foreach (var stockDataItem in GetStockItemsFromConfig())
+                {
+                    var cell = new TextView(Context);
+                    cell.Text = item.Items[stockDataItem];
+                    cell.SetWidth(columnWidth);
+                    row.AddView(cell);
+                }
+                return row;
+            }
         }
 
         private void WireUpEvents()
@@ -109,7 +144,7 @@ namespace MonoStockPortfolio.Activites
             this.Title = "Portfolio: " + portfolio.Name;
         }
 
-        private List<StockDataItem> GetStockItemsFromConfig()
+        public static List<StockDataItem> GetStockItemsFromConfig()
         {
             // TODO: load this from a config
             var items = new List<StockDataItem>();
@@ -133,52 +168,6 @@ namespace MonoStockPortfolio.Activites
             base.OnActivityResult(requestCode, resultCode, data);
 
             Refresh();
-        }
-
-        private void WriteTickerHeader(IDictionary<StockDataItem, string> ticker)
-        {
-            var tr = new TableRow(this);
-            tr.SetPadding(5, 5, 0, 5);
-            tr.SetBackgroundColor(Color.Gray);
-            tr.LayoutParameters = new TableRow.LayoutParams(TableRow.LayoutParams.FillParent, TableRow.LayoutParams.WrapContent);
-
-            foreach (var item in ticker)
-            {
-                var column = new TextView(this);
-                column.Text = item.Key.GetStringValue();
-                column.SetPadding(0, 0, 5, 0);
-                column.LayoutParameters = new TableRow.LayoutParams(TableRow.LayoutParams.FillParent, TableRow.LayoutParams.WrapContent);
-                column.SetTextSize(2, 18);
-                column.SetTextColor(Color.Black);
-                tr.AddView(column);
-            }
-
-            QuoteTable.AddView(tr, new TableRow.LayoutParams(TableRow.LayoutParams.FillParent, TableRow.LayoutParams.WrapContent));
-        }
-
-        private void WriteTickerRow(IDictionary<StockDataItem, string> ticker)
-        {
-            var tr = new TableRow(this);
-            tr.SetPadding(5,0,0,5);
-            tr.LayoutParameters = new TableRow.LayoutParams(TableRow.LayoutParams.FillParent, TableRow.LayoutParams.WrapContent);
-            tr.LongClick += tr_LongClick;
-
-            foreach (var item in ticker)
-            {
-                var column = new TextView(this);
-                column.Text = item.Value;
-                column.SetPadding(0,0,5,0);
-                column.LayoutParameters = new TableRow.LayoutParams(TableRow.LayoutParams.FillParent, TableRow.LayoutParams.WrapContent);
-                column.SetTextSize(2, 18);
-                tr.AddView(column);
-            }
-
-            QuoteTable.AddView(tr, new TableRow.LayoutParams(TableRow.LayoutParams.FillParent, TableRow.LayoutParams.WrapContent));
-        }
-
-        void tr_LongClick(object sender, Android.Views.View.LongClickEventArgs e)
-        {
-            Toast.MakeText(this, "TODO!", ToastLength.Long);
         }
     }
 }
