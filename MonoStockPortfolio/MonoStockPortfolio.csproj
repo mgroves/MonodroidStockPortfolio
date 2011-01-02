@@ -55,6 +55,7 @@
     <Compile Include="Activites\EditPortfolioActivity.designer.cs">
       <DependentUpon>EditPortfolioActivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Framework\ActivityExtensions.cs" />
     <Compile Include="Framework\ContextExtensions.cs" />
     <Compile Include="Framework\GenericArrayAdapter.cs" />
     <Compile Include="Framework\IoCAttribute.cs" />

@@ -13,11 +13,6 @@ namespace MonoStockPortfolio.Core.Services
         private readonly IPortfolioRepository _portRepo;
         private readonly IStockDataProvider _stockRepo;
 
-//        public PortfolioService(Context context) : this(new AndroidSqlitePortfolioRepository(context),
-//            new YahooStockDataProvider())
-//        {
-//        }
-
         public PortfolioService(IPortfolioRepository portfolioRepository, IStockDataProvider stockDataProvider)
         {
             _portRepo = portfolioRepository;
@@ -58,11 +53,6 @@ namespace MonoStockPortfolio.Core.Services
                 Log.E("GetDetailedItems", ex.ToString());
                 throw;
             }
-        }
-
-        public Portfolio GetPortolioById(long portfolioId)
-        {
-            return _portRepo.GetPortfolioById(portfolioId);
         }
 
         private IDictionary<StockDataItem, string> GetStockItems(IEnumerable<StockDataItem> items, StockQuote quote)

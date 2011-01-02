@@ -12,7 +12,6 @@ using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.Services;
 using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Framework;
-using Orientation = Android.Widget.Orientation;
 
 namespace MonoStockPortfolio.Activites
 {
@@ -178,19 +177,8 @@ namespace MonoStockPortfolio.Activites
 
         private void SetTitle()
         {
-            var portfolio = _svc.GetPortolioById(ThisPortofolioId);
+            var portfolio = _repo.GetPortfolioById(ThisPortofolioId);
             this.Title = "Portfolio: " + portfolio.Name;
-        }
-
-        public static List<StockDataItem> GetStockItemsFromConfig()
-        {
-            // TODO: load this from a config
-            var items = new List<StockDataItem>();
-            items.Add(StockDataItem.Ticker);
-            items.Add(StockDataItem.LastTradePrice);
-            items.Add(StockDataItem.GainLossRealTime);
-            items.Add(StockDataItem.Time);
-            return items;
         }
 
         void addPositionButton_Click(object sender, EventArgs e)
@@ -207,5 +195,19 @@ namespace MonoStockPortfolio.Activites
 
             Refresh();
         }
+
+
+
+
+        public static List<StockDataItem> GetStockItemsFromConfig()
+        {
+            // TODO: load this from a config
+            var items = new List<StockDataItem>();
+            items.Add(StockDataItem.Ticker);
+            items.Add(StockDataItem.LastTradePrice);
+            items.Add(StockDataItem.GainLossRealTime);
+            items.Add(StockDataItem.Time);
+            return items;
+        }    
     }
 }

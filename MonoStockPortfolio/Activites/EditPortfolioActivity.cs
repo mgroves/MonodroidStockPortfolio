@@ -1,8 +1,6 @@
 ﻿using System;
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Widget;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Framework;
@@ -22,7 +20,7 @@ namespace MonoStockPortfolio.Activites
 
             WireUpEvents();
 
-            var portfolioId = Intent.GetLongExtra(Extra_PortfolioID, -1);
+            var portfolioId = ThisPortfolioId;
             if(portfolioId != -1)
             {
                 this.Title = "Edit Portfolio";
@@ -49,11 +47,9 @@ namespace MonoStockPortfolio.Activites
             {
                 _repo.SavePortfolio(portfolioToSave);
 
-                Toast.MakeText(this, "You saved: " + PortfolioName.Text, ToastLength.Short).Show();
+                this.LongToast("You saved: " + PortfolioName.Text);
 
-                var intent = new Intent();
-                SetResult(Result.Ok, intent);
-                Finish();
+                this.EndActivity();
             }
         }
 
@@ -66,7 +62,7 @@ namespace MonoStockPortfolio.Activites
             var result = validator.Apply();
             if(result != string.Empty)
             {
-                Toast.MakeText(this, result, ToastLength.Long).Show();
+                this.LongToast(result);
                 return false;
             }
             return true;
@@ -85,7 +81,7 @@ namespace MonoStockPortfolio.Activites
         private Portfolio GetPortfolioToSave()
         {
             Portfolio portfolioToSave;
-            var portfolioId = Intent.GetLongExtra(Extra_PortfolioID, -1);
+            var portfolioId = ThisPortfolioId;
             if (portfolioId != -1)
             {
                 portfolioToSave = new Portfolio(portfolioId);

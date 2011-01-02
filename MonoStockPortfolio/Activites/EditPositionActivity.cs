@@ -1,8 +1,6 @@
 using System;
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Widget;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Framework;
@@ -20,7 +18,7 @@ namespace MonoStockPortfolio.Activites
 
             SetContentView(Resource.layout.addposition);
 
-            var positionId = Intent.GetLongExtra(Extra_PositionID, -1);
+            var positionId = ThisPositionId;
             if (positionId != -1)
             {
                 this.Title = "Edit Position";
@@ -50,9 +48,7 @@ namespace MonoStockPortfolio.Activites
                 var positionToSave = GetPositionToSave();
                 _repo.SavePosition(positionToSave);
 
-                var intent = new Intent();
-                SetResult(Result.Ok, intent);
-                Finish();
+                this.EndActivity();
             }
         }
 
@@ -65,7 +61,7 @@ namespace MonoStockPortfolio.Activites
                 return true;
             }
 
-            Toast.MakeText(this, result, ToastLength.Long).Show();
+            this.LongToast(result);
             return false;
         }
 
@@ -84,7 +80,7 @@ namespace MonoStockPortfolio.Activites
         private Position GetPositionToSave()
         {
             Position positionToSave;
-            var positionId = Intent.GetLongExtra(Extra_PortfolioID, -1);
+            var positionId = ThisPositionId;
             if (positionId != -1)
             {
                 positionToSave = new Position(positionId);
@@ -97,7 +93,7 @@ namespace MonoStockPortfolio.Activites
             positionToSave.Shares = decimal.Parse(SharesTextBox.Text.ToString());
             positionToSave.PricePerShare = decimal.Parse(PriceTextBox.Text.ToString());
             positionToSave.Ticker = TickerTextBox.Text.ToString();
-            positionToSave.ContainingPortfolioID = Intent.GetLongExtra(Extra_PortfolioID, -1);
+            positionToSave.ContainingPortfolioID = ThisPortfolioId;
             return positionToSave;
         }
     }

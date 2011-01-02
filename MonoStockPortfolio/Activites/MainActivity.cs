@@ -6,7 +6,6 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using MonoStockPortfolio.Core.PortfolioRepositories;
-using MonoStockPortfolio.Core.Services;
 using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Framework;
 
@@ -15,7 +14,6 @@ namespace MonoStockPortfolio.Activites
     [Activity(Label = "Stock Portfolio", MainLauncher = true, Icon = "@drawable/icon")]
     public partial class MainActivity : Activity
     {
-        [IoC] private IPortfolioService _svc;
         [IoC] private IPortfolioRepository _repo;
 
         private IList<Portfolio> _portfolios;
@@ -33,7 +31,7 @@ namespace MonoStockPortfolio.Activites
 
         private void RefreshList()
         {
-            _portfolios = _svc.GetAllPortfolios();
+            _portfolios = _repo.GetAllPortfolios();
 
             var listAdapter = new ArrayAdapter<string>(this, Android.R.Layout.SimpleListItem1, _portfolios.Select(p => p.Name).ToList());
             PortfolioListView.Adapter = listAdapter;
