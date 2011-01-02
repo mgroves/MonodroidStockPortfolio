@@ -8,6 +8,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using MonoStockPortfolio.Core;
+using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.Services;
 using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Framework;
@@ -19,6 +20,7 @@ namespace MonoStockPortfolio.Activites
     public partial class PortfolioActivity : Activity
     {
         [IoC] private IPortfolioService _svc;
+        [IoC] private IPortfolioRepository _repo;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -67,11 +69,19 @@ namespace MonoStockPortfolio.Activites
         {
             if (item.Title.ToS() == "Edit")
             {
-                Toast.MakeText(this, "edit: " + item.ItemId, ToastLength.Long).Show();
+                // Edit
+//                var intent = new Intent();
+//                intent.SetClassName(this, EditPortfolioActivity.ClassName);
+//                intent.PutExtra(EditPortfolioActivity.Extra_PortfolioID, (long)item.ItemId);
+//                StartActivityForResult(intent, 0);
+//                return true;
             }
             else if (item.Title.ToS() == "Delete")
             {
-                Toast.MakeText(this, "delete: " + item.ItemId, ToastLength.Long).Show();
+                // Delete
+                _repo.DeletePositionById(item.ItemId);
+                Refresh();
+                return true;
             }
             return base.OnContextItemSelected(item);
         }

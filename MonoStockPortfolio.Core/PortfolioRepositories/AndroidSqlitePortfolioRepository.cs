@@ -91,6 +91,11 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
             return null;
         }
 
+        public void DeletePositionById(long positionId)
+        {
+            _db.Delete(POSITION_TABLE_NAME, "id = " + positionId, null);
+        }
+
         public IList<Position> GetAllPositions(long portfolioId)
         {
             var list = new List<Position>();
