@@ -1,5 +1,6 @@
 ﻿using System;
 using Android.Content;
+using MonoStockPortfolio.Core.Config;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.Services;
 using MonoStockPortfolio.Core.StockData;
@@ -29,6 +30,7 @@ namespace MonoStockPortfolio.Framework
             container.Register<IStockDataProvider, YahooStockDataProvider>().AsMultiInstance();
             container.Register<IPortfolioService, PortfolioService>().AsMultiInstance();
             container.Register<IPortfolioRepository, AndroidSqlitePortfolioRepository>().AsMultiInstance();
+            container.Register<IConfigRepository, AndroidSqliteConfigRepository>().AsMultiInstance();
 
             return container;
         }

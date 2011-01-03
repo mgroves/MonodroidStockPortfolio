@@ -8,6 +8,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using MonoStockPortfolio.Core;
+using MonoStockPortfolio.Core.Config;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.Services;
 using MonoStockPortfolio.Entities;
@@ -20,6 +21,7 @@ namespace MonoStockPortfolio.Activites
     {
         [IoC] private IPortfolioService _svc;
         [IoC] private IPortfolioRepository _repo;
+        [IoC] private IConfigRepository _config;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -123,10 +125,10 @@ namespace MonoStockPortfolio.Activites
             QuoteListview.Adapter = listAdapter;
         }
 
-        private void UpdateHeader(ICollection<StockDataItem> items)
+        private void UpdateHeader(IEnumerable<StockDataItem> items)
         {
             QuoteListviewHeader.RemoveAllViews();
-            var cellwidth = this.GetScreenWidth()/items.Count;
+            var cellwidth = this.GetScreenWidth()/items.Count();
             foreach (var stockDataItem in items)
             {
                 var textItem = new TextView(this);
@@ -157,7 +159,8 @@ namespace MonoStockPortfolio.Activites
 
                 var row = new LinearLayout(Context);
                 row.Orientation = Orientation.Horizontal;
-                foreach (var stockDataItem in GetStockItemsFromConfig())
+                var portfolioActivity = (PortfolioActivity) Context;
+                foreach (var stockDataItem in portfolioActivity.GetStockItemsFromConfig())
                 {
                     var cell = new TextView(Context);
                     cell.Text = item.Items[stockDataItem];
@@ -199,15 +202,9 @@ namespace MonoStockPortfolio.Activites
 
 
 
-        public static List<StockDataItem> GetStockItemsFromConfig()
+        public IEnumerable<StockDataItem> GetStockItemsFromConfig()
         {
-            // TODO: load this from a config
-            var items = new List<StockDataItem>();
-            items.Add(StockDataItem.Ticker);
-            items.Add(StockDataItem.LastTradePrice);
-            items.Add(StockDataItem.GainLossRealTime);
-            items.Add(StockDataItem.Time);
-            return items;
+            return _config.GetStockItems();
         }    
     }
 }

@@ -43,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\AndroidSqliteConfigRepository.cs" />
-    <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\IConfigRepository.cs" />
     <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="EnumExtensions.cs" />

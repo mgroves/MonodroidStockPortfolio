@@ -229,6 +229,4 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
             }
         }
     }
-
-
 }

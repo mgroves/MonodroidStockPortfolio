@@ -1,8 +1,10 @@
+using System.Collections.Generic;
+using MonoStockPortfolio.Entities;
+
 namespace MonoStockPortfolio.Core.Config
 {
     public interface IConfigRepository
     {
-        ConfigManager.Config LoadOrCreateConfig();
-        void SaveConfig(ConfigManager.Config config);
+        IEnumerable<StockDataItem> GetStockItems();
     }
 }
