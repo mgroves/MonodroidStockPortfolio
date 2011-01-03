@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="General Settings">
+        <Preference
+                android:title="Stock Items"
+                android:summary="Which columns do you want to see?"
+                android:key="customStockItems" />
+    </PreferenceCategory>
+</PreferenceScreen>

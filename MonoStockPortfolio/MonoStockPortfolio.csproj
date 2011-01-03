@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activites\ConfigActivity.cs" />
     <Compile Include="Activites\EditPositionActivity.designer.cs">
       <DependentUpon>EditPositionActivity.cs</DependentUpon>
     </Compile>
@@ -126,6 +127,9 @@
     <AndroidResource Include="Resources\drawable-hdpi\ic_menu_refresh.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_menu_refresh.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_menu_refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\config.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

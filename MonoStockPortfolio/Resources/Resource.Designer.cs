@@ -88,10 +88,13 @@ namespace MonoStockPortfolio
 			public const int addposition = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int main = 2130903042;
+			public const int config = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int portfolio = 2130903043;
+			public const int main = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int portfolio = 2130903044;
 			
 			private layout()
 			{

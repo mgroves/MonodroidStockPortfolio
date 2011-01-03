@@ -29,6 +29,14 @@ namespace MonoStockPortfolio.Core.Config
             return stockItemsCsv.Split(',').Select(i => (StockDataItem)int.Parse(i));
         }
 
+        public void UpdateStockItems(List<StockDataItem> stockDataItems)
+        {
+            var stockItemsCsv = string.Join(",", stockDataItems.Select(i => ((int) i).ToString()).ToArray());
+            var contentValues = new ContentValues();
+            contentValues.Put("StockItems", stockItemsCsv);
+            Db.Update(CONFIG_TABLE_NAME, contentValues, null, null);
+        }
+
         // this should never be called, but it's here anyway in case of some catastrophe
         private static IEnumerable<StockDataItem> DefaultItems()
         {

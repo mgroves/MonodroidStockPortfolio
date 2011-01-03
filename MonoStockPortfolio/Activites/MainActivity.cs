@@ -4,6 +4,7 @@ using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Entities;
@@ -77,6 +78,32 @@ namespace MonoStockPortfolio.Activites
                 return true;
             }
             return base.OnContextItemSelected(item);
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            var configItem = menu.Add(0, 1, 1, "Config");
+            configItem.SetIcon(Android.R.Drawable.IcMenuPreferences);
+            var exitItem = menu.Add(0, 1, 1, "Exit");
+            exitItem.SetIcon(Android.R.Drawable.IcMenuCloseClearCancel);
+            return true;
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.Title.ToS())
+            {
+                case "Config":
+                    var intent = new Intent();
+                    intent.SetClassName(this, ConfigActivity.ClassName);
+                    StartActivityForResult(intent, 0);
+                    return true;
+                case "Exit":
+                    Finish();
+                    return true;
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
         }
 
         private void listView_ItemClick(object sender, ItemEventArgs e)
