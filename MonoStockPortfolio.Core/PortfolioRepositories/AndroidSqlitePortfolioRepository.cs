@@ -212,10 +212,15 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
                 db.ExecSQL("CREATE TABLE " + PORTFOLIO_TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT)");
                 db.ExecSQL("CREATE TABLE " + POSITION_TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT, Ticker TEXT, Shares REAL, PricePerShare REAL, ContainingPortfolioID INT)");
 
-                db.ExecSQL("INSERT INTO " + PORTFOLIO_TABLE_NAME + " (Name) VALUES ('Test portfolio')");
-                db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('XIN', '300', '2.98', 1)");
-                db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('MSFT', '300', '25.18', 1)");
-                db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('AAPL', '300', '300', 1)");
+                db.ExecSQL("INSERT INTO " + PORTFOLIO_TABLE_NAME + " (Name) VALUES ('Sample portfolio')");
+                db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('GOOG', '500', '593.97', 1)");
+                db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('AMZN', '500', '180.00', 1)");
+                db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('AAPL', '500', '322.56', 1)");
+                db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('MSFT', '500', '27.91', 1)");
+                db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('NOVL', '500', '5.92', 1)");
+                db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('S', '500', '4.23', 1)");
+                db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('VZ', '500', '35.78', 1)");
+                db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('T', '500', '29.38', 1)");
             }
 
             public override void OnUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
