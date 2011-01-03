@@ -3,22 +3,22 @@ namespace MonoStockPortfolio.Entities
     public enum StockDataItem
     {
         [StringValue("Change")]
-        Change,
+        Change = 0,
         [StringValue("Gain/Loss")]
-        GainLoss,
+        GainLoss = 1,
         [StringValue("Ticker")]
-        Ticker,
+        Ticker = 2,
         [StringValue("Time")]
-        Time,
+        Time = 3,
         [StringValue("Volume")]
-        Volume,
+        Volume = 4,
         [StringValue("Price")]
-        LastTradePrice,
+        LastTradePrice = 5,
         [StringValue("Price-RT")]
-        RealTimeLastTradeWithTime,
+        RealTimeLastTradeWithTime = 6,
         [StringValue("Change-RT")]
-        ChangeRealTime,
+        ChangeRealTime = 7,
         [StringValue("Gain/Loss-RT")]
-        GainLossRealTime
+        GainLossRealTime = 8
     }
 }
