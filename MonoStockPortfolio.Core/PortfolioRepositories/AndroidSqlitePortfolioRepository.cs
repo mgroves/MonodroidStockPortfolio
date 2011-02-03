@@ -66,7 +66,7 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
             }
             catch (SQLiteException)
             {
-                Log.E("DeletePortfolio", "SQLiteException => Id = " + portfolioId);
+                Log.Error("DeletePortfolio", "SQLiteException => Id = " + portfolioId);
             }
             finally
             {
@@ -147,23 +147,23 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
         private void UpdateExistingPortfolio(Portfolio portfolio)
         {
             var portfolioID = portfolio.ID ?? -1;
-            Log.E("UpdateExistingPortfolio", "Portfolios updated: " + Db.Update(PORTFOLIO_TABLE_NAME, GetPortfolioContentValues(portfolio), "id = " + portfolioID, null));
+            Log.Error("UpdateExistingPortfolio", "Portfolios updated: " + Db.Update(PORTFOLIO_TABLE_NAME, GetPortfolioContentValues(portfolio), "id = " + portfolioID, null));
         }
 
         private void InsertNewPortfolio(Portfolio portfolio)
         {
-            Log.E("InsertNewPortfolio", "Portfolios inserted: " + Db.Insert(PORTFOLIO_TABLE_NAME, null, GetPortfolioContentValues(portfolio)));
+            Log.Error("InsertNewPortfolio", "Portfolios inserted: " + Db.Insert(PORTFOLIO_TABLE_NAME, null, GetPortfolioContentValues(portfolio)));
         }
 
         private void UpdateExistingPosition(Position position)
         {
             var positionID = position.ID ?? -1;
-            Log.E("UpdateExistingPosition", "Positions updated: " + Db.Update(POSITION_TABLE_NAME, GetPositionContentValues(position), "id = " + positionID, null));
+            Log.Error("UpdateExistingPosition", "Positions updated: " + Db.Update(POSITION_TABLE_NAME, GetPositionContentValues(position), "id = " + positionID, null));
         }
 
         private void InsertNewPosition(Position position)
         {
-            Log.E("InsertNewPosition", "Positions inserted: " + Db.Insert(POSITION_TABLE_NAME, null, GetPositionContentValues(position)));
+            Log.Error("InsertNewPosition", "Positions inserted: " + Db.Insert(POSITION_TABLE_NAME, null, GetPositionContentValues(position)));
         }
 
         private static ContentValues GetPortfolioContentValues(Portfolio portfolio)

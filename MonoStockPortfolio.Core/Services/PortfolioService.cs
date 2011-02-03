@@ -50,7 +50,7 @@ namespace MonoStockPortfolio.Core.Services
             }
             catch (Exception ex)
             {
-                Log.E("GetDetailedItems", ex.ToString());
+                Log.Error("GetDetailedItems", ex.ToString());
                 throw;
             }
         }

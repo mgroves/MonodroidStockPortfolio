@@ -21,7 +21,7 @@ namespace MonoStockPortfolio.Activites
         {
             base.OnCreate(bundle);
 
-            AddPreferencesFromResource(Resource.layout.config);
+            AddPreferencesFromResource(Resource.Layout.config);
 
             _stockItemsConfig = StockItemPreference.BuildList(_repo.GetStockItems()).ToArray();
 

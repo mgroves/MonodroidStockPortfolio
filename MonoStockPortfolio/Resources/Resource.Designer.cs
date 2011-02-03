@@ -15,15 +15,15 @@ namespace MonoStockPortfolio
 	public partial class Resource
 	{
 		
-		public partial class attr
+		public partial class Attribute
 		{
 			
-			private attr()
+			private Attribute()
 			{
 			}
 		}
 		
-		public partial class drawable
+		public partial class Drawable
 		{
 			
 			// aapt resource value: 0x7f020000
@@ -32,12 +32,12 @@ namespace MonoStockPortfolio
 			// aapt resource value: 0x7f020001
 			public const int icon = 2130837505;
 			
-			private drawable()
+			private Drawable()
 			{
 			}
 		}
 		
-		public partial class id
+		public partial class Id
 		{
 			
 			// aapt resource value: 0x7f050004
@@ -73,12 +73,12 @@ namespace MonoStockPortfolio
 			// aapt resource value: 0x7f05000a
 			public const int quoteListview = 2131034122;
 			
-			private id()
+			private Id()
 			{
 			}
 		}
 		
-		public partial class layout
+		public partial class Layout
 		{
 			
 			// aapt resource value: 0x7f030000
@@ -96,12 +96,12 @@ namespace MonoStockPortfolio
 			// aapt resource value: 0x7f030004
 			public const int portfolio = 2130903044;
 			
-			private layout()
+			private Layout()
 			{
 			}
 		}
 		
-		public partial class @string
+		public partial class String
 		{
 			
 			// aapt resource value: 0x7f040001
@@ -110,7 +110,7 @@ namespace MonoStockPortfolio
 			// aapt resource value: 0x7f040000
 			public const int hello = 2130968576;
 			
-			private @string()
+			private String()
 			{
 			}
 		}

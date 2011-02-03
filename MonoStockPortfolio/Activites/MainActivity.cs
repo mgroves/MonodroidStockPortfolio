@@ -23,7 +23,7 @@ namespace MonoStockPortfolio.Activites
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.layout.main);
+            SetContentView(Resource.Layout.main);
 
             RefreshList();
 
@@ -34,7 +34,7 @@ namespace MonoStockPortfolio.Activites
         {
             _portfolios = _repo.GetAllPortfolios();
 
-            var listAdapter = new ArrayAdapter<string>(this, Android.R.Layout.SimpleListItem1, _portfolios.Select(p => p.Name).ToList());
+            var listAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, _portfolios.Select(p => p.Name).ToList());
             PortfolioListView.Adapter = listAdapter;
         }
 
@@ -83,9 +83,9 @@ namespace MonoStockPortfolio.Activites
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             var configItem = menu.Add(0, 1, 1, "Config");
-            configItem.SetIcon(Android.R.Drawable.IcMenuPreferences);
+            configItem.SetIcon(Android.Resource.Drawable.IcMenuPreferences);
             var exitItem = menu.Add(0, 1, 1, "Exit");
-            exitItem.SetIcon(Android.R.Drawable.IcMenuCloseClearCancel);
+            exitItem.SetIcon(Android.Resource.Drawable.IcMenuCloseClearCancel);
             return true;
         }
 

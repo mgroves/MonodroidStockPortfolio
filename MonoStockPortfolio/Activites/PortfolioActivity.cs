@@ -27,7 +27,7 @@ namespace MonoStockPortfolio.Activites
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.layout.portfolio);
+            SetContentView(Resource.Layout.portfolio);
 
             Refresh();
 
@@ -39,7 +39,7 @@ namespace MonoStockPortfolio.Activites
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             var item = menu.Add(0,1,1,"Refresh");
-            item.SetIcon(Resource.drawable.ic_menu_refresh);
+            item.SetIcon(Resource.Drawable.ic_menu_refresh);
             return true;
         }
 
@@ -115,7 +115,7 @@ namespace MonoStockPortfolio.Activites
 
         private void ShowMessage(string message)
         {
-            var listAdapter = new ArrayAdapter<string>(this, Android.R.Layout.SimpleListItem1, new[] {message});
+            var listAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, new[] { message });
             QuoteListview.Adapter = listAdapter;
         }
 
@@ -134,10 +134,10 @@ namespace MonoStockPortfolio.Activites
                 var textItem = new TextView(this);
                 textItem.Text = stockDataItem.GetStringValue();
                 textItem.SetWidth(cellwidth);
-                textItem.SetTextColor(Resources.GetColor(Android.R.Color.Black));
+                textItem.SetTextColor(Resources.GetColor(Android.Resource.Color.Black));
                 QuoteListviewHeader.AddView(textItem);
             }
-            QuoteListviewHeader.SetBackgroundResource(Android.R.Color.BackgroundLight);
+            QuoteListviewHeader.SetBackgroundResource(Android.Resource.Color.BackgroundLight);
         }
 
         public class PositionArrayAdapter : GenericArrayAdapter<PositionResultsViewModel>

@@ -31,11 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FileHelpers">
-      <HintPath>..\libs\FileHelpers.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.Android" />
-    <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,9 +48,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IPortfolioService.cs" />
     <Compile Include="Services\PortfolioService.cs" />
+    <Compile Include="StockData\DummyStockDataProvider.cs" />
     <Compile Include="StockData\IStockDataProvider.cs" />
-    <Compile Include="StockData\YahooFinanceStockData.cs" />
-    <Compile Include="StockData\YahooStockDataProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MonoStockPortfolio.Entities\MonoStockPortfolio.Entities.csproj">

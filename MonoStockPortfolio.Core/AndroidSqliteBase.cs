@@ -40,7 +40,7 @@ namespace MonoStockPortfolio.Core
 
         public override void OnUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
         {
-            Log.W("Upgrade", "Nothing to upgrade");
+            Log.Warn("Upgrade", "Nothing to upgrade");
         }
     }
 }
