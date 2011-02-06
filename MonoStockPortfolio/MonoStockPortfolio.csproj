@@ -71,7 +71,6 @@
     <Compile Include="Framework\IoCAttribute.cs" />
     <Compile Include="Framework\IttyBittyIoC.cs" />
     <Compile Include="Framework\ServiceLocator.cs" />
-    <Compile Include="Framework\TinyIoC.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Framework\StringExtensions.cs" />
