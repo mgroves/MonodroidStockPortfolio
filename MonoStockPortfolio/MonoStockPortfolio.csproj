@@ -69,6 +69,7 @@
       <DependentUpon>PortfolioActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="Framework\IoCAttribute.cs" />
+    <Compile Include="Framework\IttyBittyIoC.cs" />
     <Compile Include="Framework\ServiceLocator.cs" />
     <Compile Include="Framework\TinyIoC.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

@@ -9,23 +9,24 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
 {
     public class AndroidSqlitePortfolioRepository : AndroidSqliteBase, IPortfolioRepository
     {
-        public AndroidSqlitePortfolioRepository(Context context) : base(context)
+        public AndroidSqlitePortfolioRepository(Context context)
+            : base(context)
         { }
 
         public IList<Portfolio> GetAllPortfolios()
         {
             var list = new List<Portfolio>();
             var cursor = Db.Query(PORTFOLIO_TABLE_NAME, new[] { "id", "Name" }, null, null, null, null, null);
-            if(cursor.Count > 0)
+            if (cursor.Count > 0)
             {
-                while(cursor.MoveToNext())
+                while (cursor.MoveToNext())
                 {
                     var portfolio = new Portfolio(cursor.GetInt(0));
                     portfolio.Name = cursor.GetString(1);
                     list.Add(portfolio);
                 }
             }
-            if(!cursor.IsClosed) cursor.Close();
+            if (!cursor.IsClosed) cursor.Close();
             return list;
         }
 
@@ -102,7 +103,7 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
             {
                 while (cursor.MoveToNext())
                 {
-                    position= new Position(cursor.GetInt(0));
+                    position = new Position(cursor.GetInt(0));
                     position.Ticker = cursor.GetString(1);
                     position.Shares = Convert.ToDecimal(cursor.GetFloat(2));
                     position.PricePerShare = Convert.ToDecimal(cursor.GetFloat(3));
