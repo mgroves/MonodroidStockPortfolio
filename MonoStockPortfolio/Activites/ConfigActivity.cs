@@ -4,10 +4,17 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Preferences;
+<<<<<<< HEAD
 using MonoStockPortfolio.Core;
 using MonoStockPortfolio.Core.Config;
 using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Framework;
+=======
+using MonoStockPortfolio.Core.Config;
+using MonoStockPortfolio.Entities;
+using MonoStockPortfolio.Framework;
+using MonoStockPortfolio.Core;
+>>>>>>> develop
 
 namespace MonoStockPortfolio.Activites
 {

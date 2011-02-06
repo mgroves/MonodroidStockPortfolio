@@ -43,6 +43,7 @@
     <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="AndroidSqliteBase.cs" />
     <Compile Include="EnumExtensions.cs" />
+    <Compile Include="AndroidSqliteBase.cs" />
     <Compile Include="PortfolioRepositories\AndroidSqlitePortfolioRepository.cs" />
     <Compile Include="PortfolioRepositories\IPortfolioRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
