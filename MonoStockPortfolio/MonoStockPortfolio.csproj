@@ -40,7 +40,7 @@
     <Reference Include="mscorlib" />
     <Reference Include="PostSharp.SL, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\libs\PostSharp.SL.dll</HintPath>
+      <HintPath>..\..\..\Program Files (x86)\PostSharp 2.0\Reference Assemblies\Silverlight 3.0\PostSharp.SL.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activites\ConfigActivity.cs" />
     <Compile Include="Activites\EditPositionActivity.designer.cs">
       <DependentUpon>EditPositionActivity.cs</DependentUpon>
     </Compile>
@@ -58,7 +59,6 @@
     <Compile Include="Framework\ActivityExtensions.cs" />
     <Compile Include="Framework\ContextExtensions.cs" />
     <Compile Include="Framework\GenericArrayAdapter.cs" />
-    <Compile Include="Framework\IoCAttribute.cs" />
     <Compile Include="Activites\MainActivity.designer.cs">
       <DependentUpon>MainActivity.cs</DependentUpon>
     </Compile>
@@ -68,17 +68,16 @@
     <Compile Include="Activites\PortfolioActivity.designer.cs">
       <DependentUpon>PortfolioActivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Framework\IoCAttribute.cs" />
+    <Compile Include="Framework\IttyBittyIoC.cs" />
     <Compile Include="Framework\ServiceLocator.cs" />
-    <Compile Include="Framework\TinyIoC.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Framework\StringExtensions.cs" />
     <Compile Include="Framework\FormValidator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="PostSharp.Custom.targets">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="PostSharp.Custom.targets" />
     <None Include="Resources\AboutResources.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -118,14 +117,26 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\layout\config.xml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\ic_menu_refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\ic_menu_refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
     <AndroidResource Include="Resources\drawable-mdpi\icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\ic_menu_refresh.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_menu_refresh.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\ic_menu_refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-ldpi\icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

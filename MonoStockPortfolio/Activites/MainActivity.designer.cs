@@ -6,7 +6,7 @@ namespace MonoStockPortfolio.Activites
     {
         public static string ClassName { get { return "monostockportfolio.activites.MainActivity"; } }
 
-        protected Button AddPortfolioButton { get { return FindViewById<Button>(Resource.id.btnAddPortfolio); } }
-        protected ListView PortfolioListView { get { return FindViewById<ListView>(Resource.id.portfolioList); } }
+        protected Button AddPortfolioButton { get { return FindViewById<Button>(Resource.Id.btnAddPortfolio); } }
+        protected ListView PortfolioListView { get { return FindViewById<ListView>(Resource.Id.portfolioList); } }
     }
 }

@@ -16,7 +16,7 @@ namespace MonoStockPortfolio.Activites
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.layout.addposition);
+            SetContentView(Resource.Layout.addposition);
 
             var positionId = ThisPositionId;
             if (positionId != -1)

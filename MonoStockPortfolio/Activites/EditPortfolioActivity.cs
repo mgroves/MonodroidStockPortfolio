@@ -16,7 +16,7 @@ namespace MonoStockPortfolio.Activites
         {
             base.OnCreate(bundle);
 
-            SetContentView(Resource.layout.addportfolio);
+            SetContentView(Resource.Layout.addportfolio);
 
             WireUpEvents();
 
