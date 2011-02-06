@@ -10,9 +10,9 @@ namespace MonoStockPortfolio.Activites
         public static string Extra_PositionID { get { return "monoStockPortfolio.EditPositionActivity.PositionID"; } }
         public long ThisPositionId { get { return Intent.GetLongExtra(Extra_PositionID, -1); } }
 
-        protected EditText TickerTextBox { get { return FindViewById<EditText>(Resource.id.addPositionTicker); } }
-        protected EditText PriceTextBox { get { return FindViewById<EditText>(Resource.id.addPositionPrice); } }
-        protected EditText SharesTextBox { get { return FindViewById<EditText>(Resource.id.addPositionShares); } }
-        protected Button SaveButton { get { return FindViewById<Button>(Resource.id.addPositionSaveButton); } }
+        protected EditText TickerTextBox { get { return FindViewById<EditText>(Resource.Id.addPositionTicker); } }
+        protected EditText PriceTextBox { get { return FindViewById<EditText>(Resource.Id.addPositionPrice); } }
+        protected EditText SharesTextBox { get { return FindViewById<EditText>(Resource.Id.addPositionShares); } }
+        protected Button SaveButton { get { return FindViewById<Button>(Resource.Id.addPositionSaveButton); } }
     }
 }
