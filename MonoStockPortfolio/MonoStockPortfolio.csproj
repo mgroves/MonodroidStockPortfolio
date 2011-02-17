@@ -40,7 +40,7 @@
     <Reference Include="mscorlib" />
     <Reference Include="PostSharp.SL, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files (x86)\PostSharp 2.0\Reference Assemblies\Silverlight 3.0\PostSharp.SL.dll</HintPath>
+      <HintPath>..\libs\PostSharp.SL.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

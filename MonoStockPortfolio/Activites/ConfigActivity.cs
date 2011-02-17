@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.App;
@@ -26,10 +27,10 @@ namespace MonoStockPortfolio.Activites
             _stockItemsConfig = StockItemPreference.BuildList(_repo.GetStockItems()).ToArray();
 
             var customPref = FindPreference("customStockItems");
-            customPref.PreferenceClick += customPref_PreferenceClick;
+            customPref.PreferenceClick = customPref_PreferenceClick;
         }
 
-        bool customPref_PreferenceClick(Preference preference)
+        private bool customPref_PreferenceClick(Preference preference)
         {
             IEnumerable<char>[] stockItemsDisplay = _stockItemsConfig.OrderBy(i => i.StockDataItem).Select(i => i.StockDataItem.GetStringValue()).ToArray();
             bool[] allitemschecked = _stockItemsConfig.OrderBy(i => i.StockDataItem).Select(i => i.IsChecked).ToArray();
@@ -37,12 +38,12 @@ namespace MonoStockPortfolio.Activites
             var dialog = new AlertDialog.Builder(this);
             dialog.SetMultiChoiceItems(stockItemsDisplay, allitemschecked, clickCallback);
             dialog.SetTitle("Select columns");
-            dialog.SetPositiveButton("Save", okCallback);
+            dialog.SetPositiveButton("Save", saveCallback);
             dialog.Create().Show();
             return true;
         }
 
-        private void okCallback(object sender, DialogClickEventArgs e)
+        private void saveCallback(object sender, DialogClickEventArgs e)
         {
             var list = _stockItemsConfig.Where(i => i.IsChecked).Select(i => i.StockDataItem).ToList();
             _repo.UpdateStockItems(list);
@@ -50,7 +51,8 @@ namespace MonoStockPortfolio.Activites
 
         private void clickCallback(object sender, DialogMultiChoiceClickEventArgs e)
         {
-            _stockItemsConfig[e.Which].IsChecked = e.IsChecked;
+            var which = int.Parse(e.Which.ToString());
+            _stockItemsConfig[which].IsChecked = e.IsChecked;
         }
 
         public static string ClassName { get { return "monostockportfolio.activites.ConfigActivity"; } }

@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1AAA2739-D853-41B0-866B-B55B373616E1}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MonoDroid.FileHelpers</RootNamespace>
+    <AssemblyName>MonoDroid.FileHelpers</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\ConditionalRecordAttribute.cs" />
+    <Compile Include="Attributes\DelimitedRecordAttribute.cs" />
+    <Compile Include="Attributes\FieldAlignAttribute.cs" />
+    <Compile Include="Attributes\FieldAttribute.cs" />
+    <Compile Include="Attributes\FieldConverterAttribute.cs" />
+    <Compile Include="Attributes\FieldDelimiterAttribute.cs" />
+    <Compile Include="Attributes\FieldFixedLengthAttribute.cs" />
+    <Compile Include="Attributes\FieldIgnoredAttribute.cs" />
+    <Compile Include="Attributes\FieldInNewLineAttribute.cs" />
+    <Compile Include="Attributes\FieldNullValueAttribute.cs" />
+    <Compile Include="Attributes\FieldOptionalAttribute.cs" />
+    <Compile Include="Attributes\FieldQuotedAttribute.cs" />
+    <Compile Include="Attributes\FieldTrimAttribute.cs" />
+    <Compile Include="Attributes\FixedLengthRecordAttribute.cs" />
+    <Compile Include="Attributes\IgnoreCommentedLinesAttribute.cs" />
+    <Compile Include="Attributes\IgnoreEmptyLinesAttribute.cs" />
+    <Compile Include="Attributes\IgnoreFirstAttribute.cs" />
+    <Compile Include="Attributes\IgnoreLastAttribute.cs" />
+    <Compile Include="Converters\ConverterBase.cs" />
+    <Compile Include="Converters\ConvertHelpers.cs" />
+    <Compile Include="Converters\EnumConverter.cs" />
+    <Compile Include="Core\ExtractInfo.cs" />
+    <Compile Include="Core\ForwardReader.cs" />
+    <Compile Include="Core\LineInfo.cs" />
+    <Compile Include="Core\RecordInfo.cs" />
+    <Compile Include="Engines\EngineBase.cs" />
+    <Compile Include="Engines\FileHelperEngine.cs" />
+    <Compile Include="Enums\AlignMode.cs" />
+    <Compile Include="Enums\ConverterKind.cs" />
+    <Compile Include="Enums\ErrorMode.cs" />
+    <Compile Include="Enums\FixedMode.cs" />
+    <Compile Include="Enums\MultilineMode.cs" />
+    <Compile Include="Enums\ProgressMode.cs" />
+    <Compile Include="Enums\QuoteMode.cs" />
+    <Compile Include="Enums\RecordCondition.cs" />
+    <Compile Include="Enums\TrimMode.cs" />
+    <Compile Include="ErrorHandling\BadUsageException.cs" />
+    <Compile Include="ErrorHandling\ConvertException.cs" />
+    <Compile Include="ErrorHandling\ErrorInfo.cs" />
+    <Compile Include="ErrorHandling\ErrorManager.cs" />
+    <Compile Include="ErrorHandling\FileHelpersException.cs" />
+    <Compile Include="Events\Delegates.cs" />
+    <Compile Include="Events\ReadEventArgs.cs" />
+    <Compile Include="Events\WriteEventArgs.cs" />
+    <Compile Include="Fields\DelimitedField.cs" />
+    <Compile Include="Fields\FieldBase.cs" />
+    <Compile Include="Fields\FieldFactory.cs" />
+    <Compile Include="Fields\FixedLengthField.cs" />
+    <Compile Include="Helpers\ConditionHelper.cs" />
+    <Compile Include="Helpers\ExHelper.cs" />
+    <Compile Include="Helpers\ProgressHelper.cs" />
+    <Compile Include="Helpers\StreamHelper.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Interfaces\INotificableRecord.cs" />
+    <Compile Include="Options\DelimitedRecordOptions.cs" />
+    <Compile Include="Options\FixedRecordOptions.cs" />
+    <Compile Include="Options\RecordOptions.cs" />
+    <Compile Include="Progress\ProgressChange.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Attributes\TypedRecordAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DevNotes.txt" />
+    <Content Include="LGPL - License.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FileHelpers - Amazon Whish List.url" />
+    <None Include="FileHelpers - Contact Me.url" />
+    <None Include="FileHelpers - Download Source Code.url" />
+    <None Include="FileHelpers - Forums.url" />
+    <None Include="FileHelpers - Home Page.url" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

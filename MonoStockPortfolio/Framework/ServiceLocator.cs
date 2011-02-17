@@ -13,8 +13,7 @@ namespace MonoStockPortfolio.Framework
 
         static ServiceLocator()
         {
-            //IttyBittyIoC.Register(Context);
-            IttyBittyIoC.Register<IStockDataProvider>(() => new GoogleStockDataProvider());
+            IttyBittyIoC.Register<IStockDataProvider>(() => new YahooStockDataProvider());
             IttyBittyIoC.Register<IPortfolioService>(() => new PortfolioService(new AndroidSqlitePortfolioRepository(Context), new GoogleStockDataProvider()));
             IttyBittyIoC.Register<IPortfolioRepository>(() => new AndroidSqlitePortfolioRepository(Context));
             IttyBittyIoC.Register<IConfigRepository>(() => new AndroidSqliteConfigRepository(Context));
