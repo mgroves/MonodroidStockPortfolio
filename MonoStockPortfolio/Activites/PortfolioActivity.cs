@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -90,41 +89,40 @@ namespace MonoStockPortfolio.Activites
 
         private void Refresh()
         {
-            var pd = new ProgressDialog(this);
-            pd.SetMessage("Loading...Please wait...");
-            pd.SetProgressStyle(ProgressDialogStyle.Spinner);
-            pd.Show();
+            RefreshWorker();
 
-            Action refresh = () =>
-                                 {
-                                     var tickers = _svc.GetDetailedItems(ThisPortofolioId, GetStockItemsFromConfig());
-                                     if (tickers.Any())
-                                     {
-                                         RunOnUiThread(() => RefreshUI(tickers));
-                                     }
-                                     else
-                                     {
-                                         RunOnUiThread(() => ShowMessage("Please add positions!"));
-                                     }
-                                     RunOnUiThread(pd.Dismiss);
-                                 };
-            var background = new Thread(() => refresh());
-            background.Start();
             UpdateHeader(GetStockItemsFromConfig());
         }
 
-        private void ShowMessage(string message)
+        [OnWorkerThread]
+        private void RefreshWorker()
         {
-            var listAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, new[] { message });
-            QuoteListview.Adapter = listAdapter;
+            var tickers = _svc.GetDetailedItems(ThisPortofolioId, GetStockItemsFromConfig());
+            if (tickers.Any())
+            {
+                RefreshUI(tickers);
+            }
+            else
+            {
+                ShowMessage("Please add positions!");
+            }
         }
 
+        [OnGuiThread]
         private void RefreshUI(IEnumerable<PositionResultsViewModel> tickers)
         {
             var listAdapter = new PositionArrayAdapter(this, tickers.ToArray());
             QuoteListview.Adapter = listAdapter;
         }
 
+        [OnGuiThread]
+        private void ShowMessage(string message)
+        {
+            var listAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, new[] { message });
+            QuoteListview.Adapter = listAdapter;
+        }
+
+        [OnGuiThread]
         private void UpdateHeader(IEnumerable<StockDataItem> items)
         {
             QuoteListviewHeader.RemoveAllViews();
