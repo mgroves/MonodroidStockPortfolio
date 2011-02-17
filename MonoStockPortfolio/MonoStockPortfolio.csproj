@@ -70,6 +70,8 @@
     </Compile>
     <Compile Include="Framework\IoCAttribute.cs" />
     <Compile Include="Framework\IttyBittyIoC.cs" />
+    <Compile Include="Framework\OnGuiThreadAttribute.cs" />
+    <Compile Include="Framework\OnWorkerThreadAttribute.cs" />
     <Compile Include="Framework\ServiceLocator.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
