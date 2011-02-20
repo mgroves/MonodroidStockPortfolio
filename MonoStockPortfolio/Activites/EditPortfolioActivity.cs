@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.App;
 using Android.OS;
+using Android.Widget;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Framework;
@@ -11,6 +12,9 @@ namespace MonoStockPortfolio.Activites
     public partial class EditPortfolioActivity : Activity
     {
         [IoC] private IPortfolioRepository _repo;
+
+        [LazyView(Resource.Id.btnSave)] protected Button SaveButton;
+        [LazyView(Resource.Id.portfolioName)] protected EditText PortfolioName;
 
         protected override void OnCreate(Bundle bundle)
         {
