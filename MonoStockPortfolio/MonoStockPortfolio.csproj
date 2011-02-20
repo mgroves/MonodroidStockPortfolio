@@ -59,9 +59,6 @@
     <Compile Include="Framework\ActivityExtensions.cs" />
     <Compile Include="Framework\ContextExtensions.cs" />
     <Compile Include="Framework\GenericArrayAdapter.cs" />
-    <Compile Include="Activites\MainActivity.designer.cs">
-      <DependentUpon>MainActivity.cs</DependentUpon>
-    </Compile>
     <Compile Include="Activites\PortfolioActivity.cs" />
     <Compile Include="Activites\MainActivity.cs" />
     <Compile Include="Activites\EditPositionActivity.cs" />
@@ -70,6 +67,7 @@
     </Compile>
     <Compile Include="Framework\IoCAttribute.cs" />
     <Compile Include="Framework\IttyBittyIoC.cs" />
+    <Compile Include="Framework\LazyViewAttribute.cs" />
     <Compile Include="Framework\OnGuiThreadAttribute.cs" />
     <Compile Include="Framework\OnWorkerThreadAttribute.cs" />
     <Compile Include="Framework\ServiceLocator.cs" />
