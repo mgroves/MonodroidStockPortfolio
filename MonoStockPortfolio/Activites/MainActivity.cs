@@ -13,9 +13,12 @@ using MonoStockPortfolio.Framework;
 namespace MonoStockPortfolio.Activites
 {
     [Activity(Label = "Stock Portfolio", MainLauncher = true, Icon = "@drawable/icon")]
-    public partial class MainActivity : Activity
+    public class MainActivity : Activity
     {
         [IoC] private IPortfolioRepository _repo;
+
+        [LazyView(Resource.Id.btnAddPortfolio)] protected Button AddPortfolioButton;
+        [LazyView(Resource.Id.portfolioList)] protected ListView PortfolioListView;
 
         private IList<Portfolio> _portfolios;
 
@@ -45,7 +48,7 @@ namespace MonoStockPortfolio.Activites
             RegisterForContextMenu(PortfolioListView);
         }
 
-        public override void OnCreateContextMenu(Android.Views.IContextMenu menu, Android.Views.View v, Android.Views.IContextMenuContextMenuInfo menuInfo)
+        public override void OnCreateContextMenu(IContextMenu menu, View v, IContextMenuContextMenuInfo menuInfo)
         {
             base.OnCreateContextMenu(menu, v, menuInfo);
 
@@ -59,7 +62,7 @@ namespace MonoStockPortfolio.Activites
             menu.Add(0, id, 2, "Delete");
         }
 
-        public override bool OnContextItemSelected(Android.Views.IMenuItem item)
+        public override bool OnContextItemSelected(IMenuItem item)
         {
             if (item.Title.ToS() == "Rename")
             {

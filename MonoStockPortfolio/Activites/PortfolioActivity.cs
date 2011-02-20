@@ -22,6 +22,10 @@ namespace MonoStockPortfolio.Activites
         [IoC] private IPortfolioRepository _repo;
         [IoC] private IConfigRepository _config;
 
+        [LazyView(Resource.Id.quoteListview)] protected ListView QuoteListview;
+        [LazyView(Resource.Id.btnAddPosition)] protected Button AddPositionButton;
+        [LazyView(Resource.Id.quoteHeaderLayout)] protected LinearLayout QuoteListviewHeader;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
