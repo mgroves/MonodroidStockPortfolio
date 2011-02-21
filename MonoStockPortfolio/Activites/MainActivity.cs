@@ -67,9 +67,7 @@ namespace MonoStockPortfolio.Activites
             if (item.Title.ToS() == "Rename")
             {
                 // Edit
-                var intent = new Intent();
-                intent.SetClassName(this, EditPortfolioActivity.ClassName);
-                intent.PutExtra(EditPortfolioActivity.Extra_PortfolioID, (long)item.ItemId);
+                var intent = EditPortfolioActivity.EditIntent(this, item.ItemId);
                 StartActivityForResult(intent, 0);
                 return true;
             }
@@ -111,16 +109,13 @@ namespace MonoStockPortfolio.Activites
 
         private void listView_ItemClick(object sender, ItemEventArgs e)
         {
-            var intent = new Intent();
-            intent.SetClassName(this, PortfolioActivity.ClassName);
-            intent.PutExtra(PortfolioActivity.Extra_PortfolioID, _portfolios[e.Position].ID ?? -1);
+            var intent = PortfolioActivity.ViewIntent(this, _portfolios[e.Position].ID ?? -1);
             StartActivityForResult(intent, 0);
         }
 
         private void addPortfolioButton_Click(object sender, EventArgs e)
         {
-            var intent = new Intent();
-            intent.SetClassName(this, EditPortfolioActivity.ClassName);
+            var intent = EditPortfolioActivity.AddIntent(this);
             StartActivityForResult(intent, 0);
         }
 

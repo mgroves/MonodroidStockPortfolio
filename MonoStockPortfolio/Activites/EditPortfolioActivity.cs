@@ -1,5 +1,6 @@
 ﻿using System;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Widget;
 using MonoStockPortfolio.Core.PortfolioRepositories;
@@ -8,13 +9,30 @@ using MonoStockPortfolio.Framework;
 
 namespace MonoStockPortfolio.Activites
 {
-    [Activity(Label = "Add Portfolio", MainLauncher = false)]
-    public partial class EditPortfolioActivity : Activity
+    [Activity(Label = "Add Portfolio", MainLauncher = false, Name = "monostockportfolio.activites.EditPortfolioActivity")]
+    public class EditPortfolioActivity : Activity
     {
         [IoC] private IPortfolioRepository _repo;
 
         [LazyView(Resource.Id.btnSave)] protected Button SaveButton;
         [LazyView(Resource.Id.portfolioName)] protected EditText PortfolioName;
+
+        private const string PORTFOLIOIDEXTRA = "monoStockPortfolio.EditPortfolioActivity.PortfolioID";
+
+        public static Intent AddIntent(Context context)
+        {
+            var intent = new Intent();
+            intent.SetClassName(context, ManifestNames.GetName<EditPortfolioActivity>());
+            return intent;
+        }
+        public static Intent EditIntent(Context context, long portfolioId)
+        {
+            var intent = new Intent();
+            intent.SetClassName(context, ManifestNames.GetName<EditPortfolioActivity>());
+            intent.PutExtra(PORTFOLIOIDEXTRA, portfolioId);
+            return intent;
+        }
+        public long ThisPortfolioId { get { return Intent.GetLongExtra(PORTFOLIOIDEXTRA, -1); } }
 
         protected override void OnCreate(Bundle bundle)
         {

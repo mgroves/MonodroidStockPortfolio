@@ -15,8 +15,8 @@ using MonoStockPortfolio.Framework;
 
 namespace MonoStockPortfolio.Activites
 {
-    [Activity(Label = "Portfolio")]
-    public partial class PortfolioActivity : Activity
+    [Activity(Label = "Portfolio", Name = "monostockportfolio.activites.PortfolioActivity")]
+    public class PortfolioActivity : Activity
     {
         [IoC] private IPortfolioService _svc;
         [IoC] private IPortfolioRepository _repo;
@@ -25,6 +25,17 @@ namespace MonoStockPortfolio.Activites
         [LazyView(Resource.Id.quoteListview)] protected ListView QuoteListview;
         [LazyView(Resource.Id.btnAddPosition)] protected Button AddPositionButton;
         [LazyView(Resource.Id.quoteHeaderLayout)] protected LinearLayout QuoteListviewHeader;
+
+        private const string PORTFOLIOIDEXTRA = "monoStockPortfolio.PortfolioActivity.PortfolioID";
+
+        public static Intent ViewIntent(Context context, long portfolioId)
+        {
+            var intent = new Intent();
+            intent.SetClassName(context, ManifestNames.GetName<PortfolioActivity>());
+            intent.PutExtra(PORTFOLIOIDEXTRA, portfolioId);
+            return intent;
+        }
+        public long ThisPortofolioId { get { return Intent.GetLongExtra(PORTFOLIOIDEXTRA, -1); } }
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -74,10 +85,7 @@ namespace MonoStockPortfolio.Activites
             if (item.Title.ToS() == "Edit")
             {
                 // Edit
-                var intent = new Intent();
-                intent.SetClassName(this, EditPositionActivity.ClassName);
-                intent.PutExtra(EditPositionActivity.Extra_PositionID, (long)item.ItemId);
-                intent.PutExtra(EditPositionActivity.Extra_PortfolioID, ThisPortofolioId);
+                var intent = EditPositionActivity.EditIntent(this, item.ItemId, ThisPortofolioId);
                 StartActivityForResult(intent, 0);
                 return true;
             }
@@ -188,9 +196,7 @@ namespace MonoStockPortfolio.Activites
 
         void addPositionButton_Click(object sender, EventArgs e)
         {
-            var intent = new Intent();
-            intent.SetClassName(this, EditPositionActivity.ClassName);
-            intent.PutExtra(EditPositionActivity.Extra_PortfolioID, ThisPortofolioId);
+            var intent = EditPositionActivity.AddIntent(this, ThisPortofolioId);
             StartActivityForResult(intent, 0);
         }
 
@@ -201,12 +207,9 @@ namespace MonoStockPortfolio.Activites
             Refresh();
         }
 
-
-
-
         public IEnumerable<StockDataItem> GetStockItemsFromConfig()
         {
             return _config.GetStockItems();
-        }    
+        }
     }
 }

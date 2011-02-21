@@ -1,5 +1,6 @@
 using System;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Widget;
 using MonoStockPortfolio.Core.PortfolioRepositories;
@@ -8,8 +9,8 @@ using MonoStockPortfolio.Framework;
 
 namespace MonoStockPortfolio.Activites
 {
-    [Activity(Label = "Add Position", MainLauncher = false)]
-    public partial class EditPositionActivity : Activity
+    [Activity(Label = "Add Position", MainLauncher = false, Name = "monostockportfolio.activites.EditPositionActivity")]
+    public class EditPositionActivity : Activity
     {
         [IoC] private IPortfolioRepository _repo;
 
@@ -17,6 +18,27 @@ namespace MonoStockPortfolio.Activites
         [LazyView(Resource.Id.addPositionPrice)] protected EditText PriceTextBox;
         [LazyView(Resource.Id.addPositionShares)] protected EditText SharesTextBox;
         [LazyView(Resource.Id.addPositionSaveButton)] protected Button SaveButton;
+
+        private const string POSITIONIDEXTRA = "monoStockPortfolio.EditPositionActivity.PositionID";
+        private const string PORTFOLIOIDEXTRA = "monoStockPortfolio.EditPositionActivity.PortfolioID";
+
+        public static Intent AddIntent(Context context, long portfolioId)
+        {
+            var intent = new Intent();
+            intent.SetClassName(context, ManifestNames.GetName<EditPositionActivity>());
+            intent.PutExtra(PORTFOLIOIDEXTRA, portfolioId);
+            return intent;
+        }
+        public static Intent EditIntent(Context context, long positionId, long portfolioId)
+        {
+            var intent = new Intent();
+            intent.SetClassName(context, ManifestNames.GetName<EditPositionActivity>());
+            intent.PutExtra(POSITIONIDEXTRA, positionId);
+            intent.PutExtra(PORTFOLIOIDEXTRA, portfolioId);
+            return intent;
+        }
+        public long ThisPortfolioId { get { return Intent.GetLongExtra(PORTFOLIOIDEXTRA, -1); } }
+        public long ThisPositionId { get { return Intent.GetLongExtra(POSITIONIDEXTRA, -1); } }
 
         protected override void OnCreate(Bundle bundle)
         {

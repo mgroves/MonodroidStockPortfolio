@@ -49,25 +49,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activites\ConfigActivity.cs" />
-    <Compile Include="Activites\EditPositionActivity.designer.cs">
-      <DependentUpon>EditPositionActivity.cs</DependentUpon>
-    </Compile>
     <Compile Include="Activites\EditPortfolioActivity.cs" />
-    <Compile Include="Activites\EditPortfolioActivity.designer.cs">
-      <DependentUpon>EditPortfolioActivity.cs</DependentUpon>
-    </Compile>
     <Compile Include="Framework\ActivityExtensions.cs" />
     <Compile Include="Framework\ContextExtensions.cs" />
     <Compile Include="Framework\GenericArrayAdapter.cs" />
     <Compile Include="Activites\PortfolioActivity.cs" />
     <Compile Include="Activites\MainActivity.cs" />
     <Compile Include="Activites\EditPositionActivity.cs" />
-    <Compile Include="Activites\PortfolioActivity.designer.cs">
-      <DependentUpon>PortfolioActivity.cs</DependentUpon>
-    </Compile>
     <Compile Include="Framework\IoCAttribute.cs" />
     <Compile Include="Framework\IttyBittyIoC.cs" />
     <Compile Include="Framework\LazyViewAttribute.cs" />
+    <Compile Include="Framework\ManifestNames.cs" />
     <Compile Include="Framework\OnGuiThreadAttribute.cs" />
     <Compile Include="Framework\OnWorkerThreadAttribute.cs" />
     <Compile Include="Framework\ServiceLocator.cs" />

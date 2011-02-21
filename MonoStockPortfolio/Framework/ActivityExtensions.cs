@@ -1,3 +1,4 @@
+using System.Reflection;
 using Android.App;
 using Android.Content;
 using Android.Widget;
@@ -17,5 +18,6 @@ namespace MonoStockPortfolio.Framework
         {
             Toast.MakeText(@this, message, ToastLength.Long).Show();
         }
+
     }
 }
