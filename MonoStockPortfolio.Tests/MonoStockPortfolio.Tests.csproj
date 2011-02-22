@@ -57,6 +57,7 @@
     <Compile Include="CsvParserTests.cs" />
     <Compile Include="GoogleStockQuoteTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="YahooStockDataProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MonoStockPortfolio.Core\MonoStockPortfolio.Core.csproj">

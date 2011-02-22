@@ -1,6 +1,5 @@
 using System;
 using Android.App;
-using Android.Util;
 using PostSharp.Aspects;
 
 namespace MonoStockPortfolio.Framework
@@ -19,7 +18,6 @@ namespace MonoStockPortfolio.Framework
             args.ProceedGetValue(); // this actually fetches the field and populates the args.Value
             if (args.Value == null)
             {
-                Log.Info("OnGetValue", "FindViewById called for " + args.LocationFullName);
                 var activity = args.Instance as Activity;
                 if (activity == null) throw new ArgumentException("LazyViewAttribute can only be used within Activities");
                 args.SetNewValue(activity.FindViewById(_viewId));
