@@ -41,10 +41,7 @@ namespace MonoStockPortfolio.Core.StockData
 
             var yahooQuoteData = ParseCsvIntoStockQuotes(resultCsv);
 
-            foreach (var quote in yahooQuoteData)
-            {
-                yield return MapYahooData(quote);
-            }
+            return yahooQuoteData.Select(MapYahooData);
         }
 
         private static StockQuote MapYahooData(YahooFinanceStockData data)
@@ -74,6 +71,7 @@ namespace MonoStockPortfolio.Core.StockData
         {
             var engine = new FileHelperEngine(typeof(YahooFinanceStockData));
             var stockQuotes = engine.ReadString(csv) as YahooFinanceStockData[];
+            stockQuotes.ToList().ForEach(q => Log.Error("ParseCSV",q.Volume));
             if (stockQuotes == null)
             {
                 throw new ArgumentException("Could not parse CSV input");

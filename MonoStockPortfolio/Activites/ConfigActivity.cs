@@ -31,7 +31,7 @@ namespace MonoStockPortfolio.Activites
 
         private bool customPref_PreferenceClick(Preference preference)
         {
-            IEnumerable<char>[] stockItemsDisplay = _stockItemsConfig.OrderBy(i => i.StockDataItem).Select(i => i.StockDataItem.GetStringValue()).ToArray();
+            string[] stockItemsDisplay = _stockItemsConfig.OrderBy(i => i.StockDataItem).Select(i => i.StockDataItem.GetStringValue()).ToArray();
             bool[] allitemschecked = _stockItemsConfig.OrderBy(i => i.StockDataItem).Select(i => i.IsChecked).ToArray();
             
             var dialog = new AlertDialog.Builder(this);
