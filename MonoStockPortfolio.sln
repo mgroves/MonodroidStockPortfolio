@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoStockPortfolio.Entities
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoStockPortfolio.Tests", "MonoStockPortfolio.Tests\MonoStockPortfolio.Tests.csproj", "{C2797FAB-AFAB-49F6-9131-FC9BF03CAB9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDroid.FileHelpers", "MonoDroid.FileHelpers\MonoDroid.FileHelpers.csproj", "{1AAA2739-D853-41B0-866B-B55B373616E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDroid.LumenWorks.Framework.IO.Csv", "MonoDroid.FileHelpers\MonoDroid.LumenWorks.Framework.IO.Csv.csproj", "{1AAA2739-D853-41B0-866B-B55B373616E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -57,21 +57,21 @@ namespace MonoStockPortfolio.Activites
             var selectedPortfolio = _repo.GetPortfolioByName(selectedPortfolioName);
             var id = (int)(selectedPortfolio.ID ?? -1);
 
-            menu.SetHeaderTitle("Options");
-            menu.Add(0, id, 1, "Rename");
-            menu.Add(0, id, 2, "Delete");
+            menu.SetHeaderTitle("Options".ToJ());
+            menu.Add(0, id, 1, "Rename".ToJ());
+            menu.Add(0, id, 2, "Delete".ToJ());
         }
 
         public override bool OnContextItemSelected(IMenuItem item)
         {
-            if (item.Title.ToS() == "Rename")
+            if (item.TitleFormatted.ToS() == "Rename")
             {
                 // Edit
                 var intent = EditPortfolioActivity.EditIntent(this, item.ItemId);
                 StartActivityForResult(intent, 0);
                 return true;
             }
-            if (item.Title.ToS() == "Delete")
+            if (item.TitleFormatted.ToS() == "Delete")
             {
                 // Delete
                 _repo.DeletePortfolioById(item.ItemId);
@@ -83,20 +83,21 @@ namespace MonoStockPortfolio.Activites
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            var configItem = menu.Add(0, 1, 1, "Config");
+            var configItem = menu.Add(0, 1, 1, "Config".ToJ());
             configItem.SetIcon(Android.Resource.Drawable.IcMenuPreferences);
-            var exitItem = menu.Add(0, 1, 1, "Exit");
+            var exitItem = menu.Add(0, 1, 1, "Exit".ToJ());
             exitItem.SetIcon(Android.Resource.Drawable.IcMenuCloseClearCancel);
             return true;
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            switch (item.Title.ToS())
+            switch (item.TitleFormatted.ToS())
             {
                 case "Config":
-                    var intent = new Intent();
-                    intent.SetClassName(this, ConfigActivity.ClassName);
+                    var intent = ConfigActivity2.GotoIntent(this);
+//                    var intent = new Intent();
+//                    intent.SetClassName(this, ConfigActivity.ClassName);
                     StartActivityForResult(intent, 0);
                     return true;
                 case "Exit":

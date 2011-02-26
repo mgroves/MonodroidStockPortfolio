@@ -4,8 +4,10 @@ using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
+using Java.Lang;
 using MonoStockPortfolio.Core;
 using MonoStockPortfolio.Core.Config;
 using MonoStockPortfolio.Core.PortfolioRepositories;
@@ -52,14 +54,14 @@ namespace MonoStockPortfolio.Activites
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            var item = menu.Add(0,1,1,"Refresh");
+            var item = menu.Add(0,1,1, "Refresh".ToJ());
             item.SetIcon(Resource.Drawable.ic_menu_refresh);
             return true;
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            switch (item.Title.ToS())
+            switch (item.TitleFormatted.ToS())
             {
                 case "Refresh": Refresh();
                     return true;
@@ -75,21 +77,21 @@ namespace MonoStockPortfolio.Activites
             var info = (AdapterView.AdapterContextMenuInfo)menuInfo;
             var selectedPositionId = int.Parse(info.TargetView.Tag.ToString());
 
-            menu.SetHeaderTitle("Options");
-            menu.Add(0, selectedPositionId, 1, "Edit");
-            menu.Add(0, selectedPositionId, 2, "Delete");
+            menu.SetHeaderTitle("Options".ToJ());
+            menu.Add(0, selectedPositionId, 1, "Edit".ToJ());
+            menu.Add(0, selectedPositionId, 2, "Delete".ToJ());
         }
 
         public override bool OnContextItemSelected(IMenuItem item)
         {
-            if (item.Title.ToS() == "Edit")
+            if (item.TitleFormatted.ToS() == "Edit")
             {
                 // Edit
                 var intent = EditPositionActivity.EditIntent(this, item.ItemId, ThisPortofolioId);
                 StartActivityForResult(intent, 0);
                 return true;
             }
-            if (item.Title.ToS() == "Delete")
+            if (item.TitleFormatted.ToS() == "Delete")
             {
                 // Delete
                 _repo.DeletePositionById(item.ItemId);

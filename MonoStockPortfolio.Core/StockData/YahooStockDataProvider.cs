@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using Android.Util;
-using FileHelpers;
+using LumenWorks.Framework.IO.Csv;
 using MonoStockPortfolio.Entities;
 
 namespace MonoStockPortfolio.Core.StockData
@@ -41,10 +41,7 @@ namespace MonoStockPortfolio.Core.StockData
 
             var yahooQuoteData = ParseCsvIntoStockQuotes(resultCsv);
 
-            foreach (var quote in yahooQuoteData)
-            {
-                yield return MapYahooData(quote);
-            }
+            return yahooQuoteData.Select(MapYahooData);
         }
 
         private static StockQuote MapYahooData(YahooFinanceStockData data)
@@ -70,15 +67,24 @@ namespace MonoStockPortfolio.Core.StockData
             return stock;
         }
 
-        private static IList<YahooFinanceStockData> ParseCsvIntoStockQuotes(string csv)
+        private static IEnumerable<YahooFinanceStockData> ParseCsvIntoStockQuotes(string csv)
         {
-            var engine = new FileHelperEngine(typeof(YahooFinanceStockData));
-            var stockQuotes = engine.ReadString(csv) as YahooFinanceStockData[];
-            if (stockQuotes == null)
+            using(var csvReader = new CsvReader(new StringReader(csv),false))
             {
-                throw new ArgumentException("Could not parse CSV input");
+                while(csvReader.ReadNextRecord())
+                {
+                    var d = new YahooFinanceStockData();
+                    d.Ticker = csvReader[0];
+                    d.LastTradePrice = decimal.Parse(csvReader[1]);
+                    d.Name = csvReader[2];
+                    d.Volume = csvReader[3];
+                    d.Change = decimal.Parse(csvReader[4]);
+                    d.LastTradeTime = csvReader[5];
+                    d.RealTimeLastTradeWithTime = csvReader[6];
+                    d.ChangeRealTime = csvReader[7];
+                    yield return d;
+                }
             }
-            return stockQuotes;
         }
 
         private static string ScrapeUrl(string url)

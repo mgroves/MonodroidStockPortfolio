@@ -34,6 +34,7 @@
     <Reference Include="Mono.Android" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -49,7 +50,9 @@
     <Compile Include="Services\IPortfolioService.cs" />
     <Compile Include="Services\PortfolioService.cs" />
     <Compile Include="StockData\CsvParser.cs" />
-    <Compile Include="StockData\GoogleStockDataProvider.cs" />
+    <Compile Include="StockData\GoogleStockDataProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="StockData\IStockDataProvider.cs" />
     <Compile Include="StockData\YahooFinanceStockData.cs">
       <SubType>Code</SubType>
@@ -59,9 +62,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MonoDroid.FileHelpers\MonoDroid.FileHelpers.csproj">
+    <ProjectReference Include="..\MonoDroid.FileHelpers\MonoDroid.LumenWorks.Framework.IO.Csv.csproj">
       <Project>{1AAA2739-D853-41B0-866B-B55B373616E1}</Project>
-      <Name>MonoDroid.FileHelpers</Name>
+      <Name>MonoDroid.LumenWorks.Framework.IO.Csv</Name>
     </ProjectReference>
     <ProjectReference Include="..\MonoStockPortfolio.Entities\MonoStockPortfolio.Entities.csproj">
       <Project>{05A57650-3B41-46FF-9EAD-9112B5EFBEED}</Project>

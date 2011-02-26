@@ -5,13 +5,15 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C2797FAB-AFAB-49F6-9131-FC9BF03CAB9D}</ProjectGuid>
+    <ProjectGuid>{1AAA2739-D853-41B0-866B-B55B373616E1}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MonoStockPortfolio.Tests</RootNamespace>
-    <AssemblyName>MonoStockPortfolio.Tests</AssemblyName>
+    <RootNamespace>LumenWorks.Framework.IO.Csv</RootNamespace>
+    <AssemblyName>MonoDroid.LumenWorks.Framework.IO.Csv</AssemblyName>
     <FileAlignment>512</FileAlignment>
+    <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,50 +33,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Mono.Android">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="mscorlib">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Core">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Xml">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="xunit">
-      <HintPath>..\libs\xunit.dll</HintPath>
-    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CsvParserTests.cs" />
-    <Compile Include="GoogleStockQuoteTests.cs" />
+    <Compile Include="Csv\CachedCsvReader.cs" />
+    <Compile Include="Csv\CachedCsvReader.CsvBindingList.cs" />
+    <Compile Include="Csv\CachedCsvReader.CsvPropertyDescriptor.cs" />
+    <Compile Include="Csv\CachedCsvReader.CsvRecordComparer.cs" />
+    <Compile Include="Csv\CsvReader.cs" />
+    <Compile Include="Csv\CsvReader.DataReaderValidations.cs" />
+    <Compile Include="Csv\CsvReader.RecordEnumerator.cs" />
+    <Compile Include="Csv\Events\ParseErrorEventArgs.cs" />
+    <Compile Include="Csv\Exceptions\MalformedCsvException.cs" />
+    <Compile Include="Csv\Exceptions\MissingFieldCsvException.cs" />
+    <Compile Include="Csv\MissingFieldAction.cs" />
+    <Compile Include="Csv\ParseErrorAction.cs" />
+    <Compile Include="Csv\Resources\ExceptionMessage.Designer.cs" />
+    <Compile Include="Csv\ValueTrimmingOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="YahooStockDataProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MonoStockPortfolio.Core\MonoStockPortfolio.Core.csproj">
-      <Project>{251E7BB4-CFE2-4DE4-9E2A-AAE1AF41C8CB}</Project>
-      <Name>MonoStockPortfolio.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MonoStockPortfolio.Entities\MonoStockPortfolio.Entities.csproj">
-      <Project>{05A57650-3B41-46FF-9EAD-9112B5EFBEED}</Project>
-      <Name>MonoStockPortfolio.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MonoStockPortfolio\MonoStockPortfolio.csproj">
-      <Project>{E23D8575-CE4E-4716-B9C7-70115D23ADBB}</Project>
-      <Name>MonoStockPortfolio</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="PostSharp.Custom.targets" />
+    <EmbeddedResource Include="Csv\Resources\ExceptionMessage.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
