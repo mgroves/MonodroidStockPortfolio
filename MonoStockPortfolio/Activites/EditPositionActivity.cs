@@ -130,9 +130,9 @@ namespace MonoStockPortfolio.Activites
                 positionToSave = new Position();
             }
 
-            positionToSave.Shares = decimal.Parse(SharesTextBox.Text.ToString());
-            positionToSave.PricePerShare = decimal.Parse(PriceTextBox.Text.ToString());
-            positionToSave.Ticker = TickerTextBox.Text.ToString();
+            positionToSave.Shares = decimal.Parse(SharesTextBox.Text);
+            positionToSave.PricePerShare = decimal.Parse(PriceTextBox.Text);
+            positionToSave.Ticker = TickerTextBox.Text.ToUpper();
             positionToSave.ContainingPortfolioID = ThisPortfolioId;
             return positionToSave;
         }
