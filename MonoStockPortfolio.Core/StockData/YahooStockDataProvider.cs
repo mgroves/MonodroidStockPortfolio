@@ -28,6 +28,9 @@ namespace MonoStockPortfolio.Core.StockData
             string url = "http://finance.yahoo.com/d/quotes.csv?s=";
             url += string.Join("+", tickers.ToArray());
             url += "&f=";
+
+            // the ordering is important, if it's changed here, it should be changed
+            // in the ParseCsvIntoStockQuotes method too
             url += TICKER_SYMBOL;
             url += LAST_TRADE_PRICE_ONLY;
             url += NAME;

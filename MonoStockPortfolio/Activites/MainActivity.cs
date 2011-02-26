@@ -95,7 +95,7 @@ namespace MonoStockPortfolio.Activites
             switch (item.TitleFormatted.ToS())
             {
                 case "Config":
-                    var intent = ConfigActivity2.GotoIntent(this);
+                    var intent = ConfigActivity.GotoIntent(this);
 //                    var intent = new Intent();
 //                    intent.SetClassName(this, ConfigActivity.ClassName);
                     StartActivityForResult(intent, 0);

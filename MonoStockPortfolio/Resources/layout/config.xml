@@ -1,9 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="General Settings">
-        <Preference
-                android:title="Stock Items"
-                android:summary="Which columns do you want to see?"
-                android:key="customStockItems" />
-    </PreferenceCategory>
-</PreferenceScreen>
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <Button android:text="Save" android:layout_height="wrap_content"
+        android:layout_width="fill_parent" android:id="@+id/btnSaveConfig" />
+
+    <ListView android:id="@+id/configList"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+</LinearLayout>

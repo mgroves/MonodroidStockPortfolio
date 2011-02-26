@@ -49,7 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activites\ConfigActivity.cs" />
-    <Compile Include="Activites\ConfigActivity2.cs" />
     <Compile Include="Activites\EditPortfolioActivity.cs" />
     <Compile Include="Framework\ActivityExtensions.cs" />
     <Compile Include="Framework\ContextExtensions.cs" />
@@ -72,7 +71,7 @@
   <ItemGroup>
     <None Include="PostSharp.Custom.targets" />
     <None Include="Resources\AboutResources.txt" />
-    <AndroidResource Include="Resources\layout\config2.xml">
+    <AndroidResource Include="Resources\layout\config.xml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -111,9 +110,6 @@
     <AndroidResource Include="Resources\layout\addposition.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\config.xml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

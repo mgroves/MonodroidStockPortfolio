@@ -3,69 +3,68 @@ using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Preferences;
-using MonoStockPortfolio.Core;
+using Android.Widget;
 using MonoStockPortfolio.Core.Config;
 using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Framework;
+using MonoStockPortfolio.Core;
 
 namespace MonoStockPortfolio.Activites
 {
-    [Activity(Label = "Config")]
-    public class ConfigActivity : PreferenceActivity
+    [Activity(Label = "Config", Name = "monostockportfolio.activites.ConfigActivity")]
+    public class ConfigActivity : Activity
     {
         [IoC] private IConfigRepository _repo;
-        private StockItemPreference[] _stockItemsConfig;
+
+        [LazyView(Resource.Id.configList)] private ListView ConfigList;
+        [LazyView(Resource.Id.btnSaveConfig)] private Button SaveConfigButton;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
-            AddPreferencesFromResource(Resource.Layout.config);
+            SetContentView(Resource.Layout.config);
 
-            _stockItemsConfig = StockItemPreference.BuildList(_repo.GetStockItems()).ToArray();
+            var allitems = StockDataItem.Volume.GetValues<StockDataItem>().ToList();
+            var allitemsLabels = allitems.Select(i => i.GetStringValue()).ToList();
+            var checkeditems = _repo.GetStockItems();
 
-            var customPref = FindPreference("customStockItems");
-            customPref.PreferenceClick = customPref_PreferenceClick;
-        }
+            var configAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItemMultipleChoice, allitemsLabels);
+            ConfigList.Adapter = configAdapter;
+            ConfigList.ChoiceMode = ChoiceMode.Multiple;
 
-        private bool customPref_PreferenceClick(Preference preference)
-        {
-            string[] stockItemsDisplay = _stockItemsConfig.OrderBy(i => i.StockDataItem).Select(i => i.StockDataItem.GetStringValue()).ToArray();
-            bool[] allitemschecked = _stockItemsConfig.OrderBy(i => i.StockDataItem).Select(i => i.IsChecked).ToArray();
-            
-            var dialog = new AlertDialog.Builder(this);
-            dialog.SetMultiChoiceItems(stockItemsDisplay, allitemschecked, clickCallback);
-            dialog.SetTitle("Select columns");
-            dialog.SetPositiveButton("Save", saveCallback);
-            dialog.Create().Show();
-            return true;
-        }
-
-        private void saveCallback(object sender, DialogClickEventArgs e)
-        {
-            var list = _stockItemsConfig.Where(i => i.IsChecked).Select(i => i.StockDataItem).ToList();
-            _repo.UpdateStockItems(list);
-        }
-
-        private void clickCallback(object sender, DialogMultiChoiceClickEventArgs e)
-        {
-            var which = int.Parse(e.Which.ToString());
-            _stockItemsConfig[which].IsChecked = e.IsChecked;
-        }
-
-        public static string ClassName { get { return "monostockportfolio.activites.ConfigActivity"; } }
-
-        private class StockItemPreference
-        {
-            public static IEnumerable<StockItemPreference> BuildList(IEnumerable<StockDataItem> checkedItems)
+            for(int i=0;i<ConfigList.Count;i++)
             {
-                var allitems = StockDataItem.Change.GetValues<StockDataItem>();
-
-                return allitems.Select(item => new StockItemPreference {StockDataItem = item, IsChecked = checkedItems.Contains(item)});
+                if (checkeditems.Contains(allitems[i]))
+                {
+                    ConfigList.SetItemChecked(i, true);
+                }
             }
-            public StockDataItem StockDataItem { get; private set; }
-            public bool IsChecked { get; set; }
+
+            SaveConfigButton.Click += SaveConfigButton_Click;
+        }
+
+        void SaveConfigButton_Click(object sender, System.EventArgs e)
+        {
+            var allitems = StockDataItem.Volume.GetValues<StockDataItem>().ToList();
+            var newConfig = new List<StockDataItem>();
+            for (int i = 0; i < ConfigList.Count; i++)
+            {
+                if(ConfigList.IsItemChecked(i))
+                {
+                    newConfig.Add(allitems[i]);
+                }
+            }
+            _repo.UpdateStockItems(newConfig);
+
+            this.LongToast("Configuration updated!");
+        }
+
+        public static Intent GotoIntent(Context context)
+        {
+            var intent = new Intent();
+            intent.SetClassName(context, ManifestNames.GetName<ConfigActivity>());
+            return intent;
         }
     }
 }
