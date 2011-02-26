@@ -4,6 +4,7 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using MonoStockPortfolio.Core.PortfolioRepositories;
+using MonoStockPortfolio.Core.StockData;
 using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Framework;
 
@@ -13,6 +14,7 @@ namespace MonoStockPortfolio.Activites
     public class EditPositionActivity : Activity
     {
         [IoC] private IPortfolioRepository _repo;
+        [IoC] private IStockDataProvider _svc;
 
         [LazyView(Resource.Id.addPositionTicker)] protected EditText TickerTextBox;
         [LazyView(Resource.Id.addPositionPrice)] protected EditText PriceTextBox;
@@ -101,8 +103,18 @@ namespace MonoStockPortfolio.Activites
                 validator.AddRequired(TickerTextBox, "Please enter a ticker");
                 validator.AddValidPositiveDecimal(SharesTextBox, "Please enter a valid, positive number of shares");
                 validator.AddValidPositiveDecimal(PriceTextBox, "Please enter a valid, positive price per share");
+                validator.AddValidation(TickerTextBox, () => ValidateTicker(TickerTextBox.Text));
                 return validator;
             }
+        }
+
+        private string ValidateTicker(string ticker)
+        {
+            if(_svc.IsValidTicker(ticker))
+            {
+                return string.Empty;
+            }
+            return "Invalid Ticker Name";
         }
 
         private Position GetPositionToSave()

@@ -47,6 +47,14 @@ namespace MonoStockPortfolio.Core.StockData
             return yahooQuoteData.Select(MapYahooData);
         }
 
+        // Yahoo API will return a stock with price of 0.00
+        // if it can't find the ticker
+        public bool IsValidTicker(string ticker)
+        {
+            var quote = GetStockQuotes(new[] {ticker}).Single();
+            return quote.LastTradePrice > 0.0M;
+        }
+
         private static StockQuote MapYahooData(YahooFinanceStockData data)
         {
             if (data == null)
@@ -78,10 +86,12 @@ namespace MonoStockPortfolio.Core.StockData
                 {
                     var d = new YahooFinanceStockData();
                     d.Ticker = csvReader[0];
-                    d.LastTradePrice = decimal.Parse(csvReader[1]);
+                    decimal.TryParse(csvReader[1], out d.LastTradePrice);
+                    //d.LastTradePrice = decimal.Parse(csvReader[1]);
                     d.Name = csvReader[2];
                     d.Volume = csvReader[3];
-                    d.Change = decimal.Parse(csvReader[4]);
+                    decimal.TryParse(csvReader[4], out d.Change);
+                    //d.Change = decimal.Parse(csvReader[4]);
                     d.LastTradeTime = csvReader[5];
                     d.RealTimeLastTradeWithTime = csvReader[6];
                     d.ChangeRealTime = csvReader[7];

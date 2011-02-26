@@ -35,6 +35,20 @@ namespace MonoStockPortfolio.Tests
             Assert.True(items.Any());
         }
 
+        [Fact]
+        public void Can_tell_if_a_ticker_is_valid()
+        {
+            var svc = new YahooStockDataProvider();
+            Assert.True(svc.IsValidTicker("GOOG"));
+        }
+
+        [Fact]
+        public void Can_tell_if_a_ticker_is_invalid()
+        {
+            var svc = new YahooStockDataProvider();
+            Assert.False(svc.IsValidTicker("HARBLHARBLHARBL"));
+        }
+
         private IPortfolioRepository BuildStubPortfolioRepo()
         {
             return new StubPortfolioRepo();
