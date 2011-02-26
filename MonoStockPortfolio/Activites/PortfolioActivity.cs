@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -12,19 +14,26 @@ using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.Services;
 using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Framework;
+using Orientation = Android.Widget.Orientation;
 
 namespace MonoStockPortfolio.Activites
 {
     [Activity(Label = "Portfolio", Name = "monostockportfolio.activites.PortfolioActivity")]
     public class PortfolioActivity : Activity
     {
-        [IoC] private IPortfolioService _svc;
-        [IoC] private IPortfolioRepository _repo;
-        [IoC] private IConfigRepository _config;
+        [IoC]
+        private IPortfolioService _svc;
+        [IoC]
+        private IPortfolioRepository _repo;
+        [IoC]
+        private IConfigRepository _config;
 
-        [LazyView(Resource.Id.quoteListview)] protected ListView QuoteListview;
-        [LazyView(Resource.Id.btnAddPosition)] protected Button AddPositionButton;
-        [LazyView(Resource.Id.quoteHeaderLayout)] protected LinearLayout QuoteListviewHeader;
+        [LazyView(Resource.Id.quoteListview)]
+        protected ListView QuoteListview;
+        [LazyView(Resource.Id.btnAddPosition)]
+        protected Button AddPositionButton;
+        [LazyView(Resource.Id.quoteHeaderLayout)]
+        protected LinearLayout QuoteListviewHeader;
 
         private const string PORTFOLIOIDEXTRA = "monoStockPortfolio.PortfolioActivity.PortfolioID";
 
@@ -52,7 +61,7 @@ namespace MonoStockPortfolio.Activites
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            var item = menu.Add(0,1,1, "Refresh".ToJ());
+            var item = menu.Add(0, 1, 1, "Refresh".ToJ());
             item.SetIcon(Resource.Drawable.ic_menu_refresh);
             return true;
         }
@@ -138,7 +147,7 @@ namespace MonoStockPortfolio.Activites
         private void UpdateHeader(IEnumerable<StockDataItem> items)
         {
             QuoteListviewHeader.RemoveAllViews();
-            var cellwidth = this.GetScreenWidth()/items.Count();
+            var cellwidth = this.GetScreenWidth() / items.Count();
             foreach (var stockDataItem in items)
             {
                 var textItem = new TextView(this);
@@ -169,16 +178,25 @@ namespace MonoStockPortfolio.Activites
 
                 var row = new LinearLayout(Context);
                 row.Orientation = Orientation.Horizontal;
-                var portfolioActivity = (PortfolioActivity) Context;
+                var portfolioActivity = (PortfolioActivity)Context;
                 foreach (var stockDataItem in portfolioActivity.GetStockItemsFromConfig())
                 {
                     var cell = new TextView(Context);
                     cell.Text = item.Items[stockDataItem];
                     cell.SetWidth(columnWidth);
+                    RedGreenHighlighting(cell, item.Items);
                     row.Tag = item.PositionId;
                     row.AddView(cell);
                 }
                 return row;
+            }
+
+            private static void RedGreenHighlighting(TextView cell, IDictionary<StockDataItem, string> items)
+            {
+                if(items.ContainsKey(StockDataItem.GainLoss))
+                {
+                    cell.SetTextColor(decimal.Parse(items[StockDataItem.GainLoss]) < 0 ? Color.Red : Color.Green);
+                }
             }
         }
 
