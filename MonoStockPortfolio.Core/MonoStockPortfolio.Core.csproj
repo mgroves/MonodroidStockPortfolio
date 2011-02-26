@@ -49,10 +49,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IPortfolioService.cs" />
     <Compile Include="Services\PortfolioService.cs" />
-    <Compile Include="StockData\CsvParser.cs" />
-    <Compile Include="StockData\GoogleStockDataProvider.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="StockData\IStockDataProvider.cs" />
     <Compile Include="StockData\YahooFinanceStockData.cs">
       <SubType>Code</SubType>
