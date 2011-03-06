@@ -50,6 +50,9 @@
   <ItemGroup>
     <Compile Include="Activites\ConfigActivity.cs" />
     <Compile Include="Activites\EditPortfolioActivity.cs" />
+    <Compile Include="Presenters\IMainPresenter.cs" />
+    <Compile Include="Presenters\IMainView.cs" />
+    <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Framework\ActivityExtensions.cs" />
     <Compile Include="Framework\ContextExtensions.cs" />
     <Compile Include="Framework\GenericArrayAdapter.cs" />

@@ -7,20 +7,24 @@ namespace MonoStockPortfolio.Framework
     {
         public sealed override void OnGetValue(LocationInterceptionArgs args)
         {
-            if (ServiceLocator.Context == null)
+            args.ProceedGetValue(); 
+            if (args.Value == null)
             {
-                var activityContext = (Context)args.Instance;
-                ServiceLocator.Context = activityContext.ApplicationContext.ApplicationContext;
-            }
+                if (ServiceLocator.Context == null)
+                {
+                    var activityContext = (Context) args.Instance;
+                    ServiceLocator.Context = activityContext.ApplicationContext.ApplicationContext;
+                }
 
-            var locationType = args.Location.LocationType;
-            var instantiation = ServiceLocator.Get(locationType);
+                var locationType = args.Location.LocationType;
+                var instantiation = ServiceLocator.Get(locationType);
 
-            if (instantiation != null)
-            {
-                args.SetNewValue(instantiation);
+                if (instantiation != null)
+                {
+                    args.SetNewValue(instantiation);
+                }
+                args.ProceedGetValue();
             }
-            args.ProceedGetValue();
         }
     }
 }

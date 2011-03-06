@@ -4,6 +4,7 @@ using MonoStockPortfolio.Core.Config;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.Services;
 using MonoStockPortfolio.Core.StockData;
+using MonoStockPortfolio.Presenters;
 
 namespace MonoStockPortfolio.Framework
 {
@@ -13,6 +14,7 @@ namespace MonoStockPortfolio.Framework
 
         static ServiceLocator()
         {
+            IttyBittyIoC.Register<IMainPresenter>(() => new MainPresenter(new AndroidSqlitePortfolioRepository(Context)));
             IttyBittyIoC.Register<IStockDataProvider>(() => new YahooStockDataProvider());
             IttyBittyIoC.Register<IPortfolioService>(() => new PortfolioService(new AndroidSqlitePortfolioRepository(Context), new YahooStockDataProvider()));
             IttyBittyIoC.Register<IPortfolioRepository>(() => new AndroidSqlitePortfolioRepository(Context));
