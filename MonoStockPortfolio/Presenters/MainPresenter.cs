@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Android.Util;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Entities;
 using System.Linq;
