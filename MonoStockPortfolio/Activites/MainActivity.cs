@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using MonoStockPortfolio.Framework;
 using MonoStockPortfolio.Presenters;
+using System.Linq;
 
 namespace MonoStockPortfolio.Activites
 {
@@ -33,6 +35,10 @@ namespace MonoStockPortfolio.Activites
 
         public void RefreshList(IList<string> portfolioNames)
         {
+            foreach (var portfolioName in portfolioNames)
+            {
+                Log.Info("RefreshList", portfolioName);
+            }
             var listAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, portfolioNames);
             PortfolioListView.Adapter = listAdapter;
         }

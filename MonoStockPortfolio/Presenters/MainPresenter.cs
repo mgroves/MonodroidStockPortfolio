@@ -33,6 +33,7 @@ namespace MonoStockPortfolio.Presenters
 
         public void RefreshPortfolioList()
         {
+            _portfolios = null;
             var portfolioNames = Portfolios.Select(p => p.Name).ToList();
             _currentView.RefreshList(portfolioNames);
         }
@@ -44,7 +45,6 @@ namespace MonoStockPortfolio.Presenters
 
         public void ViewPortfolio(int portfolioPosition)
         {
-            // why is _currentView null?
             _currentView.StartViewPortfolioActivity(Portfolios[portfolioPosition].ID ?? -1);
         }
 
