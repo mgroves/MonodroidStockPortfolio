@@ -12,7 +12,7 @@
     <RootNamespace>MonoStockPortfolio</RootNamespace>
     <AssemblyName>MonoStockPortfolio</AssemblyName>
     <FileAlignment>512</FileAlignment>
-	<AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
@@ -115,6 +115,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_menu_preferences.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_menu_preferences.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_menu_preferences.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_menu_close_clear_cancel.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_menu_close_clear_cancel.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_menu_close_clear_cancel.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\ic_menu_refresh.png" />

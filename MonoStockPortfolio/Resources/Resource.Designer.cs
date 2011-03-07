@@ -27,10 +27,16 @@ namespace MonoStockPortfolio
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int ic_menu_refresh = 2130837504;
+			public const int ic_menu_close_clear_cancel = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int icon = 2130837505;
+			public const int ic_menu_preferences = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int ic_menu_refresh = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int icon = 2130837507;
 			
 			private Drawable()
 			{

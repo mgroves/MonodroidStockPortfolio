@@ -116,9 +116,9 @@ namespace MonoStockPortfolio.Activites
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             var configItem = menu.Add(0, 1, 1, "Config".ToJ());
-            configItem.SetIcon(Android.Resource.Drawable.IcMenuPreferences);
+            configItem.SetIcon(Resource.Drawable.ic_menu_preferences);
             var exitItem = menu.Add(0, 1, 1, "Exit".ToJ());
-            exitItem.SetIcon(Android.Resource.Drawable.IcMenuCloseClearCancel);
+            exitItem.SetIcon(Resource.Drawable.ic_menu_close_clear_cancel);
             return true;
         }
 
