@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Android.App;
@@ -21,19 +20,13 @@ namespace MonoStockPortfolio.Activites
     [Activity(Label = "Portfolio", Name = "monostockportfolio.activites.PortfolioActivity")]
     public class PortfolioActivity : Activity
     {
-        [IoC]
-        private IPortfolioService _svc;
-        [IoC]
-        private IPortfolioRepository _repo;
-        [IoC]
-        private IConfigRepository _config;
+        [IoC] private IPortfolioService _svc;
+        [IoC] private IPortfolioRepository _repo;
+        [IoC] private IConfigRepository _config;
 
-        [LazyView(Resource.Id.quoteListview)]
-        protected ListView QuoteListview;
-        [LazyView(Resource.Id.btnAddPosition)]
-        protected Button AddPositionButton;
-        [LazyView(Resource.Id.quoteHeaderLayout)]
-        protected LinearLayout QuoteListviewHeader;
+        [LazyView(Resource.Id.quoteListview)] protected ListView QuoteListview;
+        [LazyView(Resource.Id.btnAddPosition)] protected Button AddPositionButton;
+        [LazyView(Resource.Id.quoteHeaderLayout)] protected LinearLayout QuoteListviewHeader;
 
         private const string PORTFOLIOIDEXTRA = "monoStockPortfolio.PortfolioActivity.PortfolioID";
 
