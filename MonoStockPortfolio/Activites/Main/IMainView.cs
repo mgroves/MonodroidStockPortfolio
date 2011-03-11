@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MonoStockPortfolio.Presenters
+namespace MonoStockPortfolio.Activites.Main
 {
     public interface IMainView
     {

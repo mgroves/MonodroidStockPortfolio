@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoStockPortfolio.Tests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDroid.LumenWorks.Framework.IO.Csv", "MonoDroid.FileHelpers\MonoDroid.LumenWorks.Framework.IO.Csv.csproj", "{1AAA2739-D853-41B0-866B-B55B373616E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IttyBitty", "IttyBitty\IttyBitty.csproj", "{83658808-E964-4F0F-8C0F-FE33B5F7CE3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,10 @@ Global
 		{1AAA2739-D853-41B0-866B-B55B373616E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AAA2739-D853-41B0-866B-B55B373616E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AAA2739-D853-41B0-866B-B55B373616E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83658808-E964-4F0F-8C0F-FE33B5F7CE3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83658808-E964-4F0F-8C0F-FE33B5F7CE3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83658808-E964-4F0F-8C0F-FE33B5F7CE3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83658808-E964-4F0F-8C0F-FE33B5F7CE3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

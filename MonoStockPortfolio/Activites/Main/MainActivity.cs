@@ -7,10 +7,8 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using MonoStockPortfolio.Framework;
-using MonoStockPortfolio.Presenters;
-using System.Linq;
 
-namespace MonoStockPortfolio.Activites
+namespace MonoStockPortfolio.Activites.Main
 {
     [Activity(Label = "Stock Portfolio", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity, IMainView

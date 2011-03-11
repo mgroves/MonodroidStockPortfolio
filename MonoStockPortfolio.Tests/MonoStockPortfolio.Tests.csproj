@@ -49,15 +49,23 @@
     <Reference Include="System.Xml">
       <Private>True</Private>
     </Reference>
+    <Reference Include="Telerik.JustMock.Silverlight">
+      <HintPath>..\libs\Telerik.JustMock.Silverlight.dll</HintPath>
+    </Reference>
     <Reference Include="xunit">
       <HintPath>..\libs\xunit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\MainActivityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="YahooStockDataProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IttyBitty\IttyBitty.csproj">
+      <Project>{83658808-E964-4F0F-8C0F-FE33B5F7CE3B}</Project>
+      <Name>IttyBitty</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MonoStockPortfolio.Core\MonoStockPortfolio.Core.csproj">
       <Project>{251E7BB4-CFE2-4DE4-9E2A-AAE1AF41C8CB}</Project>
       <Name>MonoStockPortfolio.Core</Name>

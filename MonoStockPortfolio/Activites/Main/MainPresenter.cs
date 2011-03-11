@@ -3,7 +3,7 @@ using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Entities;
 using System.Linq;
 
-namespace MonoStockPortfolio.Presenters
+namespace MonoStockPortfolio.Activites.Main
 {
     public class MainPresenter : IMainPresenter
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using Android.Content;
+using MonoStockPortfolio.Activites.Main;
 using MonoStockPortfolio.Core.Config;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.Services;
 using MonoStockPortfolio.Core.StockData;
-using MonoStockPortfolio.Presenters;
 
 namespace MonoStockPortfolio.Framework
 {
