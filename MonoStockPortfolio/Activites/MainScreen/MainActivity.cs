@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
+using MonoStockPortfolio.Activites.PortfolioScreen;
 using MonoStockPortfolio.Framework;
 
-namespace MonoStockPortfolio.Activites.Main
+namespace MonoStockPortfolio.Activites.MainScreen
 {
-    [Activity(Label = "Stock Portfolio", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Stock Portfolio", MainLauncher = true, Icon = "@drawable/icon", Name = "monostockportfolio.activites.mainscreen.MainActivity")]
     public class MainActivity : Activity, IMainView
     {
         [LazyView(Resource.Id.btnAddPortfolio)] protected Button AddPortfolioButton;
@@ -33,10 +33,6 @@ namespace MonoStockPortfolio.Activites.Main
 
         public void RefreshList(IList<string> portfolioNames)
         {
-            foreach (var portfolioName in portfolioNames)
-            {
-                Log.Info("RefreshList", portfolioName);
-            }
             var listAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, portfolioNames);
             PortfolioListView.Adapter = listAdapter;
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Android.Content;
+using Android.Runtime;
 using MonoStockPortfolio.Entities;
 
 namespace MonoStockPortfolio.Core.Config

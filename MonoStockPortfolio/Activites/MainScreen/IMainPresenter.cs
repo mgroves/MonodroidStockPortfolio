@@ -1,4 +1,4 @@
-﻿namespace MonoStockPortfolio.Activites.Main
+﻿namespace MonoStockPortfolio.Activites.MainScreen
 {
     public interface IMainPresenter
     {

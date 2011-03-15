@@ -28,6 +28,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -52,16 +54,22 @@
   <ItemGroup>
     <Compile Include="Activites\ConfigActivity.cs" />
     <Compile Include="Activites\EditPortfolioActivity.cs" />
-    <Compile Include="Activites\Main\IMainPresenter.cs" />
-    <Compile Include="Activites\Main\IMainView.cs" />
-    <Compile Include="Activites\Main\MainPresenter.cs" />
+    <Compile Include="Activites\MainScreen\IMainPresenter.cs" />
+    <Compile Include="Activites\MainScreen\IMainView.cs" />
+    <Compile Include="Activites\MainScreen\MainPresenter.cs" />
+    <Compile Include="Activites\MenuOption.cs" />
+    <Compile Include="Activites\PortfolioScreen\IPortfolioPresenter.cs" />
+    <Compile Include="Activites\PortfolioScreen\IPortfolioView.cs" />
+    <Compile Include="Activites\PortfolioScreen\PortfolioPresenter.cs" />
+    <Compile Include="Activites\PortfolioScreen\PositionArrayAdapter.cs" />
     <Compile Include="Framework\ActivityExtensions.cs" />
     <Compile Include="Framework\ContextExtensions.cs" />
     <Compile Include="Framework\GenericArrayAdapter.cs" />
-    <Compile Include="Activites\PortfolioActivity.cs" />
-    <Compile Include="Activites\Main\MainActivity.cs" />
+    <Compile Include="Activites\PortfolioScreen\PortfolioActivity.cs" />
+    <Compile Include="Activites\MainScreen\MainActivity.cs" />
     <Compile Include="Activites\EditPositionActivity.cs" />
     <Compile Include="Framework\IoCAttribute.cs" />
+    <Compile Include="Framework\IttyBittyIoC.cs" />
     <Compile Include="Framework\LazyViewAttribute.cs" />
     <Compile Include="Framework\ManifestNames.cs" />
     <Compile Include="Framework\OnGuiThreadAttribute.cs" />
@@ -98,10 +106,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IttyBitty\IttyBitty.csproj">
-      <Project>{83658808-E964-4F0F-8C0F-FE33B5F7CE3B}</Project>
-      <Name>IttyBitty</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MonoStockPortfolio.Core\MonoStockPortfolio.Core.csproj">
       <Project>{251E7BB4-CFE2-4DE4-9E2A-AAE1AF41C8CB}</Project>
       <Name>MonoStockPortfolio.Core</Name>

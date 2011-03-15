@@ -1,6 +1,8 @@
 ﻿using System;
 using Android.Content;
-using MonoStockPortfolio.Activites.Main;
+using Android.Util;
+using MonoStockPortfolio.Activites.MainScreen;
+using MonoStockPortfolio.Activites.PortfolioScreen;
 using MonoStockPortfolio.Core.Config;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.Services;
@@ -14,19 +16,29 @@ namespace MonoStockPortfolio.Framework
 
         static ServiceLocator()
         {
-            // presenters
-            IttyBittyIoC.Register<IMainPresenter>(() => new MainPresenter(new AndroidSqlitePortfolioRepository(Context)));
-
             // services/repositories
-            IttyBittyIoC.Register<IStockDataProvider>(() => new YahooStockDataProvider());
-            IttyBittyIoC.Register<IPortfolioService>(() => new PortfolioService(new AndroidSqlitePortfolioRepository(Context), new YahooStockDataProvider()));
-            IttyBittyIoC.Register<IPortfolioRepository>(() => new AndroidSqlitePortfolioRepository(Context));
-            IttyBittyIoC.Register<IConfigRepository>(() => new AndroidSqliteConfigRepository(Context));
+            IttyBittyIoC.Register<Context>(() => Context);
+            IttyBittyIoC.Register<IStockDataProvider, YahooStockDataProvider>();
+            IttyBittyIoC.Register<IPortfolioRepository,AndroidSqlitePortfolioRepository>();
+            IttyBittyIoC.Register<IPortfolioService, PortfolioService>();
+            IttyBittyIoC.Register<IConfigRepository, AndroidSqliteConfigRepository>();
+
+            // presenters
+            IttyBittyIoC.Register<IMainPresenter, MainPresenter>();
+            IttyBittyIoC.Register<IPortfolioPresenter, PortfolioPresenter>();
         }
 
         public static object Get(Type serviceType)
         {
-            return IttyBittyIoC.Resolve(serviceType);
+            try
+            {
+                return IttyBittyIoC.Resolve(serviceType);
+            }
+            catch (Exception)
+            {
+                Log.Error("ServiceLocatorGet", "Unable to resolve type: " + serviceType.Name);
+                throw;
+            }
         }
     }
 }

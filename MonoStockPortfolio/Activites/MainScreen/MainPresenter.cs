@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Android.Runtime;
 using MonoStockPortfolio.Core.PortfolioRepositories;
-using MonoStockPortfolio.Entities;
 using System.Linq;
+using MonoStockPortfolio.Entities;
 
-namespace MonoStockPortfolio.Activites.Main
+namespace MonoStockPortfolio.Activites.MainScreen
 {
     public class MainPresenter : IMainPresenter
     {
