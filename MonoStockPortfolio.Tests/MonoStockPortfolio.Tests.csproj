@@ -40,6 +40,10 @@
     <Reference Include="mscorlib">
       <Private>True</Private>
     </Reference>
+    <Reference Include="PostSharp.SL, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b13fd38b8f9c99d7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\PostSharp.SL.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Private>True</Private>
     </Reference>
@@ -47,9 +51,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Xml">
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.JustMock.Silverlight">

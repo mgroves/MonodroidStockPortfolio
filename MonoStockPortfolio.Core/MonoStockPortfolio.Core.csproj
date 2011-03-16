@@ -60,7 +60,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MonoDroid.FileHelpers\MonoDroid.LumenWorks.Framework.IO.Csv.csproj">
+    <ProjectReference Include="..\MonoDroid.LumenWorks.Framework.IO.Csv\MonoDroid.LumenWorks.Framework.IO.Csv.csproj">
       <Project>{1AAA2739-D853-41B0-866B-B55B373616E1}</Project>
       <Name>MonoDroid.LumenWorks.Framework.IO.Csv</Name>
     </ProjectReference>
