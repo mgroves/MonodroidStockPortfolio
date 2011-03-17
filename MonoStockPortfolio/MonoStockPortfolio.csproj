@@ -38,6 +38,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -53,7 +55,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activites\ConfigActivity.cs" />
-    <Compile Include="Activites\EditPortfolioActivity.cs" />
+    <Compile Include="Activites\EditPortfolioScreen\EditPortfolioActivity.cs" />
+    <Compile Include="Activites\EditPortfolioScreen\EditPortfolioPresenter.cs" />
+    <Compile Include="Activites\EditPortfolioScreen\IEditPortfolioPresenter.cs" />
+    <Compile Include="Activites\EditPortfolioScreen\IEditPortfolioView.cs" />
+    <Compile Include="Framework\NewFormValidator.cs" />
     <Compile Include="Activites\MainScreen\IMainPresenter.cs" />
     <Compile Include="Activites\MainScreen\IMainView.cs" />
     <Compile Include="Activites\MainScreen\MainPresenter.cs" />

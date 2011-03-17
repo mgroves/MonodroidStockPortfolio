@@ -5,6 +5,7 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using MonoStockPortfolio.Activites.EditPortfolioScreen;
 using MonoStockPortfolio.Activites.PortfolioScreen;
 using MonoStockPortfolio.Framework;
 

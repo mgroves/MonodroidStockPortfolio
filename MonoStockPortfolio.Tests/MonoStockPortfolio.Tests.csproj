@@ -62,6 +62,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Framework\ValidationTests.cs" />
+    <Compile Include="Presenters\EditPortfolioTests.cs" />
     <Compile Include="Presenters\MainPresenterTests.cs" />
     <Compile Include="Presenters\PortfolioPresenterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
