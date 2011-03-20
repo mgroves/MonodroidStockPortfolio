@@ -46,9 +46,9 @@ namespace MonoStockPortfolio.Activites.EditPortfolioScreen
 
         private IEnumerable<string> Validate(Portfolio portfolioToSave)
         {
-            var validator = new NewFormValidator();
+            var validator = new FormValidator();
             validator.AddRequired(() => portfolioToSave.Name, "Please enter a portfolio name");
-            validator.AddValidation(() => portfolioToSave.Name, () => IsDuplicateName(portfolioToSave));
+            validator.AddValidation(() => IsDuplicateName(portfolioToSave));
 
             return validator.Apply().ToList();
         }

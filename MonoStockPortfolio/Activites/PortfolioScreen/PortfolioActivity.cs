@@ -6,6 +6,7 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using MonoStockPortfolio.Activites.EditPositionScreen;
 using MonoStockPortfolio.Core;
 using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Framework;

@@ -15,23 +15,23 @@ namespace MonoStockPortfolio.Tests.Presenters
         protected static IEditPortfolioView _mockEditPortfolioView;
 
         Establish context = () =>
-                                {
-                                    _mockPortfolioRepository = Mock.Create<IPortfolioRepository>();
-                                    Mock.Arrange(() => _mockPortfolioRepository.GetPortfolioById(999)).Returns(
-                                        new Portfolio(999) { Name = "Testing Portfolio!" });
+            {
+                _mockPortfolioRepository = Mock.Create<IPortfolioRepository>();
+                Mock.Arrange(() => _mockPortfolioRepository.GetPortfolioById(999)).Returns(
+                    new Portfolio(999) {Name = "Testing Portfolio!"});
 
-                                    _mockEditPortfolioView = Mock.Create<IEditPortfolioView>();
+                _mockEditPortfolioView = Mock.Create<IEditPortfolioView>();
 
-                                    _presenter = new EditPortfolioPresenter(_mockPortfolioRepository);
-                                };
+                _presenter = new EditPortfolioPresenter(_mockPortfolioRepository);
+            };
     }
 
     public class When_initializing_the_edit_portfolio_presenter_with_no_id : EditPortfolioTests
     {
         Because of = () =>
-                         {
-                             _presenter.Initialize(_mockEditPortfolioView, null);
-                         };
+            {
+                _presenter.Initialize(_mockEditPortfolioView, null);
+            };
 
         It should_set_the_title_to_Add_New_Portfolio = () =>
             Mock.Assert(() => _mockEditPortfolioView.SetTitle("Add New Portfolio"), Occurs.Exactly(1));
@@ -42,9 +42,9 @@ namespace MonoStockPortfolio.Tests.Presenters
     public class When_initializing_the_edit_portfolio_presenter_with_an_id : EditPortfolioTests
     {
         Because of = () =>
-                         {
-                             _presenter.Initialize(_mockEditPortfolioView, 999);
-                         };
+            {
+                _presenter.Initialize(_mockEditPortfolioView, 999);
+            };
 
         It should_set_the_title_to_Edit_Portfolio = () =>
             Mock.Assert(() => _mockEditPortfolioView.SetTitle("Edit Portfolio"), Occurs.Exactly(1));
@@ -55,14 +55,14 @@ namespace MonoStockPortfolio.Tests.Presenters
     public class When_the_user_wants_to_save_a_valid_portfolio : EditPortfolioTests
     {
         Establish context = () =>
-                        {
-                            _presenter.Initialize(_mockEditPortfolioView, null);
-                        };
+            {
+                _presenter.Initialize(_mockEditPortfolioView, null);
+            };
 
         Because of = () =>
-                         {
-                             _presenter.SavePortfolio(new Portfolio(999) { Name = "Whatever Portfolio" });
-                         };
+            {
+                _presenter.SavePortfolio(new Portfolio(999) {Name = "Whatever Portfolio"});
+            };
 
         It should_use_the_repository_to_save_the_portfolio = () =>
             Mock.Assert(() => _mockPortfolioRepository.SavePortfolio(Arg.Matches<Portfolio>(x => x.ID == 999 && x.Name == "Whatever Portfolio")), Occurs.Exactly(1));
@@ -75,14 +75,14 @@ namespace MonoStockPortfolio.Tests.Presenters
     public class When_the_user_tries_to_save_a_new_portfolio_with_a_blank_name : EditPortfolioTests
     {
         Establish context = () =>
-        {
-            _presenter.Initialize(_mockEditPortfolioView);
-        };
+            {
+                _presenter.Initialize(_mockEditPortfolioView);
+            };
 
         Because of = () =>
-                         {
-                             _presenter.SavePortfolio(new Portfolio { Name = "" });
-                         };
+            {
+                _presenter.SavePortfolio(new Portfolio {Name = ""});
+            };
 
         It should_return_1_validation_error = () =>
             Mock.Assert(() => _mockEditPortfolioView.ShowValidationErrors(Arg.Matches<IEnumerable<string>>(x => x.Count() == 1)), Occurs.Exactly(1));
@@ -93,16 +93,16 @@ namespace MonoStockPortfolio.Tests.Presenters
     public class When_the_user_tries_to_save_a_portfolio_with_a_duplicated_name : EditPortfolioTests
     {
         Establish context = () =>
-        {
-            _presenter.Initialize(_mockEditPortfolioView);
-        };
+            {
+                _presenter.Initialize(_mockEditPortfolioView);
+            };
 
         Because of = () =>
-                         {
-                             Mock.Arrange(() => _mockPortfolioRepository.GetPortfolioByName(Arg.AnyString)).Returns(
-                                 new Portfolio(998) {Name = "Some Name"});
-                             _presenter.SavePortfolio(new Portfolio { Name = "Some Name" });
-                         };
+            {
+                Mock.Arrange(() => _mockPortfolioRepository.GetPortfolioByName(Arg.AnyString)).Returns(
+                    new Portfolio(998) {Name = "Some Name"});
+                _presenter.SavePortfolio(new Portfolio {Name = "Some Name"});
+            };
 
         It should_return_1_validation_error = () =>
             Mock.Assert(() => _mockEditPortfolioView.ShowValidationErrors(Arg.Matches<IEnumerable<string>>(x => x.Count() == 1)), Occurs.Exactly(1));

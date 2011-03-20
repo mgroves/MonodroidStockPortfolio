@@ -8,12 +8,12 @@ namespace MonoStockPortfolio.Tests.Framework
 {
     public class ValidationTests
     {
-        static NewFormValidator _validator;
+        static FormValidator _validator;
         static IEnumerable<string> _errors;
 
         Establish context = () =>
                                 {
-                                    _validator = new NewFormValidator();
+                                    _validator = new FormValidator();
                                 };
 
         Because of = () =>
