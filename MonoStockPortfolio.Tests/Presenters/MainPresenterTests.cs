@@ -5,7 +5,7 @@ using MonoStockPortfolio.Activites.MainScreen;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Entities;
 using Telerik.JustMock;
-using Xunit;
+using Telerik.JustMock.Helpers;
 
 namespace MonoStockPortfolio.Tests.Activities
 {

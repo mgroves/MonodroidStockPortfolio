@@ -8,6 +8,7 @@ using MonoStockPortfolio.Core.Services;
 using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Framework;
 using Telerik.JustMock;
+using Telerik.JustMock.Helpers;
 
 namespace MonoStockPortfolio.Tests.Presenters
 {

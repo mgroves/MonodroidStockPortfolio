@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>169</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -56,19 +57,15 @@
     <Reference Include="Telerik.JustMock.Silverlight">
       <HintPath>..\libs\Telerik.JustMock.Silverlight.dll</HintPath>
     </Reference>
-    <Reference Include="xunit, Version=1.6.1.1521, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\libs\xunit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Framework\ValidationTests.cs" />
+    <Compile Include="Framework\When_validating_forms_with_validation_errors.cs" />
     <Compile Include="Presenters\EditPortfolioTests.cs" />
     <Compile Include="Presenters\EditPositionTests.cs" />
     <Compile Include="Presenters\MainPresenterTests.cs" />
     <Compile Include="Presenters\PortfolioPresenterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="YahooStockDataProviderTests.cs" />
+    <Compile Include="Services\YahooStockDataServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MonoStockPortfolio.Core\MonoStockPortfolio.Core.csproj">
