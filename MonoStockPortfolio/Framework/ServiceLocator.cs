@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.Content;
 using Android.Util;
+using MonoStockPortfolio.Activites.ConfigScreen;
 using MonoStockPortfolio.Activites.EditPortfolioScreen;
 using MonoStockPortfolio.Activites.EditPositionScreen;
 using MonoStockPortfolio.Activites.MainScreen;
@@ -30,6 +31,7 @@ namespace MonoStockPortfolio.Framework
             IttyBittyIoC.Register<IPortfolioPresenter, PortfolioPresenter>();
             IttyBittyIoC.Register<IEditPortfolioPresenter, EditPortfolioPresenter>();
             IttyBittyIoC.Register<IEditPositionPresenter, EditPositionPresenter>();
+            IttyBittyIoC.Register<IConfigPresenter, ConfigPresenter>();
         }
 
         public static object Get(Type serviceType)

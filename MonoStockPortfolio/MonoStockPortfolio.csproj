@@ -54,7 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activites\ConfigActivity.cs" />
+    <Compile Include="Activites\ConfigScreen\ConfigActivity.cs" />
+    <Compile Include="Activites\ConfigScreen\ConfigPresenter.cs" />
+    <Compile Include="Activites\ConfigScreen\IConfigPresenter.cs" />
+    <Compile Include="Activites\ConfigScreen\IConfigView.cs" />
     <Compile Include="Activites\EditPortfolioScreen\EditPortfolioActivity.cs" />
     <Compile Include="Activites\EditPortfolioScreen\EditPortfolioPresenter.cs" />
     <Compile Include="Activites\EditPortfolioScreen\IEditPortfolioPresenter.cs" />
@@ -67,7 +70,7 @@
     <Compile Include="Activites\MainScreen\IMainPresenter.cs" />
     <Compile Include="Activites\MainScreen\IMainView.cs" />
     <Compile Include="Activites\MainScreen\MainPresenter.cs" />
-    <Compile Include="Activites\MenuOption.cs" />
+    <Compile Include="Activites\PortfolioScreen\MenuOption.cs" />
     <Compile Include="Activites\PortfolioScreen\IPortfolioPresenter.cs" />
     <Compile Include="Activites\PortfolioScreen\IPortfolioView.cs" />
     <Compile Include="Activites\PortfolioScreen\PortfolioPresenter.cs" />

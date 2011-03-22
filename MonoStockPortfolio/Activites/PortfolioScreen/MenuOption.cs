@@ -1,4 +1,4 @@
-namespace MonoStockPortfolio.Activites
+namespace MonoStockPortfolio.Activites.PortfolioScreen
 {
     public class MenuOption
     {

@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Framework\ValidationTests.cs" />
+    <Compile Include="Presenters\Given_an_initialized_Config_Presenter.cs" />
     <Compile Include="Presenters\EditPortfolioTests.cs" />
     <Compile Include="Presenters\EditPositionTests.cs" />
     <Compile Include="Presenters\MainPresenterTests.cs" />
