@@ -5,6 +5,7 @@ using MonoStockPortfolio.Activites.EditPortfolioScreen;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Entities;
 using Telerik.JustMock;
+using Telerik.JustMock.Helpers;
 
 namespace MonoStockPortfolio.Tests.Presenters
 {
