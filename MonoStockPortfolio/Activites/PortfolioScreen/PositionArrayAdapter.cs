@@ -10,7 +10,7 @@ namespace MonoStockPortfolio.Activites.PortfolioScreen
 {
     public class PositionArrayAdapter : GenericArrayAdapter<PositionResultsViewModel>
     {
-        private IEnumerable<StockDataItem> _configItems;
+        private readonly IEnumerable<StockDataItem> _configItems;
 
         public PositionArrayAdapter(Context context, IEnumerable<PositionResultsViewModel> results, IEnumerable<StockDataItem> configItems)
             : base(context, results)

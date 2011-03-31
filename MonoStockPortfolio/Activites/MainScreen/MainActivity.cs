@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -8,6 +9,7 @@ using Android.Widget;
 using MonoStockPortfolio.Activites.ConfigScreen;
 using MonoStockPortfolio.Activites.EditPortfolioScreen;
 using MonoStockPortfolio.Activites.PortfolioScreen;
+using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Framework;
 
 namespace MonoStockPortfolio.Activites.MainScreen
@@ -33,9 +35,10 @@ namespace MonoStockPortfolio.Activites.MainScreen
 
         #region IMainView implementation
 
-        public void RefreshList(IList<string> portfolioNames)
+        public void RefreshList(IList<Portfolio> portfolios)
         {
-            var listAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, portfolioNames);
+            var portfolioLabels = portfolios.Select(p => p.Name).ToArray();
+            var listAdapter = new PortfolioArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, portfolios, portfolioLabels);
             PortfolioListView.Adapter = listAdapter;
         }
 
@@ -82,9 +85,7 @@ namespace MonoStockPortfolio.Activites.MainScreen
             base.OnCreateContextMenu(menu, v, menuInfo);
 
             var info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-            var selectedPortfolioName = ((TextView)info.TargetView).Text.ToS();
-
-            var id = _presenter.GetPortfolioIdForContextMenu(selectedPortfolioName);
+            var id = (int)info.Id;
 
             menu.SetHeaderTitle("Options".ToJ());
             menu.Add(0, id, 1, "Rename".ToJ());

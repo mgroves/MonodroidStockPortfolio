@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Java.Lang;
-using StringBuilder = System.Text.StringBuilder;
 
 namespace MonoStockPortfolio.Framework
 {

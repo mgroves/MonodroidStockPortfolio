@@ -66,6 +66,7 @@
     <Compile Include="Activites\EditPositionScreen\IEditPositionPresenter.cs" />
     <Compile Include="Activites\EditPositionScreen\IEditPositionView.cs" />
     <Compile Include="Activites\EditPositionScreen\PositionInputModel.cs" />
+    <Compile Include="Activites\MainScreen\PortfolioArrayAdapter.cs" />
     <Compile Include="Framework\FormValidator.cs" />
     <Compile Include="Activites\MainScreen\IMainPresenter.cs" />
     <Compile Include="Activites\MainScreen\IMainView.cs" />

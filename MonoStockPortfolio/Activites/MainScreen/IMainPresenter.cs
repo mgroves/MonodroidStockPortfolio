@@ -10,6 +10,5 @@
         void EditPortfolio(int itemId);
         void GotoConfig();
         void ExitApplication();
-        int GetPortfolioIdForContextMenu(string selectedPortfolioName);
     }
 }
