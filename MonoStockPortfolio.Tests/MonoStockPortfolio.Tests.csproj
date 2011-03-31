@@ -60,12 +60,39 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Framework\When_validating_forms_with_validation_errors.cs" />
+    <Compile Include="MetaTests.cs" />
     <Compile Include="Presenters\Given_an_initialized_Config_Presenter.cs" />
     <Compile Include="Presenters\EditPortfolioTests.cs" />
     <Compile Include="Presenters\EditPositionTests.cs" />
     <Compile Include="Presenters\MainPresenterTests.cs" />
     <Compile Include="Presenters\PortfolioPresenterTests.cs" />
+    <Compile Include="Presenters\When_done_initializing_a_Portfolio_Presenter.cs" />
+    <Compile Include="Presenters\When_initialize_the_config_presenter.cs" />
+    <Compile Include="Presenters\When_initializing_the_edit_portfolio_presenter_with_an_id.cs" />
+    <Compile Include="Presenters\When_initializing_the_edit_portfolio_presenter_with_no_id.cs" />
+    <Compile Include="Presenters\When_initializing_the_edit_position_presenter_with_an_id.cs" />
+    <Compile Include="Presenters\When_initializing_the_edit_position_presenter_with_no_id.cs" />
+    <Compile Include="Presenters\When_initializing_the_Main_Presenter.cs" />
+    <Compile Include="Presenters\When_the_user_selects_delete_context_option.cs" />
+    <Compile Include="Presenters\When_the_user_selects_edit_context_option.cs" />
+    <Compile Include="Presenters\When_the_user_tries_to_save_a_new_portfolio_with_a_blank_name.cs" />
+    <Compile Include="Presenters\When_the_user_tries_to_save_a_portfolio_with_a_duplicated_name.cs" />
+    <Compile Include="Presenters\When_the_user_wants_to_add_a_new_portfolio.cs" />
+    <Compile Include="Presenters\When_the_user_wants_to_add_a_new_position.cs" />
+    <Compile Include="Presenters\When_the_user_wants_to_configure_the_display_fields.cs" />
+    <Compile Include="Presenters\When_the_user_wants_to_delete_a_portfolio.cs" />
+    <Compile Include="Presenters\When_the_user_wants_to_edit_a_portfolio.cs" />
+    <Compile Include="Presenters\When_the_user_wants_to_exit_the_app.cs" />
+    <Compile Include="Presenters\When_the_user_wants_to_refresh_the_positions.cs" />
+    <Compile Include="Presenters\When_the_user_wants_to_save_an_invalid_position.cs" />
+    <Compile Include="Presenters\When_the_user_wants_to_save_an_invalid_position_with_blank_fields.cs" />
+    <Compile Include="Presenters\When_the_user_wants_to_save_a_valid_portfolio.cs" />
+    <Compile Include="Presenters\When_the_user_wants_to_save_a_valid_position.cs" />
+    <Compile Include="Presenters\When_the_user_wants_to_save_configuration.cs" />
+    <Compile Include="Presenters\When_the_user_wants_to_see_the_context_menu.cs" />
+    <Compile Include="Presenters\When_the_user_wants_to_view_a_portfolio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\When_using_the_Yahoo_stock_data_service_to_validate_tickers.cs" />
     <Compile Include="Services\YahooStockDataServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>

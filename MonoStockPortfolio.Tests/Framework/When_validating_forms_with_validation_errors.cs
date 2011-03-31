@@ -5,6 +5,7 @@ using MonoStockPortfolio.Framework;
 
 namespace MonoStockPortfolio.Tests.Framework
 {
+    [Tags("UnitTest")]
     public class When_validating_forms_with_validation_errors
     {
         static FormValidator _validator;

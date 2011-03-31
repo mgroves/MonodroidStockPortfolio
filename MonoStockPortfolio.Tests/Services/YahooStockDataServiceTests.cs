@@ -7,6 +7,7 @@ using MonoStockPortfolio.Entities;
 
 namespace MonoStockPortfolio.Tests.Services
 {
+    [Tags("IntegrationTest")]
     public class When_using_the_Yahoo_stock_data_service_to_get_quotes
     {
         static YahooStockDataProvider _svc;
@@ -29,28 +30,5 @@ namespace MonoStockPortfolio.Tests.Services
             _quotes.ForEach(q => q.LastTradePrice.ShouldNotEqual(0.0M));
         It should_get_price_change_from_the_web = () =>
             _quotes.ForEach(q => q.Change.ShouldNotEqual(0.0M));
-    }
-
-    public class When_using_the_Yahoo_stock_data_service_to_validate_tickers
-    {
-        static YahooStockDataProvider _svc;
-        static bool _goodTicker;
-        static bool _badTicker;
-
-        Establish context = () =>
-            {
-                _svc = new YahooStockDataProvider();
-            };
-
-        Because of = () =>
-            {
-                _goodTicker = _svc.IsValidTicker("GOOG");
-                _badTicker = _svc.IsValidTicker("GOOGAMOOGA");
-            };
-
-        It should_validate_the_good_ticker = () =>
-            _goodTicker.ShouldBeTrue();
-        It shouldnt_validate_the_bad_ticker = () =>
-            _badTicker.ShouldBeFalse();
     }
 }
