@@ -6,7 +6,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{643BA3D4-E3D6-49B7-B347-2B935FD5B9FC}"
 	ProjectSection(SolutionItems) = preProject
 		libs\PostSharp.SL.dll = libs\PostSharp.SL.dll
-		libs\xunit.dll = libs\xunit.dll
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoStockPortfolio.Core", "MonoStockPortfolio.Core\MonoStockPortfolio.Core.csproj", "{251E7BB4-CFE2-4DE4-9E2A-AAE1AF41C8CB}"
@@ -15,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoStockPortfolio.Entities
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoStockPortfolio.Tests", "MonoStockPortfolio.Tests\MonoStockPortfolio.Tests.csproj", "{C2797FAB-AFAB-49F6-9131-FC9BF03CAB9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDroid.LumenWorks.Framework.IO.Csv", "MonoDroid.FileHelpers\MonoDroid.LumenWorks.Framework.IO.Csv.csproj", "{1AAA2739-D853-41B0-866B-B55B373616E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDroid.LumenWorks.Framework.IO.Csv", "MonoDroid.LumenWorks.Framework.IO.Csv\MonoDroid.LumenWorks.Framework.IO.Csv.csproj", "{1AAA2739-D853-41B0-866B-B55B373616E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

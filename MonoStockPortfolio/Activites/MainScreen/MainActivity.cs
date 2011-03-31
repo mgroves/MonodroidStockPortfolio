@@ -1,26 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using MonoStockPortfolio.Core.PortfolioRepositories;
-using MonoStockPortfolio.Entities;
+using MonoStockPortfolio.Activites.ConfigScreen;
+using MonoStockPortfolio.Activites.EditPortfolioScreen;
+using MonoStockPortfolio.Activites.PortfolioScreen;
 using MonoStockPortfolio.Framework;
 
-namespace MonoStockPortfolio.Activites
+namespace MonoStockPortfolio.Activites.MainScreen
 {
-    [Activity(Label = "Stock Portfolio", MainLauncher = true, Icon = "@drawable/icon")]
-    public class MainActivity : Activity
+    [Activity(Label = "Stock Portfolio", MainLauncher = true, Icon = "@drawable/icon", Name = "monostockportfolio.activites.mainscreen.MainActivity")]
+    public class MainActivity : Activity, IMainView
     {
-        [IoC] private IPortfolioRepository _repo;
-
         [LazyView(Resource.Id.btnAddPortfolio)] protected Button AddPortfolioButton;
         [LazyView(Resource.Id.portfolioList)] protected ListView PortfolioListView;
 
-        private IList<Portfolio> _portfolios;
+        [IoC] IMainPresenter _presenter;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -28,18 +26,49 @@ namespace MonoStockPortfolio.Activites
 
             SetContentView(Resource.Layout.main);
 
-            RefreshList();
+            _presenter.Initialize(this);
 
             WireUpEvents();
         }
 
-        private void RefreshList()
-        {
-            _portfolios = _repo.GetAllPortfolios();
+        #region IMainView implementation
 
-            var listAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, _portfolios.Select(p => p.Name).ToList());
+        public void RefreshList(IList<string> portfolioNames)
+        {
+            var listAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, portfolioNames);
             PortfolioListView.Adapter = listAdapter;
         }
+
+        public void ExitApplication()
+        {
+            Finish();
+        }
+
+        public void StartEditPortfolioActivity(int itemId)
+        {
+            var intent = EditPortfolioActivity.EditIntent(this, itemId);
+            StartActivityForResult(intent, 0);
+        }
+
+        public void StartConfigActivity()
+        {
+            var intent = ConfigActivity.GotoIntent(this);
+            StartActivityForResult(intent, 0);
+        }
+
+        public void StartViewPortfolioActivity(long portfolioId)
+        {
+            var intent = PortfolioActivity.ViewIntent(this, portfolioId);
+            StartActivityForResult(intent, 0);
+        }
+
+        public void StartAddPortfolioActivity()
+        {
+            var intent = EditPortfolioActivity.AddIntent(this);
+            StartActivityForResult(intent, 0);
+        }
+
+        #endregion
 
         private void WireUpEvents()
         {
@@ -54,8 +83,8 @@ namespace MonoStockPortfolio.Activites
 
             var info = (AdapterView.AdapterContextMenuInfo)menuInfo;
             var selectedPortfolioName = ((TextView)info.TargetView).Text.ToS();
-            var selectedPortfolio = _repo.GetPortfolioByName(selectedPortfolioName);
-            var id = (int)(selectedPortfolio.ID ?? -1);
+
+            var id = _presenter.GetPortfolioIdForContextMenu(selectedPortfolioName);
 
             menu.SetHeaderTitle("Options".ToJ());
             menu.Add(0, id, 1, "Rename".ToJ());
@@ -67,15 +96,14 @@ namespace MonoStockPortfolio.Activites
             if (item.TitleFormatted.ToS() == "Rename")
             {
                 // Edit
-                var intent = EditPortfolioActivity.EditIntent(this, item.ItemId);
-                StartActivityForResult(intent, 0);
+                _presenter.EditPortfolio(item.ItemId);
                 return true;
             }
             if (item.TitleFormatted.ToS() == "Delete")
             {
                 // Delete
-                _repo.DeletePortfolioById(item.ItemId);
-                RefreshList();
+                _presenter.DeletePortfolio(item.ItemId);
+                _presenter.RefreshPortfolioList();
                 return true;
             }
             return base.OnContextItemSelected(item);
@@ -84,9 +112,9 @@ namespace MonoStockPortfolio.Activites
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             var configItem = menu.Add(0, 1, 1, "Config".ToJ());
-            configItem.SetIcon(Android.Resource.Drawable.IcMenuPreferences);
+            configItem.SetIcon(Resource.Drawable.ic_menu_preferences);
             var exitItem = menu.Add(0, 1, 1, "Exit".ToJ());
-            exitItem.SetIcon(Android.Resource.Drawable.IcMenuCloseClearCancel);
+            exitItem.SetIcon(Resource.Drawable.ic_menu_close_clear_cancel);
             return true;
         }
 
@@ -95,13 +123,10 @@ namespace MonoStockPortfolio.Activites
             switch (item.TitleFormatted.ToS())
             {
                 case "Config":
-                    var intent = ConfigActivity.GotoIntent(this);
-//                    var intent = new Intent();
-//                    intent.SetClassName(this, ConfigActivity.ClassName);
-                    StartActivityForResult(intent, 0);
+                    _presenter.GotoConfig();
                     return true;
                 case "Exit":
-                    Finish();
+                    _presenter.ExitApplication();
                     return true;
                 default:
                     return base.OnOptionsItemSelected(item);
@@ -110,21 +135,19 @@ namespace MonoStockPortfolio.Activites
 
         private void listView_ItemClick(object sender, ItemEventArgs e)
         {
-            var intent = PortfolioActivity.ViewIntent(this, _portfolios[e.Position].ID ?? -1);
-            StartActivityForResult(intent, 0);
+            _presenter.ViewPortfolio(e.Position);
         }
 
         private void addPortfolioButton_Click(object sender, EventArgs e)
         {
-            var intent = EditPortfolioActivity.AddIntent(this);
-            StartActivityForResult(intent, 0);
+            _presenter.AddNewPortfolio();
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
 
-            RefreshList();
+            _presenter.RefreshPortfolioList();
         }
     }
 }

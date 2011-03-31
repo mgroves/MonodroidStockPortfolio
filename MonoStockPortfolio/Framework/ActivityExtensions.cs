@@ -1,4 +1,3 @@
-using System.Reflection;
 using Android.App;
 using Android.Content;
 using Android.Widget;

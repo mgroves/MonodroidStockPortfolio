@@ -1,80 +1,73 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Android.Widget;
+using System.Linq;
 
 namespace MonoStockPortfolio.Framework
 {
     public class FormValidator
     {
-        private IList<KeyValuePair<EditText, Func<string>>> _dict;
+        private readonly IList<Func<string>> _list;
 
         public FormValidator()
         {
-            _dict = new List<KeyValuePair<EditText, Func<string>>>();
+            _list = new List<Func<string>>();
         }
 
-        public void AddValidation(EditText control, Func<string> validationFunction)
+        public void AddValidation(Func<string> validationFunction)
         {
-            _dict.Add(new KeyValuePair<EditText, Func<string>>(control, validationFunction));
-        }
-        public void AddRequired(EditText control, string errorMessage)
-        {
-            AddValidation(control, () => Required(control, errorMessage));
-        }
-        public void AddValidDecimal(EditText control, string errorMessage)
-        {
-            AddValidation(control, () => ValidDecimal(control, errorMessage));
-        }
-        public void AddValidPositiveDecimal(EditText control, string errorMessage)
-        {
-            AddValidation(control, () => ValidPositiveDecimal(control, errorMessage));
+            _list.Add(validationFunction);
         }
 
-        public string Apply()
+        public void AddRequired(Func<string> getValue, string errorMessage)
         {
-            var errorMessage = string.Empty;
-            foreach (var keyValuePair in _dict)
-            {
-                var result = keyValuePair.Value();
-                errorMessage += keyValuePair.Value();
-                if(result != string.Empty)
-                {
-                    errorMessage += "\n";
-                }
-            }
-            return errorMessage;
+            AddValidation(() => Required(getValue(), errorMessage));
         }
 
-        #region Validation Functions
-
-        private static string Required(EditText control, string errorMessage)
+        public void AddValidDecimal(Func<string> getValue, string errorMessage)
         {
-            if (string.IsNullOrEmpty(control.Text.ToString()))
+            AddValidation(() => ValidDecimal(getValue(), errorMessage));
+        }
+        public void AddValidPositiveDecimal(Func<string> getValue, string errorMessage)
+        {
+            AddValidation(() => ValidPositiveDecimal(getValue(), errorMessage));
+        }
+
+        public IEnumerable<string> Apply()
+        {
+            return _list.Select(validation => validation())
+                .Where(result => !string.IsNullOrEmpty(result));
+        }
+
+        #region validation functions
+
+        private static string Required(string getValue, string errorMessage)
+        {
+            if (string.IsNullOrEmpty(getValue))
             {
                 return errorMessage;
             }
             return string.Empty;
         }
-        private static string ValidDecimal(EditText control, string errorMessage)
+
+        private static string ValidDecimal(string getValue, string errorMessage)
         {
-            var test = control.Text.ToString();
             decimal dummy;
-            if(!decimal.TryParse(test, out dummy))
+            if (!decimal.TryParse(getValue, out dummy))
             {
                 return errorMessage;
             }
             return string.Empty;
         }
-        private static string ValidPositiveDecimal(EditText control, string errorMessage)
+
+        private static string ValidPositiveDecimal(string getValue, string errorMessage)
         {
-            if(ValidDecimal(control, errorMessage) == string.Empty)
+            if (ValidDecimal(getValue, errorMessage) == string.Empty)
             {
-                var val = decimal.Parse(control.Text.ToString());
+                var val = decimal.Parse(getValue);
                 if (val >= 0) return string.Empty;
             }
             return errorMessage;
         }
-
         #endregion
     }
 }
