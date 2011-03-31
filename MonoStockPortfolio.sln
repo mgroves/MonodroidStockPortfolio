@@ -6,7 +6,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{643BA3D4-E3D6-49B7-B347-2B935FD5B9FC}"
 	ProjectSection(SolutionItems) = preProject
 		libs\PostSharp.SL.dll = libs\PostSharp.SL.dll
-		libs\Telerik.JustMock.Silverlight.dll = libs\Telerik.JustMock.Silverlight.dll
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoStockPortfolio.Core", "MonoStockPortfolio.Core\MonoStockPortfolio.Core.csproj", "{251E7BB4-CFE2-4DE4-9E2A-AAE1AF41C8CB}"
