@@ -17,5 +17,6 @@ namespace MonoStockPortfolio.Framework
         {
             Toast.MakeText(@this, message, ToastLength.Long).Show();
         }
+
     }
 }

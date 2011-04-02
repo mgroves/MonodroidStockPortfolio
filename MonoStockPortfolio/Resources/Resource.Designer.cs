@@ -27,10 +27,16 @@ namespace MonoStockPortfolio
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int ic_menu_refresh = 2130837504;
+			public const int ic_menu_close_clear_cancel = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int icon = 2130837505;
+			public const int ic_menu_preferences = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int ic_menu_refresh = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int icon = 2130837507;
 			
 			private Drawable()
 			{
@@ -52,26 +58,32 @@ namespace MonoStockPortfolio
 			// aapt resource value: 0x7f050002
 			public const int addPositionTicker = 2131034114;
 			
-			// aapt resource value: 0x7f050006
-			public const int btnAddPortfolio = 2131034118;
-			
 			// aapt resource value: 0x7f050008
-			public const int btnAddPosition = 2131034120;
+			public const int btnAddPortfolio = 2131034120;
+			
+			// aapt resource value: 0x7f05000a
+			public const int btnAddPosition = 2131034122;
 			
 			// aapt resource value: 0x7f050001
 			public const int btnSave = 2131034113;
 			
+			// aapt resource value: 0x7f050006
+			public const int btnSaveConfig = 2131034118;
+			
 			// aapt resource value: 0x7f050007
-			public const int portfolioList = 2131034119;
+			public const int configList = 2131034119;
+			
+			// aapt resource value: 0x7f050009
+			public const int portfolioList = 2131034121;
 			
 			// aapt resource value: 0x7f050000
 			public const int portfolioName = 2131034112;
 			
-			// aapt resource value: 0x7f050009
-			public const int quoteHeaderLayout = 2131034121;
+			// aapt resource value: 0x7f05000b
+			public const int quoteHeaderLayout = 2131034123;
 			
-			// aapt resource value: 0x7f05000a
-			public const int quoteListview = 2131034122;
+			// aapt resource value: 0x7f05000c
+			public const int quoteListview = 2131034124;
 			
 			private Id()
 			{

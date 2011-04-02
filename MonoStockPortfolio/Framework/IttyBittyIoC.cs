@@ -11,7 +11,7 @@ namespace MonoStockPortfolio.Framework
         public class InjectionConstructorAttribute : Attribute
         { }
 
-        private enum DependencyType
+        public enum DependencyType
         {
             None = 0,   // Type is unset
             Delegate,   // A builder function
@@ -20,7 +20,7 @@ namespace MonoStockPortfolio.Framework
             Transient   // Dynamically created transient object
         }
 
-        private class DependencyInfo
+        public class DependencyInfo
         {
             public object Dependency { get; private set; }
             public DependencyType DependencyType { get; private set; }
@@ -32,8 +32,8 @@ namespace MonoStockPortfolio.Framework
             }
         }
 
-        private readonly static IDictionary<Type, DependencyInfo> dependencies = new Dictionary<Type, DependencyInfo>();
-        private readonly static IDictionary<Type, object> instances = new Dictionary<Type, object>();
+        public readonly static IDictionary<Type, DependencyInfo> dependencies = new Dictionary<Type, DependencyInfo>();
+        public readonly static IDictionary<Type, object> instances = new Dictionary<Type, object>();
 
         public static void Register<TContract>(TContract instance)
         {

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Text;
+using Java.Lang;
 
 namespace MonoStockPortfolio.Framework
 {
@@ -13,6 +13,11 @@ namespace MonoStockPortfolio.Framework
                 sb.Append(c);
             }
             return sb.ToString();
+        }
+
+        public static ICharSequence ToJ(this string @this)
+        {
+            return new String(@this);
         }
     }
 }

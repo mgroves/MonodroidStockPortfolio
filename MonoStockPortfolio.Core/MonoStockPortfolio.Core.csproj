@@ -21,6 +21,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,11 +31,14 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -48,11 +53,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IPortfolioService.cs" />
     <Compile Include="Services\PortfolioService.cs" />
-    <Compile Include="StockData\CsvParser.cs" />
-    <Compile Include="StockData\GoogleStockDataProvider.cs" />
     <Compile Include="StockData\IStockDataProvider.cs" />
+    <Compile Include="StockData\YahooFinanceStockData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StockData\YahooStockDataProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MonoDroid.LumenWorks.Framework.IO.Csv\MonoDroid.LumenWorks.Framework.IO.Csv.csproj">
+      <Project>{1AAA2739-D853-41B0-866B-B55B373616E1}</Project>
+      <Name>MonoDroid.LumenWorks.Framework.IO.Csv</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MonoStockPortfolio.Entities\MonoStockPortfolio.Entities.csproj">
       <Project>{05A57650-3B41-46FF-9EAD-9112B5EFBEED}</Project>
       <Name>MonoStockPortfolio.Entities</Name>

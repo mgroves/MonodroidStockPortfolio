@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Android.Content;
 using Android.Database.Sqlite;
+using Android.Runtime;
 using Android.Util;
 using MonoStockPortfolio.Entities;
 

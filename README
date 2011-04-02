@@ -1,6 +1,12 @@
 Monodroid Stock Portfolio
 =========================
 
+Updates
+-------
+
+3/15/2011 - I'm no longer using FileHelpers, since I can't get it to work with MonoDroid anymore (even with compiling it myself)
+			so I switched to LumenWorks.Framework.IO.Csv because writing CSV parsing is a hard problem that I don't need to solve again
+
 What...? Why...?
 ----------------
 
@@ -16,10 +22,10 @@ Monodroid devs to learn from, as well as help myself learn how to use git.
 Notes
 -----
 
-I originally used db4o for the persistence of this app, but since the Mono version of db4o seems to
-be a bit behind, and it also seems a little silly to run a conversion of a conversion on top of
-another conversion, so I just switched it over to using Sqlite, since it's not that complex of a
+I originally used db4o for the persistence of this app, but I had trouble getting that to work
+with MonoDroid, so I just switched it over to using Sqlite, since it's not that complex of a
 domain anyway.
 
 To get stock quotes, I'm using a Yahoo API coupled with the FileHelpers library
 (since the Yahoo API outputs a CSV)
+

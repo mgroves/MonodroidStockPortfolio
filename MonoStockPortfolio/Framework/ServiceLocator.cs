@@ -1,5 +1,11 @@
 ﻿using System;
 using Android.Content;
+using Android.Util;
+using MonoStockPortfolio.Activites.ConfigScreen;
+using MonoStockPortfolio.Activites.EditPortfolioScreen;
+using MonoStockPortfolio.Activites.EditPositionScreen;
+using MonoStockPortfolio.Activites.MainScreen;
+using MonoStockPortfolio.Activites.PortfolioScreen;
 using MonoStockPortfolio.Core.Config;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.Services;
@@ -13,16 +19,32 @@ namespace MonoStockPortfolio.Framework
 
         static ServiceLocator()
         {
-            //IttyBittyIoC.Register(Context);
-            IttyBittyIoC.Register<IStockDataProvider>(() => new GoogleStockDataProvider());
-            IttyBittyIoC.Register<IPortfolioService>(() => new PortfolioService(new AndroidSqlitePortfolioRepository(Context), new GoogleStockDataProvider()));
-            IttyBittyIoC.Register<IPortfolioRepository>(() => new AndroidSqlitePortfolioRepository(Context));
-            IttyBittyIoC.Register<IConfigRepository>(() => new AndroidSqliteConfigRepository(Context));
+            // services/repositories
+            IttyBittyIoC.Register<Context>(() => Context);
+            IttyBittyIoC.Register<IStockDataProvider, YahooStockDataProvider>();
+            IttyBittyIoC.Register<IPortfolioRepository,AndroidSqlitePortfolioRepository>();
+            IttyBittyIoC.Register<IPortfolioService, PortfolioService>();
+            IttyBittyIoC.Register<IConfigRepository, AndroidSqliteConfigRepository>();
+
+            // presenters
+            IttyBittyIoC.Register<IMainPresenter, MainPresenter>();
+            IttyBittyIoC.Register<IPortfolioPresenter, PortfolioPresenter>();
+            IttyBittyIoC.Register<IEditPortfolioPresenter, EditPortfolioPresenter>();
+            IttyBittyIoC.Register<IEditPositionPresenter, EditPositionPresenter>();
+            IttyBittyIoC.Register<IConfigPresenter, ConfigPresenter>();
         }
 
         public static object Get(Type serviceType)
         {
-            return IttyBittyIoC.Resolve(serviceType);
+            try
+            {
+                return IttyBittyIoC.Resolve(serviceType);
+            }
+            catch (Exception)
+            {
+                Log.Error("ServiceLocatorGet", "Unable to resolve type: " + serviceType.Name);
+                throw;
+            }
         }
     }
 }
