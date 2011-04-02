@@ -28,10 +28,11 @@ namespace MonoStockPortfolio.Core.Services
         {
             try
             {
+                var results = new List<PositionResultsViewModel>();
+
                 var positions = _portRepo.GetAllPositions(portfolioID);
                 if (!positions.Any()) return new List<PositionResultsViewModel>();
 
-                var results = new List<PositionResultsViewModel>();
                 var tickers = positions.Select(p => p.Ticker);
                 var stockData = _stockRepo.GetStockQuotes(tickers);
 

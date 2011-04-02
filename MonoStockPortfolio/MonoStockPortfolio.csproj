@@ -78,7 +78,6 @@
     <Compile Include="Activites\PortfolioScreen\PositionArrayAdapter.cs" />
     <Compile Include="Framework\ActivityExtensions.cs" />
     <Compile Include="Framework\ContextExtensions.cs" />
-    <Compile Include="Framework\GenericArrayAdapter.cs" />
     <Compile Include="Activites\PortfolioScreen\PortfolioActivity.cs" />
     <Compile Include="Activites\MainScreen\MainActivity.cs" />
     <Compile Include="Activites\EditPositionScreen\EditPositionActivity.cs" />
