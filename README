@@ -4,8 +4,8 @@ Monodroid Stock Portfolio
 Updates
 -------
 
-3/15/2011 - I'm no longer using FileHelpers, since I can't get it to work with MonoDroid anymore (even with compiling it myself)
-			so I switched to LumenWorks.Framework.IO.Csv because writing CSV parsing is a hard problem that I don't need to solve again
+4/2/2011 - MVP refactor complete.  I'm pretty happy with it, though I'm sure there's plenty of room for improvement.  I call this release 0.9 to indicated that I'm just about ready to go into production when MonoDroid is finally released
+3/15/2011 - I'm no longer using FileHelpers, since I can't get it to work with MonoDroid anymore (even with compiling it myself) so I switched to LumenWorks.Framework.IO.Csv because writing CSV parsing is a hard problem that I don't need to solve again
 
 What...? Why...?
 ----------------
