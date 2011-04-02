@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Android.Content;
 using Android.Graphics;
 using Android.Views;
@@ -8,14 +9,27 @@ using MonoStockPortfolio.Framework;
 
 namespace MonoStockPortfolio.Activites.PortfolioScreen
 {
-    public class PositionArrayAdapter : GenericArrayAdapter<PositionResultsViewModel>
+    public class PositionArrayAdapter : BaseAdapter<PositionResultsViewModel>
     {
         private readonly IEnumerable<StockDataItem> _configItems;
+        private readonly List<PositionResultsViewModel> _items;
+        private readonly Context _context;
 
         public PositionArrayAdapter(Context context, IEnumerable<PositionResultsViewModel> results, IEnumerable<StockDataItem> configItems)
-            : base(context, results)
         {
             _configItems = configItems;
+            _items = results.ToList();
+            _context = context;
+        }
+
+        public override int Count
+        {
+            get { return _items.Count(); }
+        }
+
+        public override PositionResultsViewModel this[int position]
+        {
+            get { return _items[position]; }
         }
 
         public override long GetItemId(int position)
@@ -27,14 +41,14 @@ namespace MonoStockPortfolio.Activites.PortfolioScreen
         {
             var item = this[position];
 
-            var width = Context.GetScreenWidth();
+            var width = _context.GetScreenWidth();
             var columnWidth = width / item.Items.Count;
 
-            var row = new LinearLayout(Context);
+            var row = new LinearLayout(_context);
             row.Orientation = Orientation.Horizontal;
             foreach (var stockDataItem in _configItems)
             {
-                var cell = new TextView(Context);
+                var cell = new TextView(_context);
                 cell.Text = item.Items[stockDataItem];
                 cell.SetWidth(columnWidth);
                 RedGreenHighlighting(cell, item.Items);
