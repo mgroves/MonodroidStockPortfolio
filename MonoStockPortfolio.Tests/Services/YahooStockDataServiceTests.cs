@@ -28,7 +28,5 @@ namespace MonoStockPortfolio.Tests.Services
             _quotes.ForEach(q => string.IsNullOrEmpty(q.Volume).ShouldBeFalse());
         It should_get_last_trade_prices_from_the_web = () =>
             _quotes.ForEach(q => q.LastTradePrice.ShouldNotEqual(0.0M));
-        It should_get_price_change_from_the_web = () =>
-            _quotes.ForEach(q => q.Change.ShouldNotEqual(0.0M));
     }
 }

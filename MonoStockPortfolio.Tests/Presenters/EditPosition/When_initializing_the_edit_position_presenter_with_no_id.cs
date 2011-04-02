@@ -2,7 +2,7 @@
 using MonoStockPortfolio.Entities;
 using Telerik.JustMock;
 
-namespace MonoStockPortfolio.Tests.Presenters
+namespace MonoStockPortfolio.Tests.Presenters.EditPosition
 {
     [Tags("UnitTest")]
     public class When_initializing_the_edit_position_presenter_with_no_id : EditPositionTests

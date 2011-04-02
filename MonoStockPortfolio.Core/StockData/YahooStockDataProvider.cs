@@ -51,6 +51,10 @@ namespace MonoStockPortfolio.Core.StockData
         // if it can't find the ticker
         public bool IsValidTicker(string ticker)
         {
+            if(string.IsNullOrEmpty(ticker))
+            {
+                return false;
+            }
             var quote = GetStockQuotes(new[] {ticker}).Single();
             return quote.LastTradePrice > 0.0M;
         }

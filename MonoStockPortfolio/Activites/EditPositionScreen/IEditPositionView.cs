@@ -7,7 +7,7 @@ namespace MonoStockPortfolio.Activites.EditPositionScreen
     {
         void SetTitle(string title);
         void PopulateForm(Position position);
-        void GoBackToMainActivity();
+        void GoBackToPortfolioActivity();
         void ShowErrorMessages(IList<string> errorMessages);
     }
 }

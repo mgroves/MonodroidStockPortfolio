@@ -4,7 +4,7 @@ using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.StockData;
 using Telerik.JustMock;
 
-namespace MonoStockPortfolio.Tests.Presenters
+namespace MonoStockPortfolio.Tests.Presenters.EditPosition
 {
     public class EditPositionTests
     {

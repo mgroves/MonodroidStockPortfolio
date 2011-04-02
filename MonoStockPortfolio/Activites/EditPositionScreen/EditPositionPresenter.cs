@@ -1,4 +1,5 @@
 using System.Linq;
+using Android.Util;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.StockData;
 using MonoStockPortfolio.Entities;
@@ -50,7 +51,7 @@ namespace MonoStockPortfolio.Activites.EditPositionScreen
             if (!errorMessages.Any())
             {
                 _portfolioRepository.SavePosition(GetPosition(positionInputModel));
-                _currentView.GoBackToMainActivity();
+                _currentView.GoBackToPortfolioActivity();
             }
             else
             {

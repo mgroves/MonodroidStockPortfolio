@@ -3,7 +3,7 @@ using MonoStockPortfolio.Activites.EditPositionScreen;
 using MonoStockPortfolio.Entities;
 using Telerik.JustMock;
 
-namespace MonoStockPortfolio.Tests.Presenters
+namespace MonoStockPortfolio.Tests.Presenters.EditPosition
 {
     [Tags("UnitTest")]
     public class When_the_user_wants_to_save_a_valid_position : EditPositionTests
@@ -32,6 +32,6 @@ namespace MonoStockPortfolio.Tests.Presenters
         It should_save_a_position_with_the_correct_Containing_Portfolio_ID = () =>
             Mock.Assert(() => _mockPortfolioRepository.SavePosition(Arg.Matches<Position>(p => p.ContainingPortfolioID == 1)), Occurs.Exactly(1));
         It should_tell_the_view_to_go_back_to_the_main_activity = () =>
-            Mock.Assert(() => _mockView.GoBackToMainActivity(), Occurs.Exactly(1));
+            Mock.Assert(() => _mockView.GoBackToPortfolioActivity(), Occurs.Exactly(1));
     }
 }

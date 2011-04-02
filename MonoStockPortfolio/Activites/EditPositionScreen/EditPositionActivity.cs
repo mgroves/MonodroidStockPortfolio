@@ -52,7 +52,7 @@ namespace MonoStockPortfolio.Activites.EditPositionScreen
             this.SharesTextBox.Text = position.Shares.ToString();
         }
 
-        public void GoBackToMainActivity()
+        public void GoBackToPortfolioActivity()
         {
             this.EndActivity();
         }

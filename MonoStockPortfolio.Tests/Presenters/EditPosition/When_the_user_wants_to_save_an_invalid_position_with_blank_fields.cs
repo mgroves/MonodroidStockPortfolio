@@ -7,7 +7,7 @@ using MonoStockPortfolio.Activites.EditPositionScreen;
 using MonoStockPortfolio.Entities;
 using Telerik.JustMock;
 
-namespace MonoStockPortfolio.Tests.Presenters
+namespace MonoStockPortfolio.Tests.Presenters.EditPosition
 {
     [Tags("UnitTest")]
     public class When_the_user_wants_to_save_an_invalid_position_with_blank_fields : EditPositionTests
@@ -36,7 +36,7 @@ namespace MonoStockPortfolio.Tests.Presenters
         It should_send_an_invalid_price_per_share_error_to_the_view = () =>
             MockPositionMatches(x => x.Any(p => p == "Please enter a valid, positive price per share"));
         It should_not_tell_the_view_to_go_back_to_the_main_activity = () =>
-            Mock.Assert(() => _mockView.GoBackToMainActivity(), Occurs.Never());
+            Mock.Assert(() => _mockView.GoBackToPortfolioActivity(), Occurs.Never());
 
         private static void MockPositionMatches(Expression<Predicate<IList<string>>> match)
         {
