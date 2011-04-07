@@ -79,7 +79,7 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
 
         public Portfolio GetPortfolioByName(string portfolioName)
         {
-            var cursor = Db.Query(PORTFOLIO_TABLE_NAME, new[] { "id", "Name" }, " Name = '" + Sanitize(portfolioName) + "'", null, null, null, null);
+            var cursor = Db.RawQuery("SELECT id, Name FROM " + PORTFOLIO_TABLE_NAME + " WHERE Name = ?", new[] {portfolioName} );
             if (cursor.Count > 0)
             {
                 cursor.MoveToNext();
@@ -89,11 +89,6 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
                 return portfolio;
             }
             return null;
-        }
-
-        private static string Sanitize(string str)
-        {
-            return str.Replace("'", "''");
         }
 
         public void DeletePositionById(long positionId)
