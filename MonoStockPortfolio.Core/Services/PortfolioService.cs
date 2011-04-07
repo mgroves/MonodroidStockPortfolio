@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Android.Runtime;
 using Android.Util;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.StockData;
@@ -8,6 +9,7 @@ using MonoStockPortfolio.Entities;
 
 namespace MonoStockPortfolio.Core.Services
 {
+    [Preserve(AllMembers = true)]
     public class PortfolioService : IPortfolioService
     {
         private readonly IPortfolioRepository _portRepo;

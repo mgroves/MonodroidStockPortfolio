@@ -1,9 +1,11 @@
 using Android.Content;
 using Android.Database.Sqlite;
+using Android.Runtime;
 using Android.Util;
 
 namespace MonoStockPortfolio.Core
 {
+    [Preserve(AllMembers = true)]
     public abstract class AndroidSqliteBase : SQLiteOpenHelper
     {
         public const string PORTFOLIO_TABLE_NAME = "Portfolios";

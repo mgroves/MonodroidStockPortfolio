@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Android.Runtime;
 using MonoStockPortfolio.Core.Config;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.Services;
@@ -8,6 +9,7 @@ using MonoStockPortfolio.Framework;
 
 namespace MonoStockPortfolio.Activites.PortfolioScreen
 {
+    [Preserve(AllMembers = true)]
     public class PortfolioPresenter : IPortfolioPresenter
     {
         private IPortfolioView _currentView;

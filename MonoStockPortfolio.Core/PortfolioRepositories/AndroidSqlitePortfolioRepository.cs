@@ -8,6 +8,7 @@ using MonoStockPortfolio.Entities;
 
 namespace MonoStockPortfolio.Core.PortfolioRepositories
 {
+    [Preserve(AllMembers = true)]
     public class AndroidSqlitePortfolioRepository : AndroidSqliteBase, IPortfolioRepository
     {
         public AndroidSqlitePortfolioRepository(Context context)

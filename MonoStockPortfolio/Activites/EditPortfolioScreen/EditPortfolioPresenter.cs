@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Android.Runtime;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Framework;
 
 namespace MonoStockPortfolio.Activites.EditPortfolioScreen
 {
+    [Preserve(AllMembers = true)]
     public class EditPortfolioPresenter : IEditPortfolioPresenter
     {
         private IEditPortfolioView _currentView;

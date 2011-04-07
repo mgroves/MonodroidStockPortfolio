@@ -38,8 +38,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidLinkMode>Full</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -95,12 +95,12 @@
   <ItemGroup>
     <None Include="PostSharp.Custom.targets" />
     <None Include="Resources\AboutResources.txt" />
-    <AndroidResource Include="Resources\layout\config.xml">
+    <AndroidResource Include="Resources\layout\config.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\main.xml">
+    <AndroidResource Include="Resources\layout\main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -108,12 +108,12 @@
     <AndroidResource Include="Resources\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\addportfolio.xml">
+    <AndroidResource Include="Resources\layout\addportfolio.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\portfolio.xml">
+    <AndroidResource Include="Resources\layout\portfolio.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -128,7 +128,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\addposition.xml">
+    <AndroidResource Include="Resources\layout\addposition.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

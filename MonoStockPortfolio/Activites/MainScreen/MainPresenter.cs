@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using Android.Runtime;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Entities;
 
 namespace MonoStockPortfolio.Activites.MainScreen
 {
+    [Preserve(AllMembers = true)]
     public class MainPresenter : IMainPresenter
     {
         private IPortfolioRepository _repo;

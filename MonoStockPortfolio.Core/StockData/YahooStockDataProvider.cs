@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using Android.Runtime;
 using Android.Util;
 using LumenWorks.Framework.IO.Csv;
 using MonoStockPortfolio.Entities;
 
 namespace MonoStockPortfolio.Core.StockData
 {
+    [Preserve(AllMembers = true)]
     public class YahooStockDataProvider : IStockDataProvider
     {
         private const string LAST_TRADE_PRICE_ONLY = "l1";
