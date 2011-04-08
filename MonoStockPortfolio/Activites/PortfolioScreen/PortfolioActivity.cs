@@ -144,7 +144,10 @@ namespace MonoStockPortfolio.Activites.PortfolioScreen
             base.OnCreateContextMenu(menu, v, menuInfo);
         
             var info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-            var selectedPositionId = int.Parse(info.TargetView.Tag.ToString());
+            var tag = info.TargetView.Tag;
+            if (tag == null) return;
+
+            var selectedPositionId = int.Parse(tag.ToString());
         
             menu.SetHeaderTitle("Options".ToJ());
             foreach (var contextItem in _presenter.GetContextItems())
