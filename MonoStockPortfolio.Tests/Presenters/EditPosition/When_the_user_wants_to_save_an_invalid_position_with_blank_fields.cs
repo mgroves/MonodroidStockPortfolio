@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using Machine.Specifications;
 using MonoStockPortfolio.Activites.EditPositionScreen;
 using MonoStockPortfolio.Entities;
@@ -37,10 +36,5 @@ namespace MonoStockPortfolio.Tests.Presenters.EditPosition
             MockPositionMatches(x => x.Any(p => p == "Please enter a valid, positive price per share"));
         It should_not_tell_the_view_to_go_back_to_the_main_activity = () =>
             Mock.Assert(() => _mockView.GoBackToPortfolioActivity(), Occurs.Never());
-
-        private static void MockPositionMatches(Expression<Predicate<IList<string>>> match)
-        {
-            Mock.Assert(() => _mockView.ShowErrorMessages(Arg.Matches(match)), Occurs.Exactly(1));
-        }
     }
 }

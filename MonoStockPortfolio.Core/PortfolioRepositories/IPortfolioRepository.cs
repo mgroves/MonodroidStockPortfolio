@@ -15,5 +15,6 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
         void SavePosition(Position position);
         void DeletePositionById(long positionId);
         Position GetPositionById(long positionId);
+        bool IsTickerAlreadyBeingTracked(string ticker, long portfolioId);
     }
 }

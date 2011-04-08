@@ -115,6 +115,15 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
             return position;
         }
 
+        public bool IsTickerAlreadyBeingTracked(string ticker, long portfolioId)
+        {
+            var cursor = Db.RawQuery("SELECT 1 FROM " + POSITION_TABLE_NAME + " WHERE Ticker = ? AND ContainingPortfolioID = ?",
+                                    new[] { ticker, portfolioId.ToString() });
+            var result = cursor.Count > 0;
+            if(!cursor.IsClosed) cursor.Close();
+            return result;
+        }
+
         public IList<Position> GetAllPositions(long portfolioId)
         {
             var list = new List<Position>();

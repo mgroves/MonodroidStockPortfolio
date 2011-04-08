@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Android.Runtime;
 using Android.Util;
@@ -48,6 +49,7 @@ namespace MonoStockPortfolio.Activites.EditPositionScreen
             validator.AddValidPositiveDecimal(() => positionInputModel.SharesText, "Please enter a valid, positive number of shares");
             validator.AddValidPositiveDecimal(() => positionInputModel.PriceText, "Please enter a valid, positive price per share");
             validator.AddValidation(() => ValidateTicker(positionInputModel.TickerText));
+            validator.AddValidation(() => ValidateNotRepeatTicker(positionInputModel.TickerText));
 
             var errorMessages = validator.Apply();
             if (!errorMessages.Any())
@@ -87,6 +89,15 @@ namespace MonoStockPortfolio.Activites.EditPositionScreen
                 return string.Empty;
             }
             return "Invalid Ticker Name";
-        }    
+        }
+
+        private string ValidateNotRepeatTicker(string ticker)
+        {
+            if(_portfolioRepository.IsTickerAlreadyBeingTracked(ticker, _portfolioId))
+            {
+                return "You are already tracking that ticker in this portfolio";
+            }
+            return string.Empty;
+        }
     }
 }
