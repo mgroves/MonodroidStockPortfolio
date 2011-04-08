@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.App;
@@ -14,7 +15,6 @@ namespace MonoStockPortfolio.Activites.ConfigScreen
     public class ConfigActivity : Activity, IConfigView
     {
         [LazyView(Resource.Id.configList)] private ListView ConfigList;
-        [LazyView(Resource.Id.btnSaveConfig)] private Button SaveConfigButton;
 
         [IoC] IConfigPresenter _presenter;
 
@@ -36,9 +36,27 @@ namespace MonoStockPortfolio.Activites.ConfigScreen
             WireUpEvents();
         }
 
-        void WireUpEvents()
+        private void WireUpEvents()
         {
-            SaveConfigButton.Click += SaveConfigButton_Click;
+            ConfigList.ItemClick += ConfigList_ItemClick;
+        }
+
+        void ConfigList_ItemClick(object sender, ItemEventArgs e)
+        {
+            SaveConfiguration();
+        }
+
+        void SaveConfiguration()
+        {
+            var checkedItems = new List<StockDataItem>();
+            for(int i =0;i<ConfigList.Count;i++)
+            {
+                if (ConfigList.IsItemChecked(i))
+                {
+                    checkedItems.Add((StockDataItem) i);
+                }
+            }
+            _presenter.SaveConfig(checkedItems);
         }
 
         #region IConfigView members
@@ -65,18 +83,5 @@ namespace MonoStockPortfolio.Activites.ConfigScreen
         }
 
         #endregion
-
-        void SaveConfigButton_Click(object sender, System.EventArgs e)
-        {
-            var checkedItems = new List<StockDataItem>();
-            for(int i =0;i<ConfigList.Count;i++)
-            {
-                if (ConfigList.IsItemChecked(i))
-                {
-                    checkedItems.Add((StockDataItem) i);
-                }
-            }
-            _presenter.SaveConfig(checkedItems);
-        }
     }
 }
