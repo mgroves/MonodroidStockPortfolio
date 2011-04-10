@@ -140,6 +140,9 @@
     <AndroidResource Include="Resources\drawable-hdpi\ic_menu_close_clear_cancel.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_menu_close_clear_cancel.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_menu_close_clear_cancel.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_menu_info_details.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_menu_info_details.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_menu_info_details.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\ic_menu_refresh.png" />

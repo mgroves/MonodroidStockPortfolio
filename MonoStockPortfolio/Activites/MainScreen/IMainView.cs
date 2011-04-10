@@ -11,5 +11,6 @@ namespace MonoStockPortfolio.Activites.MainScreen
         void StartEditPortfolioActivity(int itemId);
         void StartConfigActivity();
         void ExitApplication();
+        void ShowAboutInfo(string message);
     }
 }

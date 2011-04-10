@@ -68,6 +68,7 @@
     <Compile Include="Presenters\EditPosition\EditPositionTests.cs" />
     <Compile Include="Presenters\EditPosition\When_the_user_tries_to_save_a_position_for_a_ticker_thats_already_being_tracked.cs" />
     <Compile Include="Presenters\Main\MainPresenterTests.cs" />
+    <Compile Include="Presenters\Main\When_the_user_wants_to_see_About_info.cs" />
     <Compile Include="Presenters\Portfolio\PortfolioPresenterTests.cs" />
     <Compile Include="Presenters\Portfolio\When_done_initializing_a_Portfolio_Presenter.cs" />
     <Compile Include="Presenters\Config\When_initialize_the_config_presenter.cs" />
