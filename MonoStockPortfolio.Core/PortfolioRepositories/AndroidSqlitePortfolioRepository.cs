@@ -118,7 +118,7 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
         public bool IsTickerAlreadyBeingTracked(string ticker, long portfolioId)
         {
             var cursor = Db.RawQuery("SELECT 1 FROM " + POSITION_TABLE_NAME + " WHERE Ticker = ? AND ContainingPortfolioID = ?",
-                                    new[] { ticker, portfolioId.ToString() });
+                                    new[] { ticker.ToUpper(), portfolioId.ToString() });
             var result = cursor.Count > 0;
             if(!cursor.IsClosed) cursor.Close();
             return result;
@@ -189,7 +189,7 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
         {
             var positionValues = new ContentValues();
             positionValues.Put("PricePerShare", (double)position.PricePerShare);
-            positionValues.Put("Ticker", position.Ticker);
+            positionValues.Put("Ticker", position.Ticker.ToUpper());
             positionValues.Put("Shares", (double)position.Shares);
             positionValues.Put("ContainingPortfolioID", position.ContainingPortfolioID);
             return positionValues;
