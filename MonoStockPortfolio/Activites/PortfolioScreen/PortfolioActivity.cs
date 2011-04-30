@@ -110,6 +110,12 @@ namespace MonoStockPortfolio.Activites.PortfolioScreen
             }
         }
 
+        [OnGuiThread]
+        public void FlashMessage(string toastMessage)
+        {
+            this.LongToast(toastMessage);
+        }
+
         #endregion
 
         private void WireUpEvents()

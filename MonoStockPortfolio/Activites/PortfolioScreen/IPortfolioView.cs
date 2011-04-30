@@ -13,5 +13,6 @@ namespace MonoStockPortfolio.Activites.PortfolioScreen
         void UpdateHeader(IEnumerable<StockDataItem> configItems);
         void ShowProgressDialog(string loadingMessage);
         void HideProgressDialog();
+        void FlashMessage(string toastMessage);
     }
 }
