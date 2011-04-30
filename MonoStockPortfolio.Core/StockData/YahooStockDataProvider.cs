@@ -93,11 +93,9 @@ namespace MonoStockPortfolio.Core.StockData
                     var d = new YahooFinanceStockData();
                     d.Ticker = csvReader[0];
                     decimal.TryParse(csvReader[1], out d.LastTradePrice);
-                    //d.LastTradePrice = decimal.Parse(csvReader[1]);
                     d.Name = csvReader[2];
                     d.Volume = csvReader[3];
                     decimal.TryParse(csvReader[4], out d.Change);
-                    //d.Change = decimal.Parse(csvReader[4]);
                     d.LastTradeTime = csvReader[5];
                     d.RealTimeLastTradeWithTime = csvReader[6];
                     d.ChangeRealTime = csvReader[7];
