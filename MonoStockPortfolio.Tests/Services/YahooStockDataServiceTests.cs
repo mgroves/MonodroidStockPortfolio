@@ -20,7 +20,7 @@ namespace MonoStockPortfolio.Tests.Services
 
         Because of = () =>
             {
-                _quotes = _svc.GetStockQuotes(new[] { "GOOG", "AMZN", "AAPL", "MSFT", "NOVL", "S", "VZ", "T" })
+                _quotes = _svc.GetStockQuotes(new[] { "GOOG", "AMZN", "AAPL", "MSFT", "S", "VZ", "T" })
                     .ToList();
             };
 
