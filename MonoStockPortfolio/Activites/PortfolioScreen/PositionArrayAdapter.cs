@@ -62,7 +62,7 @@ namespace MonoStockPortfolio.Activites.PortfolioScreen
         {
             if (items.ContainsKey(StockDataItem.GainLoss))
             {
-                cell.SetTextColor(decimal.Parse(items[StockDataItem.GainLoss]) < 0 ? Color.Red : Color.Green);
+                cell.SetTextColor(decimal.Parse(items[StockDataItem.GainLoss]) < 0 ? Color.Red : Color.LightGreen);
             }
         }
     }
