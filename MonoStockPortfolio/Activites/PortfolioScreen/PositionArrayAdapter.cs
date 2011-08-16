@@ -50,6 +50,7 @@ namespace MonoStockPortfolio.Activites.PortfolioScreen
             {
                 var cell = new TextView(_context);
                 cell.Text = item.Items[stockDataItem];
+                cell.TextSize = 16.55F;
                 cell.SetWidth(columnWidth);
                 RedGreenHighlighting(cell, item.Items);
                 row.Tag = item.PositionId;

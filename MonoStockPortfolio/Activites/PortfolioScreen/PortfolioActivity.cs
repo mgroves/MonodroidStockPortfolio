@@ -83,6 +83,7 @@ namespace MonoStockPortfolio.Activites.PortfolioScreen
             {
                 var textItem = new TextView(this);
                 textItem.Text = stockDataItem.GetStringValue();
+                textItem.TextSize = 16.55F;
                 textItem.SetWidth(cellwidth);
                 textItem.SetTextColor(Resources.GetColor(Android.Resource.Color.Black));
                 QuoteListviewHeader.AddView(textItem);
