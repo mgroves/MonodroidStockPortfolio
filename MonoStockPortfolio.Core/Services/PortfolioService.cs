@@ -35,7 +35,7 @@ namespace MonoStockPortfolio.Core.Services
                 var positions = _portRepo.GetAllPositions(portfolioID);
                 if (!positions.Any()) return new List<PositionResultsViewModel>();
 
-                var tickers = positions.Select(p => p.Ticker);
+                var tickers = positions.Select(p => p.Ticker).Distinct();
                 var stockData = _stockRepo.GetStockQuotes(tickers);
 
                 foreach (var position in positions)
