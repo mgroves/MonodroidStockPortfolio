@@ -1,9 +1,11 @@
 using Android.Content;
 using Android.Database.Sqlite;
+using Android.Runtime;
 using Android.Util;
 
 namespace MonoStockPortfolio.Core
 {
+    [Preserve(AllMembers = true)]
     public abstract class AndroidSqliteBase : SQLiteOpenHelper
     {
         public const string PORTFOLIO_TABLE_NAME = "Portfolios";
@@ -32,7 +34,6 @@ namespace MonoStockPortfolio.Core
             db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('AMZN', '500', '180.00', 1)");
             db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('AAPL', '500', '322.56', 1)");
             db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('MSFT', '500', '27.91', 1)");
-            db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('NOVL', '500', '5.92', 1)");
             db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('S', '500', '4.23', 1)");
             db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('VZ', '500', '35.78', 1)");
             db.ExecSQL("INSERT INTO " + POSITION_TABLE_NAME + " (Ticker, Shares, PricePerShare, ContainingPortfolioID) VALUES ('T', '500', '29.38', 1)");

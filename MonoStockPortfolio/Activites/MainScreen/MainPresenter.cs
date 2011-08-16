@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Android.Runtime;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Entities;
 
 namespace MonoStockPortfolio.Activites.MainScreen
 {
+    [Preserve(AllMembers = true)]
     public class MainPresenter : IMainPresenter
     {
         private IPortfolioRepository _repo;
@@ -64,6 +67,22 @@ namespace MonoStockPortfolio.Activites.MainScreen
         public void ExitApplication()
         {
             _currentView.ExitApplication();
+        }
+
+        public void GotoAboutInfo()
+        {
+            var message = "Matthew D. Groves © 2011\n" +
+                          "Source code:\n" +
+                          "\n" +
+                          "http://tinyurl.com/mspSource\n" +
+                          "\n" +
+                          "Contact me:\n" +
+                          "\n" +
+                          "http://mgroves.com\n" +
+                          "http://twitter.com/mgroves\n" +
+                          "webmaster@mgroves.com";
+
+            _currentView.ShowAboutInfo(message);
         }
     }
 }

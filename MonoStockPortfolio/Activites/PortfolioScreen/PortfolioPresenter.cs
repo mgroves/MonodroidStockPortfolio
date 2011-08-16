@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Android.Runtime;
 using MonoStockPortfolio.Core.Config;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.Services;
@@ -8,6 +10,7 @@ using MonoStockPortfolio.Framework;
 
 namespace MonoStockPortfolio.Activites.PortfolioScreen
 {
+    [Preserve(AllMembers = true)]
     public class PortfolioPresenter : IPortfolioPresenter
     {
         private IPortfolioView _currentView;
@@ -103,7 +106,16 @@ namespace MonoStockPortfolio.Activites.PortfolioScreen
         {
             _currentView.ShowProgressDialog("Loading...Please wait...");
 
-            _positions = GetPositions();
+            try
+            {
+                _positions = GetPositions();
+            }
+            catch (Exception)
+            {
+                _currentView.FlashMessage("Unable to load stock data from the web");
+                _positions = new List<PositionResultsViewModel>();
+            }
+
             if (_positions.Any())
             {
                 _currentView.RefreshList(_positions, GetConfigItems());

@@ -83,6 +83,7 @@ namespace MonoStockPortfolio.Activites.PortfolioScreen
             {
                 var textItem = new TextView(this);
                 textItem.Text = stockDataItem.GetStringValue();
+                textItem.TextSize = 16.55F;
                 textItem.SetWidth(cellwidth);
                 textItem.SetTextColor(Resources.GetColor(Android.Resource.Color.Black));
                 QuoteListviewHeader.AddView(textItem);
@@ -108,6 +109,12 @@ namespace MonoStockPortfolio.Activites.PortfolioScreen
             {
                 _progressDialog.Hide();
             }
+        }
+
+        [OnGuiThread]
+        public void FlashMessage(string toastMessage)
+        {
+            this.LongToast(toastMessage);
         }
 
         #endregion
@@ -144,7 +151,10 @@ namespace MonoStockPortfolio.Activites.PortfolioScreen
             base.OnCreateContextMenu(menu, v, menuInfo);
         
             var info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-            var selectedPositionId = int.Parse(info.TargetView.Tag.ToString());
+            var tag = info.TargetView.Tag;
+            if (tag == null) return;
+
+            var selectedPositionId = int.Parse(tag.ToString());
         
             menu.SetHeaderTitle("Options".ToJ());
             foreach (var contextItem in _presenter.GetContextItems())

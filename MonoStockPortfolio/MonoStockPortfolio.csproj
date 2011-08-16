@@ -19,6 +19,7 @@
     <AndroidApplication>true</AndroidApplication>
     <AndroidStoreUncompressedFileExtensions />
     <TargetFrameworkVersion>v2.1</TargetFrameworkVersion>
+    <MandroidI18n />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,8 +39,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidLinkMode>Full</AndroidLinkMode>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -95,12 +96,12 @@
   <ItemGroup>
     <None Include="PostSharp.Custom.targets" />
     <None Include="Resources\AboutResources.txt" />
-    <AndroidResource Include="Resources\layout\config.xml">
+    <AndroidResource Include="Resources\layout\config.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\main.xml">
+    <AndroidResource Include="Resources\layout\main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -108,12 +109,12 @@
     <AndroidResource Include="Resources\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\addportfolio.xml">
+    <AndroidResource Include="Resources\layout\addportfolio.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\portfolio.xml">
+    <AndroidResource Include="Resources\layout\portfolio.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -128,7 +129,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\addposition.xml">
+    <AndroidResource Include="Resources\layout\addposition.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -140,6 +141,9 @@
     <AndroidResource Include="Resources\drawable-hdpi\ic_menu_close_clear_cancel.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_menu_close_clear_cancel.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_menu_close_clear_cancel.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_menu_info_details.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ic_menu_info_details.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_menu_info_details.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\ic_menu_refresh.png" />

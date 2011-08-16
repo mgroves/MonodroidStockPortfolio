@@ -10,5 +10,6 @@
         void EditPortfolio(int itemId);
         void GotoConfig();
         void ExitApplication();
+        void GotoAboutInfo();
     }
 }

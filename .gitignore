@@ -45,5 +45,6 @@ _ReSharper*/
 # Office Temp Files
 ~$*
 
-#monodroid private beta
+#not source
 monodroid*.msi
+Deploy

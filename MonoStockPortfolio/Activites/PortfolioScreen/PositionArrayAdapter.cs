@@ -50,6 +50,7 @@ namespace MonoStockPortfolio.Activites.PortfolioScreen
             {
                 var cell = new TextView(_context);
                 cell.Text = item.Items[stockDataItem];
+                cell.TextSize = 16.55F;
                 cell.SetWidth(columnWidth);
                 RedGreenHighlighting(cell, item.Items);
                 row.Tag = item.PositionId;
@@ -62,7 +63,7 @@ namespace MonoStockPortfolio.Activites.PortfolioScreen
         {
             if (items.ContainsKey(StockDataItem.GainLoss))
             {
-                cell.SetTextColor(decimal.Parse(items[StockDataItem.GainLoss]) < 0 ? Color.Red : Color.Green);
+                cell.SetTextColor(decimal.Parse(items[StockDataItem.GainLoss]) < 0 ? Color.Red : Color.LightGreen);
             }
         }
     }

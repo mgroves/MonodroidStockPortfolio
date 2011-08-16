@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Android.Runtime;
 using Android.Util;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.StockData;
@@ -8,6 +9,7 @@ using MonoStockPortfolio.Entities;
 
 namespace MonoStockPortfolio.Core.Services
 {
+    [Preserve(AllMembers = true)]
     public class PortfolioService : IPortfolioService
     {
         private readonly IPortfolioRepository _portRepo;
@@ -33,7 +35,7 @@ namespace MonoStockPortfolio.Core.Services
                 var positions = _portRepo.GetAllPositions(portfolioID);
                 if (!positions.Any()) return new List<PositionResultsViewModel>();
 
-                var tickers = positions.Select(p => p.Ticker);
+                var tickers = positions.Select(p => p.Ticker).Distinct();
                 var stockData = _stockRepo.GetStockQuotes(tickers);
 
                 foreach (var position in positions)

@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using Machine.Specifications;
 using MonoStockPortfolio.Activites.EditPositionScreen;
 using MonoStockPortfolio.Core.PortfolioRepositories;
@@ -22,5 +25,9 @@ namespace MonoStockPortfolio.Tests.Presenters.EditPosition
                 _presenter = new EditPositionPresenter(_mockPortfolioRepository, _mockStockService);
             };
 
+        protected static void MockPositionMatches(Expression<Predicate<IList<string>>> match)
+        {
+            Mock.Assert(() => _mockView.ShowErrorMessages(Arg.Matches(match)), Occurs.Exactly(1));
+        }
     }
 }

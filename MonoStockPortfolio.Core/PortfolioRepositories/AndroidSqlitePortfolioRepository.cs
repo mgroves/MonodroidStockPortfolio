@@ -8,6 +8,7 @@ using MonoStockPortfolio.Entities;
 
 namespace MonoStockPortfolio.Core.PortfolioRepositories
 {
+    [Preserve(AllMembers = true)]
     public class AndroidSqlitePortfolioRepository : AndroidSqliteBase, IPortfolioRepository
     {
         public AndroidSqlitePortfolioRepository(Context context)
@@ -78,7 +79,7 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
 
         public Portfolio GetPortfolioByName(string portfolioName)
         {
-            var cursor = Db.Query(PORTFOLIO_TABLE_NAME, new[] { "id", "Name" }, " Name = '" + portfolioName + "'", null, null, null, null);
+            var cursor = Db.RawQuery("SELECT id, Name FROM " + PORTFOLIO_TABLE_NAME + " WHERE Name = ?", new[] {portfolioName} );
             if (cursor.Count > 0)
             {
                 cursor.MoveToNext();
@@ -112,6 +113,15 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
             }
             if (!cursor.IsClosed) cursor.Close();
             return position;
+        }
+
+        public bool IsTickerAlreadyBeingTracked(string ticker, long portfolioId)
+        {
+            var cursor = Db.RawQuery("SELECT 1 FROM " + POSITION_TABLE_NAME + " WHERE Ticker = ? AND ContainingPortfolioID = ?",
+                                    new[] { ticker.ToUpper(), portfolioId.ToString() });
+            var result = cursor.Count > 0;
+            if(!cursor.IsClosed) cursor.Close();
+            return result;
         }
 
         public IList<Position> GetAllPositions(long portfolioId)
@@ -179,7 +189,7 @@ namespace MonoStockPortfolio.Core.PortfolioRepositories
         {
             var positionValues = new ContentValues();
             positionValues.Put("PricePerShare", (double)position.PricePerShare);
-            positionValues.Put("Ticker", position.Ticker);
+            positionValues.Put("Ticker", position.Ticker.ToUpper());
             positionValues.Put("Shares", (double)position.Shares);
             positionValues.Put("ContainingPortfolioID", position.ContainingPortfolioID);
             return positionValues;

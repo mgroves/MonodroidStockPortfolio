@@ -4,6 +4,9 @@ using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Text;
+using Android.Text.Method;
+using Android.Text.Util;
 using Android.Views;
 using Android.Widget;
 using MonoStockPortfolio.Activites.ConfigScreen;
@@ -45,6 +48,22 @@ namespace MonoStockPortfolio.Activites.MainScreen
         public void ExitApplication()
         {
             Finish();
+        }
+
+        public void ShowAboutInfo(string message)
+        {
+            var spannable = new SpannableString(message);
+            Linkify.AddLinks(spannable, MatchOptions.All);
+
+            var alertBox = new AlertDialog.Builder(this)
+                .SetNeutralButton("Ok", (x, y) => { })
+                .SetMessage(spannable)
+                .SetTitle("About Mono Stock Portfolio")
+                .Create();
+
+            alertBox.Show();
+
+            ((TextView)alertBox.FindViewById(Android.Resource.Id.Message)).MovementMethod = LinkMovementMethod.Instance;
         }
 
         public void StartEditPortfolioActivity(int itemId)
@@ -114,6 +133,8 @@ namespace MonoStockPortfolio.Activites.MainScreen
         {
             var configItem = menu.Add(0, 1, 1, "Config".ToJ());
             configItem.SetIcon(Resource.Drawable.ic_menu_preferences);
+            var aboutItem = menu.Add(0, 1, 1, "About".ToJ());
+            aboutItem.SetIcon(Resource.Drawable.ic_menu_info_details); // IcMenuInfoDetails);
             var exitItem = menu.Add(0, 1, 1, "Exit".ToJ());
             exitItem.SetIcon(Resource.Drawable.ic_menu_close_clear_cancel);
             return true;
@@ -128,6 +149,9 @@ namespace MonoStockPortfolio.Activites.MainScreen
                     return true;
                 case "Exit":
                     _presenter.ExitApplication();
+                    return true;
+                case "About":
+                    _presenter.GotoAboutInfo();
                     return true;
                 default:
                     return base.OnOptionsItemSelected(item);

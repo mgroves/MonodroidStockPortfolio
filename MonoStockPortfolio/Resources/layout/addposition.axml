@@ -12,6 +12,7 @@
             android:text="Ticker" />
 
         <EditText android:id="@+id/addPositionTicker"
+            android:inputType="textCapCharacters"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
@@ -20,6 +21,7 @@
             android:text="# of shares" />
 
         <EditText android:id="@+id/addPositionShares"
+            android:inputType="numberDecimal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 
@@ -28,6 +30,7 @@
             android:text="Price per share" />
 
         <EditText android:id="@+id/addPositionPrice"
+            android:inputType="numberDecimal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
 

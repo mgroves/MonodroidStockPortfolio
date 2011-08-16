@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using Android.Runtime;
 using MonoStockPortfolio.Core.Config;
 using MonoStockPortfolio.Entities;
 using MonoStockPortfolio.Core;
 
 namespace MonoStockPortfolio.Activites.ConfigScreen
 {
+    [Preserve(AllMembers = true)]
     public class ConfigPresenter : IConfigPresenter
     {
         private IConfigView _currentView;

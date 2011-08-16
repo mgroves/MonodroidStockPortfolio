@@ -6,9 +6,11 @@ using MonoStockPortfolio.Entities;
 
 namespace MonoStockPortfolio.Core.Config
 {
+    [Preserve(AllMembers = true)]
     public class AndroidSqliteConfigRepository : AndroidSqliteBase, IConfigRepository
     {
-        public AndroidSqliteConfigRepository(Context context) : base(context)
+        public AndroidSqliteConfigRepository(Context context)
+            : base(context)
         { }
 
         public IEnumerable<StockDataItem> GetStockItems()

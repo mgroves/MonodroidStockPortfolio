@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using Android.Runtime;
 using Android.Util;
 using MonoStockPortfolio.Core.PortfolioRepositories;
 using MonoStockPortfolio.Core.StockData;
@@ -7,6 +9,7 @@ using MonoStockPortfolio.Framework;
 
 namespace MonoStockPortfolio.Activites.EditPositionScreen
 {
+    [Preserve(AllMembers = true)]
     public class EditPositionPresenter : IEditPositionPresenter
     {
         private IEditPositionView _currentView;
@@ -80,11 +83,18 @@ namespace MonoStockPortfolio.Activites.EditPositionScreen
 
         private string ValidateTicker(string ticker)
         {
-            if (_stockService.IsValidTicker(ticker))
+            try
             {
-                return string.Empty;
+                if (_stockService.IsValidTicker(ticker))
+                {
+                    return string.Empty;
+                }
+                return "Invalid Ticker Name";
             }
-            return "Invalid Ticker Name";
-        }    
+            catch (Exception ex)
+            {
+                return "Unable to load stock information from the web";
+            }
+        }
     }
 }
