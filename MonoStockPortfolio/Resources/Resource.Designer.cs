@@ -41,6 +41,9 @@ namespace MonoStockPortfolio
 			// aapt resource value: 0x7f020004
 			public const int icon = 2130837508;
 			
+			// aapt resource value: 0x7f020005
+			public const int Splash = 2130837509;
+			
 			private Drawable()
 			{
 			}
@@ -107,6 +110,9 @@ namespace MonoStockPortfolio
 			
 			// aapt resource value: 0x7f030004
 			public const int portfolio = 2130903044;
+			
+			// aapt resource value: 0x7f030005
+			public const int SplashScreen = 2130903045;
 			
 			private Layout()
 			{

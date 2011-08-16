@@ -17,7 +17,7 @@ using MonoStockPortfolio.Framework;
 
 namespace MonoStockPortfolio.Activites.MainScreen
 {
-    [Activity(Label = "Stock Portfolio", MainLauncher = true, Icon = "@drawable/icon", Name = "monostockportfolio.activites.mainscreen.MainActivity")]
+    [Activity(Label = "Stock Portfolio", MainLauncher = false, Icon = "@drawable/icon", Name = "monostockportfolio.activites.mainscreen.MainActivity")]
     public class MainActivity : Activity, IMainView
     {
         [LazyView(Resource.Id.btnAddPortfolio)] protected Button AddPortfolioButton;

@@ -18,7 +18,7 @@
     <AndroidSupportedAbis>armeabi</AndroidSupportedAbis>
     <AndroidApplication>true</AndroidApplication>
     <AndroidStoreUncompressedFileExtensions />
-    <TargetFrameworkVersion>v2.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.2</TargetFrameworkVersion>
     <MandroidI18n />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -99,6 +99,7 @@
     <AndroidResource Include="Resources\layout\config.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\SplashScreen.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\main.axml">
@@ -134,6 +135,7 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <AndroidJavaSource Include="Activites\SplashActivity.java" />
     <Content Include="Properties\AndroidManifest.xml" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_menu_preferences.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_menu_preferences.png" />
@@ -144,6 +146,7 @@
     <AndroidResource Include="Resources\drawable-hdpi\ic_menu_info_details.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ic_menu_info_details.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_menu_info_details.png" />
+    <AndroidResource Include="Resources\Drawable\Splash.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\ic_menu_refresh.png" />

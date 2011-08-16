@@ -29,3 +29,12 @@ domain anyway.
 To get stock quotes, I'm using a Yahoo API coupled with the FileHelpers library
 (since the Yahoo API outputs a CSV)
 
+Credits
+-------
+All images licensed under creative commons.
+Penny image (assorted icons):
+	From the US Mint, via Wikimedia user "Sniff"
+	http://commons.wikimedia.org/wiki/File:United_States_penny,_obverse,_2002.png
+NYSE image (splash):
+	Taken by "Helico" on Flickr
+	http://www.flickr.com/photos/helico/422215562/
